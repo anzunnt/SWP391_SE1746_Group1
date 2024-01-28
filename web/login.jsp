@@ -90,13 +90,7 @@
                                             <h6 class="text-muted">Or</h6>
                                         </div><!--end col-->
                                         
-                                        <div class="col-6 mt-3">
-                                            <div class="d-grid">
-                                                <a href="#" class="btn btn-soft-primary"><i class="uil uil-facebook"></i> Facebook</a>
-                                            </div>
-                                        </div><!--end col-->
-                                        
-                                        <div class="col-6 mt-3">
+                                        <div class="text-center">
                                             <div class="d-grid">
                                                 <a href="#" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
                                             </div>
