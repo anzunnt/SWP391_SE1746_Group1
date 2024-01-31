@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="assets/images/favicon.ico.png">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -84,7 +85,7 @@
                 <input type="text" id="style" name="style" value="${o.style}" required>
                 
                 <label for="startsAt">Publish At:</label>
-                <input type="text" id="publishedAt" name="publishedAt" value="${o.publishedAt}">
+                <input type="datetime-local" id="publishedAt" name="publishedAt" value="${o.publishedAt}">
                 
                 <label for="state">State:</label>
                 <select id="state" name="state" value="${o.state}" required>
@@ -93,10 +94,10 @@
                 </select>
 
                 <label for="startsAt">Starts At:</label>
-                <input type="text" id="startsAt" name="startsAt" value="${o.startsAt}">
+                <input type="datetime-local" id="startsAt" name="startsAt" value="${o.startsAt}">
 
                 <label for="endsAt">Ends At:</label>
-                <input type="text" id="endsAt" name="endsAt" value="${o.endsAt}">
+                <input type="datetime-local" id="endsAt" name="endsAt" value="${o.endsAt}">
 
                 </br><button type="submit">${doing} Product</button>
             </form>

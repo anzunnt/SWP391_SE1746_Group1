@@ -159,18 +159,16 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-    
+
     public List<Product> searchByTxt(String txt) {
         List<Product> list = new ArrayList<>();
-        String[] words = txt.replaceAll("\\s\\s+", " ").split("\\s");
-        for (String word : words) {
-            System.out.println(word);
-        }
+        String[] words = txt.replaceAll("\\s\\s+", " ").toLowerCase().split("\\s");
+        List<String> result = removeDuplicates(words);
         String sql = "select * from Product "
                 + "where Name like ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            for (String word : words) {
+            for (String word : result) {
                 st.setString(1, "%" + word + "%");
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
@@ -180,13 +178,38 @@ public class ProductDAO extends DBContext {
                             rs.getString(10), rs.getByte(11), rs.getString(12),
                             rs.getString(13), rs.getString(14), rs.getInt(15),
                             rs.getInt(16));
-                    list.add(p);
+                    if (!isDuplicate(list,p)) {
+                        list.add(p);
+                    }
                 }
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
+    }
+
+    public static List<String> removeDuplicates(String[] inputArray) {
+        List<String> result = new ArrayList<>();
+
+        for (String word : inputArray) {
+            if (!result.contains(word)) {
+                // Nếu từ chưa tồn tại trong kết quả, thêm vào
+                result.add(word);
+            }
+        }
+
+        return result;
+    }
+
+    public boolean isDuplicate(List<Product> list, Product product) {
+        // Kiểm tra xem sản phẩm có trong danh sách hay không qua ID
+        for (Product existingProduct : list) {
+            if (existingProduct.getId() == product.getId()) {
+                return true; // Sản phẩm đã tồn tại trong danh sách
+            }
+        }
+        return false; // Sản phẩm không tồn tại trong danh sách
     }
 
     public void insert(String name, String description, float basePrice, float price, float discount, int quantity,
