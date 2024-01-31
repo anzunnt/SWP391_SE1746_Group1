@@ -43,7 +43,7 @@ public class SearchController extends HttpServlet {
         }else{
             request.setAttribute("listP", list);
         }
-        request.getRequestDispatcher("fashionshop").forward(request, response);
+        request.getRequestDispatcher("productlist").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
