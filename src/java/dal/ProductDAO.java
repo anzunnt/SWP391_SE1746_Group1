@@ -19,8 +19,8 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        byte bit = 1;
-        dao.update(21, "Product 11", "Product 11 is test", 12, 15, 0, 100, "2024-01-18", "2024-01-18", bit, "2024-01-18", "2024-01-18", "Product 21", 1);
+        String txt = "Polo   In";
+        dao.searchByTxt(txt);
     }
 
     //doc toan bo tu bang Product
@@ -159,23 +159,29 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
-
+    
     public List<Product> searchByTxt(String txt) {
         List<Product> list = new ArrayList<>();
+        String[] words = txt.replaceAll("\\s\\s+", " ").split("\\s");
+        for (String word : words) {
+            System.out.println(word);
+        }
         String sql = "select * from Product "
                 + "where Name like ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "%" + txt + "%");
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getFloat(4), rs.getFloat(5), rs.getFloat(6),
-                        rs.getInt(7), rs.getString(8), rs.getString(9),
-                        rs.getString(10), rs.getByte(11), rs.getString(12),
-                        rs.getString(13), rs.getString(14), rs.getInt(15),
-                        rs.getInt(16));
-                list.add(p);
+            for (String word : words) {
+                st.setString(1, "%" + word + "%");
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    Product p = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),
+                            rs.getFloat(4), rs.getFloat(5), rs.getFloat(6),
+                            rs.getInt(7), rs.getString(8), rs.getString(9),
+                            rs.getString(10), rs.getByte(11), rs.getString(12),
+                            rs.getString(13), rs.getString(14), rs.getInt(15),
+                            rs.getInt(16));
+                    list.add(p);
+                }
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -241,12 +247,12 @@ public class ProductDAO extends DBContext {
         return 0;
     }
 
-    public List<Product> pagingProduct(int index) {
+    public List<Product> pagingProduct(int index, int num) {
         List<Product> list = new ArrayList<>();
-        String sql = "select * from Product order by id offset ? rows fetch next 5 rows only";
+        String sql = "select * from Product order by id offset ? rows fetch next " + num + " rows only";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, (index - 1) * 5);
+            st.setInt(1, (index - 1) * num);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),

@@ -110,19 +110,29 @@
                         <li class="has-submenu parent-menu-item"><a href="javascript:void(0)">Home</a></li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="fashionshop">Product</a>
+                            <a href="fashionshop">Product Shop</a>
                         </li>
 
                         <li class="has-submenu parent-menu-item">
-                            <a href="order-history.html">Order</a>
+                            <a href="javascript:void(0)">Patients</a><span class="menu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="patient-dashboard.html" class="sub-menu-item">Dashboard</a></li>
+                                <li><a href="patient-profile.html" class="sub-menu-item">Profile</a></li>
+                                <li><a href="booking-appointment.html" class="sub-menu-item">Book Appointment</a></li>
+                                <li><a href="patient-invoice.html" class="sub-menu-item">Invoice</a></li>
+                            </ul>
                         </li>
 
                         <li class="has-submenu parent-menu-item">
-                            <a href="news.html">News</a>
-                        </li>
-
-                        <li class="has-submenu parent-menu-item">
-                            <a href="shop-cart.html" class="menu-item">Shop Cart</a>
+                            <a href="javascript:void(0)" class="menu-item">Pharmacy</a><span class="menu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="pharmacy.html" class="sub-menu-item">Pharmacy</a></li>
+                                <li><a href="pharmacy-shop.html" class="sub-menu-item">Shop</a></li>
+                                <li><a href="pharmacy-product-detail.html" class="sub-menu-item">Medicine Detail</a></li>
+                                <li><a href="pharmacy-shop-cart.html" class="sub-menu-item">Shop Cart</a></li>
+                                <li><a href="pharmacy-checkout.html" class="sub-menu-item">Checkout</a></li>
+                                <li><a href="pharmacy-account.html" class="sub-menu-item">Account</a></li>
+                            </ul>
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>

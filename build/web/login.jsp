@@ -53,7 +53,7 @@
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Sign In</h4>  
-                                <form action="login" class="login-form mt-4">
+                                <form action="doctor-dashboard.html" class="login-form mt-4">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
@@ -90,7 +90,13 @@
                                             <h6 class="text-muted">Or</h6>
                                         </div><!--end col-->
                                         
-                                        <div class="text-center">
+                                        <div class="col-6 mt-3">
+                                            <div class="d-grid">
+                                                <a href="#" class="btn btn-soft-primary"><i class="uil uil-facebook"></i> Facebook</a>
+                                            </div>
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-6 mt-3">
                                             <div class="d-grid">
                                                 <a href="#" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
                                             </div>
