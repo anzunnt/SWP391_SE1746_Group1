@@ -147,7 +147,6 @@
                                         <table class="table table-center bg-white mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Base Price</th>
                                                     <th class="border-bottom p-3">Price</th>
@@ -155,24 +154,23 @@
                                                     <th class="border-bottom p-3">Quantity</th>
                                                     <th class="border-bottom p-3" style="min-width: 30px;">State</th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;">Style</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="addProduct.jsp">Add Product</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageProduct">Add Product</a></th>
                                                     <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="tableBody">
+                                            <tbody id="tableBody" >
                                                 <c:forEach items="${listP}" var="o">
                                                     <tr>
-                                                        <th class="p-3">${o.id}</th>
                                                         <td class="p-3">${o.name}</td>
                                                         <td class="p-3">${o.basePrice}VNĐ</td>
                                                         <td class="p-3">${o.price}VNĐ</td>
-                                                        <td class="p-3">${Math.round(o.discount*100)}%</td>
+                                                        <td class="p-3">${o.discount}</td>
                                                         <td class="p-3">${o.quantity}</td>
                                                         <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
                                                         <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  
                                                         <td class="p-3">${o.style}</td>
                                                         <td class="text-end p-3">
-                                                            <a href="updateProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                            <a href="manageProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${o.id}"></td>
@@ -186,19 +184,22 @@
                         </div><!--end row-->
 
                         <!-- PAGINATION START -->
-                        <div class="row text-center">      
+                        <div class="row text-center">                                  
                             <div class="col-12 mt-4">
-                                <select id="numberP" name="numberP" required>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                </select>
                                 <ul style="justify-content: center" class="pagination" id="pagination">
-                                    <li  class="page-item next"><a href="productlist?index=1"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
+                                    <form action="productlist" method="get">
+                                        <label for="pageNumber">Number Product/Page:</label>
+                                        <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        </br><button type="submit">OK</button>
+                                    </form>
+                                    <li  class="page-item next"><a href="productlist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
                                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                                        <li class="${param['index']==i?'page-item active':'page-item'}"><a href="productlist?index=${i}"   class="page-link">${i}</a></li>
+                                        <li class="${param['index']==i?'page-item active':'page-item'}"><a href="productlist?index=${i}&pageNumber=${num}"   class="page-link">${i}</a></li>
                                         </c:forEach>
-                                    <li  class="page-item next"><a href="productlist?index=${numberPage}"><i class="fa fa-angle-right" class="page-link" aria-hidden="true"></i></a></li>
+                                    <li  class="page-item next"><a href="productlist?index=${numberPage}&pageNumber=${num}"><i class="fa fa-angle-right" class="page-link" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div><!--end col-->                                                
                         </div> <!-- PAGINATION END --> 

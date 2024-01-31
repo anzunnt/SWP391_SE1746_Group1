@@ -35,7 +35,7 @@ public class SearchController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         ProductDAO dao = new ProductDAO();
-        String txtSearch = request.getParameter("s");
+        String txtSearch = request.getParameter("s");   
         List<Product> list1 = dao.searchByTxt(txtSearch);
         List<Product> list = dao.getAllProduct();
         if (list1 != null) {
@@ -43,7 +43,7 @@ public class SearchController extends HttpServlet {
         }else{
             request.setAttribute("listP", list);
         }
-        request.getRequestDispatcher("productlist").forward(request, response);
+        request.getRequestDispatcher("productlist.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -33,12 +33,19 @@ public class ProductListViewAdmin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String num_raw = request.getParameter("pageNumber");
+        int num;
         try {
+            if (num_raw == null) {
+                num = 5;
+            } else {
+                num = Integer.parseInt(num_raw);
+            }
             request.setCharacterEncoding("UTF-8");
             ProductDAO dao = new ProductDAO();
             //Product p = dao.getProductById(id);
             int totalProduct = dao.getTotalProduct();
-            int numberPage = (int) Math.ceil((double) totalProduct / 5);
+            int numberPage = (int) Math.ceil((double) totalProduct / num);
             int index;
             String currentPage = request.getParameter("index");
             if (currentPage == null) {
@@ -46,7 +53,8 @@ public class ProductListViewAdmin extends HttpServlet {
             } else {
                 index = Integer.parseInt(currentPage);
             }
-            List<Product> list = dao.pagingProduct(index);
+            List<Product> list = dao.pagingProduct(index, num);
+            request.setAttribute("num", num);
             request.setAttribute("numberPage", numberPage);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("productlist.jsp").forward(request, response);
