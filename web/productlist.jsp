@@ -147,6 +147,7 @@
                                         <table class="table table-center bg-white mb-0">
                                             <thead>
                                                 <tr>
+                                                    <th class="border-bottom p-3">Id</th>
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Base Price</th>
                                                     <th class="border-bottom p-3">Price</th>
@@ -161,10 +162,11 @@
                                             <tbody id="tableBody" >
                                                 <c:forEach items="${listP}" var="o">
                                                     <tr>
+                                                        <td class="p-3">${o.id}</td>
                                                         <td class="p-3">${o.name}</td>
                                                         <td class="p-3">${o.basePrice}VNĐ</td>
                                                         <td class="p-3">${o.price}VNĐ</td>
-                                                        <td class="p-3">${o.discount}</td>
+                                                        <td class="p-3">${Math.round(o.discount*100)}%</td>
                                                         <td class="p-3">${o.quantity}</td>
                                                         <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
                                                         <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  

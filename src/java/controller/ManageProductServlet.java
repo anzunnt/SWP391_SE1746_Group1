@@ -102,10 +102,11 @@ public class ManageProductServlet extends HttpServlet {
         String discount_raw = request.getParameter("discount");
         String quantity_raw = request.getParameter("quantity");
         String style_raw = request.getParameter("style");
-        String publishedAt_raw = request.getParameter("publishedAt");
+        String publishedAt_raw = request.getParameter("publishedAt").replaceAll("T", " ");
         String state_raw = request.getParameter("state");
-        String startsAt_raw = request.getParameter("startsAt");
-        String endsAt_raw = request.getParameter("endsAt");
+        String startsAt_raw = request.getParameter("startsAt").replaceAll("T", " ");
+        String endsAt_raw = request.getParameter("endsAt").replaceAll("T", " ");
+        System.out.println(publishedAt_raw);
         float basePrice, price, discount;
         int quantity;
         byte state;
@@ -126,7 +127,7 @@ public class ManageProductServlet extends HttpServlet {
             quantity = Integer.parseInt(quantity_raw);
             state = Byte.parseByte(state_raw);
             //Update a Product
-            if (id_raw != "") {
+            if (!"".equals(id_raw)) {
                 id = Integer.parseInt(id_raw);
                 dao.update(id, name_raw, description_raw, basePrice, price, discount, quantity, modifiedAt, publishedAt_raw,
                         state, startsAt_raw, endsAt_raw, style_raw, userId);
