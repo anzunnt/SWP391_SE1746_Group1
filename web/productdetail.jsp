@@ -218,11 +218,10 @@
                                 <h6 class="text-muted small font-italic mb-0 mt-1">
                                     GIÁ GỐC: <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
                                 </h6>
-                                    <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
+                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
                                 <h6 class="text-muted small font-italic mb-0 mt-1">CHỈ CÒN:<span style="color: blue"> ${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                             </div>
-                            <h5 class="mt-4 py-2">Overview :</h5>
-                            <p class="text-muted">${o.description}</p>
+
 
                             <div class="d-flex shop-list align-items-center">
                                 <h6 class="mb-0">Quantity:</h6>
@@ -237,8 +236,14 @@
                                 <a href="#" class="btn btn-primary">Shop Now</a>
                                 <a href="#" class="btn btn-soft-primary ms-2">Add to Cart</a>
                             </div>
+
                         </div>
+
                     </div><!--end col-->
+                    <div>
+                        <h5 class="mt-4 py-2">Overview :</h5>
+                        <p class="text-muted">${o.description}</p>
+                    </div>
                 </div><!--end row-->
             </div><!--end container-->
 

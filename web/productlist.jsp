@@ -166,7 +166,7 @@
                                                         <td class="p-3">${o.name}</td>
                                                         <td class="p-3">${o.basePrice}VNĐ</td>
                                                         <td class="p-3">${o.price}VNĐ</td>
-                                                        <td class="p-3">${o.discount}</td>
+                                                        <td class="p-3">${Math.round(o.discount*100)}%</td>
                                                         <td class="p-3">${o.quantity}</td>
                                                         <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
                                                         <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  
@@ -186,8 +186,13 @@
                         </div><!--end row-->
 
                         <!-- PAGINATION START -->
-                        <div class="row text-center">                                  
+                        <div class="row text-center">      
                             <div class="col-12 mt-4">
+                                <select id="numberP" name="numberP" required>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
                                 <ul style="justify-content: center" class="pagination" id="pagination">
                                     <li  class="page-item next"><a href="productlist?index=1"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
                                             <c:forEach var = "i" begin = "1" end = "${numberPage}">

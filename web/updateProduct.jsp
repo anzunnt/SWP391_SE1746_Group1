@@ -60,8 +60,6 @@
         <c:set var="o" value="${requestScope.product}"/>
         <div style="text-align: center">
             <form action="updateProduct" method="post"><!-- Replace "#" with your form submission URL -->
-                <label for="name">Product Id:</label>
-                <input type="number" id="id" readonly name="id" value="${o.id}">
                 
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" value="${o.name}"required>
