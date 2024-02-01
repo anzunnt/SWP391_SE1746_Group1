@@ -89,6 +89,10 @@
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="fashionshop" style="color: black!important">Product Shop</a>
                 </li>
+                
+                <li class="has-submenu parent-parent-menu-item">
+                    <a href="BlogList" style="color: black!important">News</a>
+                </li>
 
                 <li class="has-submenu parent-menu-itemk">
                     <a href="orderlist" style="color: black!important">Order</a>
