@@ -82,9 +82,9 @@
                 <label for="quantity">Phone:</label>
                 <input type="text" id="phone" name="phone" value="${o.phone}" required>
 <!--
-                <label for="style">Image:</label>
-                <input type="file" id="image" name="image" value="" accept="image/*" required>
-                </br>
+-->                <label for="style">Image:</label>
+                <input type="file" id="image" name="image" value="" accept="image/*">
+                </br><!--
                 <img src="${o.image}" alt="Avatar" width="100px" height="100px">-->
 
                 <label class="form-label">Birthday <span class="text-danger">*</span></label>
@@ -95,8 +95,12 @@
 
                 <label for="status">Status:</label>
                 <select id="status" name="status" value="${o.status}" required>
-                    <option value="1">Active</option>
-                    <option value="0">Disable</option>
+                    <c:if test="${o.status != 0}">
+                        <option value="1">Active</option>
+                    </c:if>
+                    <c:if test="${o.status == 0}">
+                        <option value="0">Disable</option>
+                    </c:if>
                 </select>
 
                 </br><button type="submit">${doing} User</button>

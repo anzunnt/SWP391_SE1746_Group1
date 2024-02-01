@@ -82,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
             userDAO ud = new userDAO();
             user checkExist = ud.GetUserByUsername(username);
             if (checkExist == null) {
-                ud.InsertUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, currentDate, null, null, currentDate);
+                ud.InsertUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, currentDate, 1, 1, currentDate);
                 response.sendRedirect("login");
             } else {
                 request.setAttribute("messregis", "Username is already existed!");

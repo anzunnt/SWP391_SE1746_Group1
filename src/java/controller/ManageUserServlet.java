@@ -102,20 +102,19 @@ public class ManageUserServlet extends HttpServlet {
             String address = request.getParameter("address");
             String status = request.getParameter("status");
             String created_on = request.getParameter("created_on");
-            String created_by = request.getParameter("created_by");
 
-            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.00").format(Calendar.getInstance().getTime());
 
             userDAO ud = new userDAO();
             if (!"".equals(id)) {
-                ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, Integer.parseInt(created_by), 0, currentDate, Integer.parseInt(id));
+                ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate, Integer.parseInt(id));
                 response.sendRedirect("userlist");
             } 
             //Add a Product
             else {
                 user p = ud.GetUserByUsername(username);
                 if (p == null) {
-                    ud.InsertUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, created_by, created_by, created_on);
+                    ud.InsertUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate);
                     response.sendRedirect("userlist");
                 } else {
                     request.setAttribute("error", "User is existed");
@@ -124,8 +123,8 @@ public class ManageUserServlet extends HttpServlet {
             }
         }
         catch (Exception e) {
-            request.setAttribute("messregis", "Invalid input!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("error", e);
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
