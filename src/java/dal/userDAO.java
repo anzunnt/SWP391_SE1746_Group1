@@ -70,7 +70,7 @@ public class userDAO extends DBContext{
         return null;
     }
     
-    public void InsertUser(String fullname, String username, String password, String code_verify, String email, String phone, String image, Date dob, String address, int status, String created_on, String created_by, String modified_by, String modified_on) {
+    public void InsertUser(String fullname, String username, String password, String code_verify, String email, String phone, String image, Date dob, String address, int status, String created_on, int created_by, int modified_by, String modified_on) {
         String sql = "insert into [dbo].[user] ([full_name], [username], [password], [code_verify], [email], [phone], [image], [dob], [address], [status], [created_on], [created_by], [modified_by], [modified_on])\n" +
                         "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -86,8 +86,8 @@ public class userDAO extends DBContext{
             st.setString(9, address);
             st.setInt(10, status);
             st.setString(11, created_on);
-            st.setString(12, created_by);
-            st.setString(13, modified_by);
+            st.setInt(12, created_by);
+            st.setInt(13, modified_by);
             st.setString(14, modified_on);
             st.executeUpdate();
         }

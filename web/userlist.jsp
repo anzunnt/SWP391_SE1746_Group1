@@ -64,7 +64,7 @@
 
                     <!-- sidebar-menu  -->
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Products</a></li>
+                        <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Products</a></li>
                         <!-- add another here --> 
                         <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Users</a></li>
                         <li><a href="fashionshop"><i class="uil uil-dashboard me-2 d-inline-block"></i>Home</a></li>
