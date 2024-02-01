@@ -145,7 +145,7 @@
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
-                            <h5 class="mb-0">User List</h5>
+                            <h5 class="mb-0">Customer List</h5>
                         </div>
 
                         <div class="row">
