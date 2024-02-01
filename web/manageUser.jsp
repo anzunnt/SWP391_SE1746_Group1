@@ -58,7 +58,7 @@
     </head>
     <body>
         <button onclick="history.back()">Go Back</button>
-        <h1>${doing} an user!</h1>
+        <h1>${doing} a customer!</h1>
         <h1 style="color: red">${error}</h1>
         <c:set var="o" value="${requestScope.user}"/>
         <div style="text-align: center">
@@ -96,14 +96,16 @@
                 <label for="status">Status:</label>
                 <select id="status" name="status" value="${o.status}" required>
                     <c:if test="${o.status != 0}">
-                        <option value="1">Active</option>
+                        <option value="1" selected="">Active</option>
+                        <option value="0">Disable</option>
                     </c:if>
                     <c:if test="${o.status == 0}">
-                        <option value="0">Disable</option>
+                        <option value="1" >Active</option>
+                        <option value="0" selected="">Disable</option>
                     </c:if>
                 </select>
 
-                </br><button type="submit">${doing} User</button>
+                </br><button type="submit">${doing} Customer</button>
             </form>
         </div>
     </body>
