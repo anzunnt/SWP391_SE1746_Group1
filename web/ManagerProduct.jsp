@@ -57,7 +57,8 @@
         <title>Management Product</title>
     </head>
     <body>
-        <h1>You are ${doing} a product!</h1>
+        <button onclick="history.back()">Go Back</button>
+        <h1>${doing} a product!</h1>
         <h1 style="color: red">${error}</h1>
         <c:set var="o" value="${requestScope.product}"/>
         <div style="text-align: center">
@@ -67,7 +68,7 @@
                 <input type="text" id="name" name="name" value="${o.name}"required>
 
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" required>${o.description}</textarea>
+                <textarea rows="20" cols="100" id="description" name="description" required>${o.description}</textarea>
 
                 <label for="basePrice">Base Price:</label>
                 <input type="number" id="basePrice" name="basePrice" value="${o.basePrice}" step="0.01" required>
@@ -83,14 +84,20 @@
 
                 <label for="style">Style:</label>
                 <input type="text" id="style" name="style" value="${o.style}" required>
-                
+
                 <label for="startsAt">Publish At:</label>
                 <input type="datetime-local" id="publishedAt" name="publishedAt" value="${o.publishedAt}">
-                
+
                 <label for="state">State:</label>
                 <select id="state" name="state" value="${o.state}" required>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                    <c:if test = "${o.state != 0}">
+                        <option value="1" selected="">Active</option>
+                        <option value="0">Inactive</option>
+                    </c:if>
+                    <c:if test = "${o.state == 0}">
+                        <option value="1">Active</option>
+                        <option value="0" selected="">Inactive</option>
+                    </c:if>
                 </select>
 
                 <label for="startsAt">Starts At:</label>
