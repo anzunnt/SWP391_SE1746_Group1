@@ -5,9 +5,8 @@
 
 package controller;
 
-import dal.EnCryptPassword;
+import dal.VerifyCode;
 import dal.userDAO;
-import model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +15,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import model.user;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name="RegisterServlet", urlPatterns={"/register"})
+public class RegisterServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -49,8 +51,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -63,31 +64,34 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
         try {
             HttpSession session = request.getSession();
+            String fullname = request.getParameter("fullname");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String image = request.getParameter("image");
+            String dob = request.getParameter("dob");
+            String address = request.getParameter("address");
+
+            VerifyCode vcdal = new VerifyCode();
+            String vc = vcdal.generateVerificationCode(6);
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
             userDAO ud = new userDAO();
-            EnCryptPassword ep = new EnCryptPassword();
-            List<user> users = ud.GetAllUsers();
-            String mess = "Email or password wrong!";
-            for (user user : users) {
-                if (user.getUsername().equals(username) && user.getPassword().equals(ep.hashPassword(password))) {
-                    session.setAttribute("account", user);
-                    mess = "ok";
-                }
-            }
-            if (mess.equals("ok")) {
-                response.sendRedirect("index");
+            user checkExist = ud.GetUserByUsername(username);
+            if (checkExist == null) {
+                ud.InsertUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, currentDate, null, null, currentDate);
+                response.sendRedirect("login");
             } else {
-                request.setAttribute("mess", mess);
+                request.setAttribute("messregis", "Username is already existed!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
-        catch(Exception e){
-            
+        catch (Exception e) {
+            request.setAttribute("messregis", "Invalid input!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 

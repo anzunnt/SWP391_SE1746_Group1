@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.EnCryptPassword;
 import dal.userDAO;
 import model.user;
 import java.io.IOException;
@@ -15,15 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/login"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name="UserListServlet", urlPatterns={"/userlist"})
+public class UserListServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -49,8 +47,35 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        String num_raw = request.getParameter("pageNumber");
+        int num;
+        try {
+            if (num_raw == null) {
+                num = 5;
+            } else {
+                num = Integer.parseInt(num_raw);
+            }
+            request.setCharacterEncoding("UTF-8");
+            userDAO ud = new userDAO();
+            
+            int totalUser = ud.getNumberUser();
+            int numberPage = (int) Math.ceil((double) totalUser / num);
+            int index;
+            String currentPage = request.getParameter("index");
+            if (currentPage == null) {
+                index = 1;
+            } else {
+                index = Integer.parseInt(currentPage);
+            }
+            List<user> list = ud.pagingUser(index, num);
+            request.setAttribute("num", num);
+            request.setAttribute("numberPage", numberPage);
+            request.setAttribute("users", list);
+            request.getRequestDispatcher("userlist.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", e);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     } 
 
     /** 
@@ -63,32 +88,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        try {
-            HttpSession session = request.getSession();
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            userDAO ud = new userDAO();
-            EnCryptPassword ep = new EnCryptPassword();
-            List<user> users = ud.GetAllUsers();
-            String mess = "Email or password wrong!";
-            for (user user : users) {
-                if (user.getUsername().equals(username) && user.getPassword().equals(ep.hashPassword(password))) {
-                    session.setAttribute("account", user);
-                    mess = "ok";
-                }
-            }
-            if (mess.equals("ok")) {
-                response.sendRedirect("index");
-            } else {
-                request.setAttribute("mess", mess);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
-        }
-        catch(Exception e){
-            
-        }
+        processRequest(request, response);
     }
 
     /** 

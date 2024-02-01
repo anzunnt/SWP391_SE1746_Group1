@@ -52,8 +52,8 @@
                         <img src="../assets/images/logo-dark.png" height="24" class="mx-auto d-block" alt="">
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
-                                <h4 class="text-center">Login</h4>  
-                                <form action="login" class="login-form mt-4" method="post">
+                                <h4 class="text-center">Login Admin</h4>  
+                                <form action="admin" class="login-form mt-4" method="post">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
@@ -114,104 +114,6 @@
                         </div><!---->
                     </div> <!--end col-->
 
-                    <div class="col-lg-7 col-md-8" id="registerform">
-                        <img src="../assets/images/logo-dark.png" height="24" class="mx-auto d-block" alt="">
-                        <div class="card login-page bg-white shadow mt-4 rounded border-0">
-                            <div class="card-body">
-                                <h4 class="text-center">Register</h4>  
-                                <div>
-                                    <p class="form-row" style="color: red">
-                                        ${messregis}
-                                    </p>
-                                </div>
-                                <form action="register" class="login-form mt-4" method="post">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">                                               
-                                                <label class="form-label">Full name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Full Name" id="fullname" name="fullname" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">                                                
-                                                <label class="form-label">User name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="User Name" id="username" name="username" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Phone number <span class="text-danger">*</span></label>
-                                                <input type="tel" class="form-control" placeholder="Phone number" id="phone" name="phone" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label for="image">Choose Image: </label>
-                                                <input type="file" id="image" name="image" value="" accept="image/*" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Birthday <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="dob" name="dob" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Address" id="address" name="address" value="" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input align-middle" type="checkbox" value="" id="accept-tnc-check">
-                                                    <label class="form-check-label" for="accept-tnc-check">I Accept <a href="#" class="text-primary">Terms And Condition</a></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="d-grid">
-                                                <button class="btn btn-primary" type="submit">Register</button>
-                                            </div>
-                                        </div>
-
-                                        <!--                                        <div class="col-lg-12 mt-3 text-center">
-                                                                                    <h6 class="text-muted">Or</h6>
-                                                                                </div>end col
-                                        
-                                                                                <div class="col-6 mt-3">
-                                                                                    <div class="d-grid">
-                                                                                        <a href="javascript:void(0)" class="btn btn-soft-primary"><i class="uil uil-facebook"></i> Facebook</a>
-                                                                                    </div>
-                                                                                </div>end col
-                                        
-                                                                                <div class="col-6 mt-3">
-                                                                                    <div class="d-grid">
-                                                                                        <a href="javascript:void(0)" class="btn btn-soft-primary"><i class="uil uil-google"></i> Google</a>
-                                                                                    </div>
-                                                                                </div>end col-->
-
-                                        <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="#loginform" onclick="switchLoginRegister()" class="fw-bold link-danger">Login</a></p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div><!---->
-                    </div> <!--end col-->
                 </div><!--end row-->
             </div> <!--end container-->
         </section><!--end section-->
