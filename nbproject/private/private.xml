@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/productlist.jsp</file>
-            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/conf/MANIFEST.MF</file>
-            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/web/fashionShop.jsp</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/web/header.jsp</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/web/productdetail.jsp</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/src/java/model/LineItem.java</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/web/index.jsp</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/src/java/controller/ProductListViewClient.java</file>
+            <file>file:/C:/Users/Dell/Documents/GitHub/SWP391_SE1746_Group1/web/cart.jsp</file>
         </group>
     </open-files>
 </project-private>

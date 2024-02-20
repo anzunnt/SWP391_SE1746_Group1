@@ -102,7 +102,7 @@
                                 <h6 class="text-muted small font-italic mb-0 mt-1">
                                     GIÁ GỐC: <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
                                 </h6>
-                                    <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
+                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
                                 <h6 class="text-muted small font-italic mb-0 mt-1">CHỈ CÒN:<span style="color: blue"> ${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                             </div>
                             <h5 class="mt-4 py-2">Overview :</h5>
@@ -111,15 +111,15 @@
                             <div class="d-flex shop-list align-items-center">
                                 <h6 class="mb-0">Quantity:</h6>
                                 <div class="qty-icons ms-3">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-icon btn-primary minus">-</button>
+                                    <button onclick="changeQuantity(this, -1)" class="btn btn-icon btn-primary minus">-</button>
                                     <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-icon btn-primary qty-btn quantity">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-icon btn-primary plus">+</button>
+                                    <button onclick="changeQuantity(this, 1)" class="btn btn-icon btn-primary plus">+</button>
                                 </div>
                             </div>
 
                             <div class="mt-4 pt-2">
                                 <a href="#" class="btn btn-primary">Shop Now</a>
-                                <a href="#" class="btn btn-soft-primary ms-2">Add to Cart</a>
+                                <a href="fashionshop?action=cart&productId=${o.id}&quantity=" class="btn btn-soft-primary ms-2" id="addToCartBtn">Add to Cart</a>
                             </div>
                         </div>
                     </div><!--end col-->
@@ -169,6 +169,21 @@
             <script src="assets/js/feather.min.js"></script>
             <!-- Main Js -->
             <script src="assets/js/app.js"></script>
+            <script>
+                function changeQuantity(element, value) {
+                    var inputElement = element.parentNode.querySelector('input[type=number]');
+                    var currentValue = parseInt(inputElement.value);
+                    var newValue = currentValue + value;
+
+                    if (newValue >= 0 && newValue <= parseInt(inputElement.max)) {
+                        inputElement.value = newValue;
+
+                        // Update the Add to Cart button URL
+                        var addToCartBtn = document.getElementById('addToCartBtn');
+                        addToCartBtn.href = "fashionshop?action=cart&productId=${o.id}&quantity=" + newValue;
+                    }
+                }
+            </script>
     </body>
 
 </html>
