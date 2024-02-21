@@ -63,9 +63,10 @@
 
                     <!-- sidebar-menu  -->
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Products</a></li>
+                        <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Product List</a></li>
                         <!-- add another here --> 
-                        <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Users</a></li>
+                        <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Customer List</a></li>
+                        <li><a href="adminlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Admin List</a></li>
                         <li><a href="fashionshop"><i class="uil uil-dashboard me-2 d-inline-block"></i>Home</a></li>
                     </ul>
 
@@ -163,6 +164,7 @@
                                                     <th class="border-bottom p-3" style="min-width: 30px;">State</th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;">Style</th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageProduct">Add Product</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;">Edit Image</th>
                                                     <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
                                                 </tr>
                                             </thead>
@@ -181,6 +183,9 @@
                                                         <td class="text-end p-3">
                                                             <a href="manageProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <a href="manageImage?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${o.id}"></td>
                                                     </tr>
@@ -201,6 +206,8 @@
                                         <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
                                         </select>
                                         </br><button type="submit">OK</button>
                                     </form>

@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/productlist.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/LoginServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ViewShop.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/manageUser.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/dal/ProductMenuDAO.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ProductListViewAdmin.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/userlist.jsp</file>
+        </group>
     </open-files>
 </project-private>

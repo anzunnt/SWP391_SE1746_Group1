@@ -55,7 +55,7 @@
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             </c:if>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center text-dark" href="userprofile">
+                            <a class="dropdown-item d-flex align-items-center text-dark" href="profile">
                                 <img src="assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                 <div class="flex-1 ms-2">
                                     <span class="d-block mb-1">${sessionScope['account'].username}</span>
@@ -64,7 +64,7 @@
                                     </c:if>
                                 </div>
                             </a>
-                            <a class="dropdown-item text-dark" href="changepassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Change Password</a>
+                            <a class="dropdown-item text-dark" href="resetPassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Change Password</a>
                             <div class="dropdown-divider border-top"></div>
                             <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                         </div>
@@ -92,6 +92,7 @@
 
                 <li class="has-submenu parent-menu-itemk">
                     <a href="orderlist" style="color: black!important">Order</a>
+                </li>
 
                 <li class="has-submenu parent-menu-item">
                     <a href="cart" class="menu-item" style="color: black!important">
@@ -103,7 +104,10 @@
                             (${sessionScope['cart'].getItems().size()})
                         </c:if>
                     </a>
-
+                </li>
+                <li class="has-submenu parent-menu-itemk">
+                    <a href="news" style="color: black!important">News</a>
+                </li>
                 <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)" style="color: black!important">Pages</a><span class="menu-arrow" style="color: black"></span>
                     <ul class="submenu">
                         <li><a href="aboutus.html"> About Us</a></li>

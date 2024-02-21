@@ -7,7 +7,6 @@ package controller;
 
 import dal.VerifyCode;
 import dal.userDAO;
-import model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -19,13 +18,14 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import model.user;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="ManageUserServlet", urlPatterns={"/manageUser"})
-public class ManageUserServlet extends HttpServlet {
+@WebServlet(name="profileSettingServlet", urlPatterns={"/profileSetting"})
+public class profileSettingServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,18 +37,6 @@ public class ManageUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ManageUserServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ManageUserServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,19 +50,15 @@ public class ManageUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        int id;
-        userDAO ud = new userDAO();
-
-        if (id_raw != null) {
-            id = Integer.parseInt(id_raw);
-            user u = ud.GetUserById(id);
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
+            user u = (user) session.getAttribute("account");
             request.setAttribute("user", u);
-            request.setAttribute("doing", "Update");
-            request.getRequestDispatcher("manageUser.jsp").forward(request, response);
-        } else {
-            request.setAttribute("doing", "Add");
-            request.getRequestDispatcher("manageUser.jsp").forward(request, response);
+            request.getRequestDispatcher("profileSetting.jsp").forward(request, response);
+        }
+        catch (Exception e) {
+            
         }
     } 
 
@@ -90,41 +74,34 @@ public class ManageUserServlet extends HttpServlet {
     throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            String id = request.getParameter("id");
+            userDAO ud = new userDAO();
+            user u = (user)session.getAttribute("account");
+            user un = ud.GetUserById(u.getId());
+            
             String fullname = request.getParameter("fullname");
-            String username = request.getParameter("username");
+            String username = un.getUsername();
             String password = request.getParameter("password");
-            String code = request.getParameter("code");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String image = request.getParameter("image");
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");
-            String status = request.getParameter("status");
-            String created_on = request.getParameter("created_on");
 
-            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.00").format(Calendar.getInstance().getTime());
+            String vc = un.getCode_verify();
+            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 
-            userDAO ud = new userDAO();
-            if (!"".equals(id)) {
-                ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate, Integer.parseInt(id));
-                response.sendRedirect("userlist");
-            } 
-            //Add a Product
-            else {
-                user p = ud.GetUserByUsername(username);
-                if (p == null) {
-                    ud.InsertUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate);
-                    response.sendRedirect("userlist");
-                } else {
-                    request.setAttribute("error", "User is existed");
-                    request.getRequestDispatcher("manageUser.jsp").forward(request, response);
-                }
+            if (un != null) {
+                ud.UpdateUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, u.getCreated_on(), 1, 1, currentDate, un.getId());
+                session.setAttribute("account", un);
+                response.sendRedirect("profile");
+            } else {
+                request.setAttribute("messregis", "Username is not existed!");
+                request.getRequestDispatcher("customerProfile.jsp").forward(request, response);
             }
         }
         catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.setAttribute("messregis", e.getMessage());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.ProductMenuDAO;
+import dal.adminDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.ProductMenu;
+import model.Admin;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="fashionShopServlet", urlPatterns={"/fashionshop"})
-public class ProductListViewClient extends HttpServlet {
+@WebServlet(name="AdminListServlet", urlPatterns={"/adminlist"})
+public class AdminListServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,16 +33,7 @@ public class ProductListViewClient extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setCharacterEncoding("UTF-8");
-            ProductMenuDAO dao = new ProductMenuDAO();
-            List<ProductMenu> list = dao.getAllProductMenu();
-            request.setAttribute("listP", list);
-            request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +47,35 @@ public class ProductListViewClient extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String num_raw = request.getParameter("pageNumber");
+        int num;
+        try {
+            if (num_raw == null) {
+                num = 5;
+            } else {
+                num = Integer.parseInt(num_raw);
+            }
+            request.setCharacterEncoding("UTF-8");
+            adminDAO ad = new adminDAO();
+            
+            int totalAdmin = ad.getNumberAdmin();
+            int numberPage = (int) Math.ceil((double) totalAdmin / num);
+            int index;
+            String currentPage = request.getParameter("index");
+            if (currentPage == null) {
+                index = 1;
+            } else {
+                index = Integer.parseInt(currentPage);
+            }
+            List<Admin> list = ad.pagingAdmin(index, num);
+            request.setAttribute("num", num);
+            request.setAttribute("numberPage", numberPage);
+            request.setAttribute("admins", list);
+            request.getRequestDispatcher("adminlist.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", e);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     } 
 
     /** 

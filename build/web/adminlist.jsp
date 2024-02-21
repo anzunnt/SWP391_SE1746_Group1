@@ -1,5 +1,6 @@
+
 <%-- 
-    Document   : productlist
+    Document   : adminlist
     Created on : Jan 15, 2024, 3:38:53 PM
     Author     : admin
 --%>
@@ -15,7 +16,7 @@
         <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
         <meta name="author" content="Shreethemes" />
         <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="productlist" />
+        <meta name="website" content="adminlist" />
         <meta name="Version" content="v1.2.0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=vietnamese">
         <!-- favicon -->
@@ -32,8 +33,8 @@
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <script type="text/javascript">
             function doDelete(id) {
-                if (confirm("Are you sure to delete product with id " + id)) {
-                    window.location = "deleteProduct?id=" + id;
+                if (confirm("Are you sure to delete user with id " + id)) {
+                    window.location = "deleteUser?id=" + id;
                 }
             }
         </script>
@@ -55,7 +56,7 @@
             <nav id="sidebar" class="sidebar-wrapper">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand">
-                        <a href="productlist">
+                        <a href="userlist">
                             <img src="assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
                             <img src="assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                         </a>
@@ -145,49 +146,33 @@
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
-                            <h5 class="mb-0">Product List</h5>
+                            <h5 class="mb-0">Admin List</h5>
                         </div>
 
                         <div class="row">
                             <div class="col-12 lg-4">
                                 <div class="table-responsive shadow rounded">
-                                    <form action="deleteProduct" method="post">
+                                    <form action="deleteUser" method="post">
                                         <table class="table table-center bg-white mb-0">
                                             <thead>
                                                 <tr>
                                                     <th class="border-bottom p-3">Id</th>
-                                                    <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
-                                                    <th class="border-bottom p-3">Base Price</th>
-                                                    <th class="border-bottom p-3">Price</th>
-                                                    <th class="border-bottom p-3">Discount</th>
-                                                    <th class="border-bottom p-3">Quantity</th>
-                                                    <th class="border-bottom p-3" style="min-width: 30px;">State</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;">Style</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageProduct">Add Product</a></th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;">Edit Image</th>
-                                                    <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
+                                                    <th class="border-bottom p-3">UserName</th>
+                                                    <th class="border-bottom p-3">Created On</th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageUser">Add Admin</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DISABLE"></a></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody" >
-                                                <c:forEach items="${listP}" var="o">
+                                                <c:forEach items="${admins}" var="as">
                                                     <tr>
-                                                        <td class="p-3">${o.id}</td>
-                                                        <td class="p-3">${o.name}</td>
-                                                        <td class="p-3">${o.basePrice}VNĐ</td>
-                                                        <td class="p-3">${o.price}VNĐ</td>
-                                                        <td class="p-3">${Math.round(o.discount*100)}%</td>
-                                                        <td class="p-3">${o.quantity}</td>
-                                                        <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
-                                                        <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  
-                                                        <td class="p-3">${o.style}</td>
+                                                        <td class="p-3">${as.id}</td>
+                                                        <td class="p-3">${as.username}</td>
+                                                        <td class="p-3">${as.created_on}</td>
                                                         <td class="text-end p-3">
-                                                            <a href="manageProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
-                                                            <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                                            <a href="manageUser?id=${as.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                         </td>
-                                                        <td class="p-3">
-                                                            <a href="manageImage?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
-                                                        </td>
-                                                        <td><input type="checkbox" name="deleteRow" value="${o.id}"></td>
+                                                        <td><input type="checkbox" name="deleteRow" value="${as.id}"></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -201,21 +186,19 @@
                         <div class="row text-center">                                  
                             <div class="col-12 mt-4">
                                 <ul style="justify-content: center" class="pagination" id="pagination">
-                                    <form action="productlist" method="get">
-                                        <label for="pageNumber">Number Product/Page:</label>
+                                    <form action="adminlist" method="get">
+                                        <label for="pageNumber">Number User/Page:</label>
                                         <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
                                             <option value="5">5</option>
                                             <option value="10">10</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
                                         </select>
                                         </br><button type="submit">OK</button>
                                     </form>
-                                    <li  class="page-item next"><a href="productlist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
+                                    <li  class="page-item next"><a href="adminlist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
                                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
-                                        <li class="${param['index']==i?'page-item active':'page-item'}"><a href="productlist?index=${i}&pageNumber=${num}"   class="page-link">${i}</a></li>
+                                        <li class="${param['index']==i?'page-item active':'page-item'}"><a href="adminlist?index=${i}&pageNumber=${num}"   class="page-link">${i}</a></li>
                                         </c:forEach>
-                                    <li  class="page-item next"><a href="productlist?index=${numberPage}&pageNumber=${num}"><i class="fa fa-angle-right" class="page-link" aria-hidden="true"></i></a></li>
+                                    <li  class="page-item next"><a href="adminlist?index=${numberPage}&pageNumber=${num}"><i class="fa fa-angle-right" class="page-link" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div><!--end col-->                                                
                         </div> <!-- PAGINATION END --> 

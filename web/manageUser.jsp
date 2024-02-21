@@ -5,6 +5,7 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<
 <!DOCTYPE html>
 <html>
     <head>
@@ -63,38 +64,39 @@
         <c:set var="o" value="${requestScope.user}"/>
         <div style="text-align: center">
             <form action="manageUser" method="post"><!-- Replace "#" with your form submission URL -->
-                <input type="text" hidden="true" name="id" value="${o.id}">
+                <input type="text" hidden="true" name="id" value="${o.id}" disabled="">
                 <label for="name">Full Name:</label>
-                <input type="text" id="fullname" name="fullname" value="${o.fullname}"required>
+                <input type="text" id="fullname" name="fullname" value="${o.fullname}" disabled="">
 
                 <label for="description">User Name:</label>
-                <input type="text" id="username" name="username" value="${o.username}" required>
+                <input type="text" id="username" name="username" value="${o.username}" disabled="">
 
                 <label for="basePrice">Password:</label>
-                <input type="password" id="password" name="password" value="${o.password}" required>
+                <input type="password" id="password" name="password" value="${o.password}" disabled="">
 
                 <label for="price">Code Verify:</label>
-                <input type="text" id="code_verify" name="code_verify" value="${o.code_verify}" required>
+                <input type="text" id="code_verify" name="code_verify" value="${o.code_verify}" disabled="">
 
                 <label for="discount">Email:</label>
-                <input type="text" id="email" name="email" value="${o.email}">
+                <input type="text" id="email" name="email" value="${o.email}" disabled="">
 
                 <label for="quantity">Phone:</label>
-                <input type="text" id="phone" name="phone" value="${o.phone}" required>
-<!--
--->                <label for="style">Image:</label>
-                <input type="file" id="image" name="image" value="" accept="image/*">
+                <input type="text" id="phone" name="phone" value="${o.phone}" disabled="">
+                <!--
+                -->                
+                <label for="style">Image:</label>
+                <input type="file" id="image" name="image" value="" accept="image/*" disabled="">
                 </br><!--
                 <img src="${o.image}" alt="Avatar" width="100px" height="100px">-->
 
                 <label class="form-label">Birthday <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="dob" name="dob" value="${o.dob}" required="">
+                <input type="date" class="form-control" id="dob" name="dob" value="${o.dob}" disabled="">
 
                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="address" name="address" value="${o.address}" required="">
+                <input type="text" class="form-control" id="address" name="address" value="${o.address}" disabled="">
 
                 <label for="status">Status:</label>
-                <select id="status" name="status" value="${o.status}" required>
+                <select id="status" name="status" value="${o.status}">
                     <c:if test="${o.status != 0}">
                         <option value="1" selected="">Active</option>
                         <option value="0">Disable</option>
