@@ -21,7 +21,7 @@ import model.ProductMenu;
  * @author admin
  */
 @WebServlet(name="fashionShopServlet", urlPatterns={"/fashionshop"})
-public class ViewShop extends HttpServlet {
+public class ProductListViewClient extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
