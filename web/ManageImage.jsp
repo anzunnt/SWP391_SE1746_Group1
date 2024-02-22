@@ -47,13 +47,18 @@
                 </div>
             </div><!--end row-->
         </div>
-        <form action="manageImage" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="Tải lên">
-        </form>
-        <form action="manageImage" method="post">
-            <input type="text" name="imageId" placeholder="Nhập ID hình ảnh để xóa">
-            <input type="submit" value="Xóa">
-        </form>
+        <div style="margin-top: 50px">
+            <form action="manageImage" method="post" enctype="multipart/form-data">
+                <input type="text" hidden="true" name="id" value="${id}">
+                <input type="file" name="file">
+                <label for="name">Description:</label>
+                <input type="text" id="description" name="description" required>
+                <input type="submit" value="Tải lên">
+            </form>
+                <form style="margin-top: 50px" action="manageImage" method="post">
+                <input type="text" name="imageId" placeholder="Nhập ID hình ảnh để xóa">
+                <input type="submit" value="Xóa">
+            </form>
+        </div>     
     </body>
 </html>

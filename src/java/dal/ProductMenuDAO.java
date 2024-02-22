@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Image;
 import model.ProductMenu;
 
 /**
@@ -19,8 +18,8 @@ import model.ProductMenu;
 public class ProductMenuDAO extends DBContext{
     public static void main(String[] args) {
         ProductMenuDAO dao = new ProductMenuDAO();
-        List<Image> p = dao.getAllImageByID(1);
-        System.out.println(p);
+//        List<Image> p = dao.getAllImageByID(1);
+//        System.out.println(p);
     }
     //doc toan bo tu bang Product
     public List<ProductMenu> getAllProductMenu() {
@@ -105,24 +104,6 @@ public class ProductMenuDAO extends DBContext{
                         rs.getFloat(3), rs.getFloat(4),
                         rs.getInt(5),rs.getByte(6), rs.getString(7),
                         rs.getString(8));
-                list.add(p);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-    public List<Image> getAllImageByID(int id) {
-        List<Image> list = new ArrayList<>();
-        String sql = "SELECT * FROM ProductImage WHERE ProductId = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Image p = new Image(rs.getInt(1), rs.getString(2),
-                        rs.getInt(3),rs.getString(4),rs.getInt(5),
-                        rs.getString(6),rs.getInt(7),rs.getString(8));
                 list.add(p);
             }
         } catch (SQLException e) {

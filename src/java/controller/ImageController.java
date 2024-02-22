@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.ProductMenuDAO;
+import dal.ImageDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import model.Image;
 
@@ -62,11 +65,12 @@ public class ImageController extends HttpServlet {
             throws ServletException, IOException {
         String id_raw = request.getParameter("id");
         int id;
-        ProductMenuDAO cdb = new ProductMenuDAO();
+        ImageDAO cdb = new ImageDAO();
         try {
             id = Integer.parseInt(id_raw);
             List<Image> list = cdb.getAllImageByID(id);
             request.setAttribute("listP", list);
+            request.setAttribute("id", id);
             request.getRequestDispatcher("ManageImage.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException e) {
             request.setAttribute("error", e);
@@ -86,17 +90,27 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ImageDAO imd = new ImageDAO();
+        // Xử lý việc tải lên hình ảnh
+        String id_raw = request.getParameter("id");
+        String description = request.getParameter("description");
+        String fileName = request.getParameter("file");
+        int id;
+        int userId = 1;//(int)session.getAttribute("userId");
+        // Lấy ngày giờ hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
-            String file = request.getParameter("file");
-            request.setAttribute("error", file);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-            String id_raw = request.getParameter("id");
-            int id = Integer.parseInt(id_raw);
-            System.out.println(id);
-
-        } catch (Exception e) {
+            String createdAt = currentDateTime.format(formatter);
+            id = Integer.parseInt(id_raw);
+            imd.insert(fileName, id, createdAt, userId, createdAt, userId, description);
+            // Thông báo thành công sau khi tải lên
+            response.getWriter().println("Hình ảnh đã được tải lên thành công!");
+            response.sendRedirect("productlist");
+        } catch (IOException | NumberFormatException e) {
+            // Xử lý lỗi nếu không tìm thấy file
+            response.getWriter().println("Lỗi: " + e.getMessage());
         }
-
     }
 
     /**
