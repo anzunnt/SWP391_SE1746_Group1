@@ -48,8 +48,8 @@ public class ImageDAO extends DBContext {
         return null;
     }
 
-    public void insert(String Image, int ProductId,String CreatedAt,int CreatedBy,
-            String ModifiedAt, int ModifiedBy,String ImageDescription) {
+    public void insert(String Image, int ProductId, String CreatedAt, int CreatedBy,
+            String ModifiedAt, int ModifiedBy, String ImageDescription) {
         String sql = "INSERT INTO [dbo].[ProductImage]\n"
                 + "           ([Image]\n"
                 + "           ,[ProductId]\n"
@@ -69,6 +69,19 @@ public class ImageDAO extends DBContext {
             st.setString(5, ModifiedAt);
             st.setInt(6, ModifiedBy);
             st.setString(7, ImageDescription);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //delete a product
+    public void deleteImage(int id) {
+        String sql = "DELETE FROM [dbo].[ProductImage]\n"
+                + "      WHERE Id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
