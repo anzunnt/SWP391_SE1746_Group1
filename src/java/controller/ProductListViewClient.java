@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CategoryDAO;
 import dal.ProductMenuDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Category;
 import model.ProductMenu;
 
 /**
@@ -36,7 +38,10 @@ public class ProductListViewClient extends HttpServlet {
         try {
             request.setCharacterEncoding("UTF-8");
             ProductMenuDAO dao = new ProductMenuDAO();
+            CategoryDAO cd = new CategoryDAO();
+            List<Category> clist = cd.getAllCategory();
             List<ProductMenu> list = dao.getAllProductMenu();
+            request.setAttribute("listC", clist);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
         } catch (Exception e) {

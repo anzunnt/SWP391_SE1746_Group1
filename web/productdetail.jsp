@@ -125,6 +125,53 @@
                     <h5 class="mt-4 py-2">Overview :</h5>
                     <p class="text-muted">${o.description}</p>
                 </div><!--end row-->
+
+                <!-- Start -->
+                <section class="section">
+                    <div class="container mt-100 mt-60">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="mb-0">Related Products</h5>
+                            </div><!--end col-->
+                        </div><!--end row-->
+
+                        <div class="row">    
+                            <c:forEach items="${listS}" var="o">
+                                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                                    <div class="card shop-list border-0">
+                                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                                            <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
+                                            <ul class="list-unstyled shop-icons">
+                                                <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
+                                                <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
+                                            </ul>                                
+
+                                            <div class="qty-icons">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
+                                                <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body content pt-4 p-2">
+                                            <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
+
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <h6 class="text-muted small font-italic mb-0 mt-1">
+                                                    <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                                </h6>
+                                                <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                                <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+                            </c:forEach>
+
+
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </section><!--end section-->
+
             </div><!--end container-->
 
             <jsp:include page="footer.jsp"/>

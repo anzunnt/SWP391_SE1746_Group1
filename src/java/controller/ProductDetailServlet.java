@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.CategoryDAO;
 import dal.ProductDAO;
 import dal.ProductMenuDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Category;
 import model.Product;
 import model.ProductMenu;
 
@@ -41,10 +43,14 @@ public class ProductDetailServlet extends HttpServlet {
         try {
             ProductDAO cdb = new ProductDAO();
             ProductMenuDAO dao = new ProductMenuDAO();
+            CategoryDAO cd = new CategoryDAO();
             id = Integer.parseInt(id_raw);
             Product p = cdb.getProductById(id);
+            Category c = cd.getCategoryById(id);
+            List<ProductMenu> lS = dao.getTop4RelateProductByCategory(c.getId());
             request.setAttribute("product", p);
             List<ProductMenu> list = dao.getAllProductDetailByID(id);
+            request.setAttribute("listS", lS);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("productdetail.jsp").forward(request, response);
         } catch (Exception e) {

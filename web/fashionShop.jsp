@@ -48,81 +48,20 @@
                     <h5 class="mb-0">Categories</h5>
                 </div><!--end col-->
             </div><!--end row-->
-
+            
             <div class="row">
                 <div class="col-lg-12 mt-4 pt-2">
                     <div class="slider-range-four">
+                        <c:forEach items="${listC}" var="o">
                         <div class="tiny-slide">
                             <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/skin.jpg" class="img-fluid" alt="">
+                                <img style="width: 261px; height: 261px;border: solid 2px" src="${o.image}" class="img-fluid" alt="">
                                 <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Skin</span><br>Care</span>
+                                    <span class="text-dark title-white"><span class="h5">${o.name}
                                 </div>
                             </a>
                         </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/sexual.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Sexual</span><br>Wallness</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/weight.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Weight</span><br>Management</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/pain.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Pain</span><br>Relief</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/heart.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Heart</span><br>Health</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/cough.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Cough</span><br> & Cold</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/diabetes.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Diabetes</span><br>Care</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img src="assets/images/pharmacy/cancer.jpg" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">Cancer</span><br>Care</span>
-                                </div>
-                            </a>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div><!--end col-->
             </div><!--end row-->
