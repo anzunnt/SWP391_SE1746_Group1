@@ -124,7 +124,7 @@ public class ManageUserServlet extends HttpServlet {
         }
         catch (Exception e) {
             request.setAttribute("error", e);
-                    request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
