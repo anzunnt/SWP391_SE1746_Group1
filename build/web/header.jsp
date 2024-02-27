@@ -1,3 +1,4 @@
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -88,24 +89,27 @@
                 <li class="has-submenu parent-parent-menu-item">
                     <a href="fashionshop" style="color: black!important">Product Shop</a>
                 </li>
-
-                <li class="has-submenu parent-parent-menu-item">
-                    <a href="BlogList" style="color: black!important">News</a>
+                
+                <li class="has-submenu parent-menu-itemk">
+                    <a href="news" style="color: black!important">News</a>
                 </li>
 
                 <li class="has-submenu parent-menu-itemk">
                     <a href="orderlist" style="color: black!important">Order</a>
+                </li>
 
                 <li class="has-submenu parent-menu-item">
-                    <a href="cart.jsp" class="menu-item" style="color: black!important">
+                    <a href="cart" class="menu-item" style="color: black!important">
                         View Cart
                         <c:if test="${sessionScope['cart']==null}">
                             (0)
                         </c:if>
                         <c:if test="${sessionScope['cart']!=null}">
-                            (${sessionScope['cart'].size()})
+                            (${sessionScope['cart'].getItems().size()})
                         </c:if>
                     </a>
+                </li>
+                
                 <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)" style="color: black!important">Pages</a><span class="menu-arrow" style="color: black"></span>
                     <ul class="submenu">
                         <li><a href="aboutus.html"> About Us</a></li>

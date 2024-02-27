@@ -64,9 +64,10 @@
 
                     <!-- sidebar-menu  -->
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Products</a></li>
+                        <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Product List</a></li>
                         <!-- add another here --> 
-                        <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Users</a></li>
+                        <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Customer List</a></li>
+                        <li><a href="adminlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Admin List</a></li>
                         <li><a href="fashionshop"><i class="uil uil-dashboard me-2 d-inline-block"></i>Home</a></li>
                     </ul>
 
@@ -161,8 +162,8 @@
                                                     <th class="border-bottom p-3">Email</th>
                                                     <th class="border-bottom p-3">Phone</th>
                                                     <th class="border-bottom p-3">Status</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageUser">Add User</a></th>
-                                                    <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageUser"></a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DISABLE"></a></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody" >
@@ -183,7 +184,6 @@
                                                         </td>
                                                         <td class="text-end p-3">
                                                             <a href="manageUser?id=${us.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
-                                                            <a href="#" onclick="doDelete('${us.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${us.id}"></td>
                                                     </tr>
