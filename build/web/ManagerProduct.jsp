@@ -10,7 +10,36 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="assets/images/favicon.ico.png">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
         <style>
+            form {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: 1fr 3fr;
+                max-width: 90%; /* Adjust as needed */
+                margin: 0 auto; /* Center the form */
+            }
+
+            label {
+                text-align: right;
+                padding-right: 10px;
+                line-height: 30px; /* Adjust as needed */
+            }
+
+            input[type="text"],
+            input[type="number"],
+            textarea,
+            select {
+                width: 100%;
+                padding: 5px;
+                box-sizing: border-box;
+            }
+
+            button[type="submit"] {
+                margin-left: 50%;
+                margin-top: 10px;
+            }
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
@@ -36,7 +65,7 @@
             input, select, textarea {
                 width: 50%;
                 padding: 8px;
-                margin-bottom: 16px;
+                
                 box-sizing: border-box;
             }
 
@@ -50,7 +79,7 @@
             }
             h1{
                 font-size: 20px;
-                margin-left: 25%;
+                margin-left: 10%;
                 color: blue;
             }
         </style>
@@ -68,7 +97,7 @@
                 <input type="text" id="name" name="name" value="${o.name}"required>
 
                 <label for="description">Description:</label>
-                <textarea rows="20" cols="100" id="description" name="description" required>${o.description}</textarea>
+                <textarea rows="707px" cols="100px" id="description" name="description" required>${o.description}</textarea>
 
                 <label for="basePrice">Base Price:</label>
                 <input type="number" id="basePrice" name="basePrice" value="${o.basePrice}" step="0.01" required>
@@ -108,6 +137,12 @@
 
                 </br><button type="submit">${doing} Product</button>
             </form>
+            <script>//CKEDITOR.replace('description');
+                var editor = '';
+                $(document).ready(function () {
+                    editor = CKEDITOR.replace('description');
+                });
+            </script>
         </div>
     </body>
 </html>

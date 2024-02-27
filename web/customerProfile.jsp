@@ -70,7 +70,7 @@
                                 <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
                                 <li class="navbar-item"><a href="invoices.html" class="navbar-link"><i class="ri-pages-line align-middle navbar-icon"></i> Invoices</a></li> -->
                                 <!--<li class="navbar-item"><a href="doctor-messages.html" class="navbar-link"><i class="ri-mail-unread-line align-middle navbar-icon"></i> Messages</a></li>-->
-                                <li class="navbar-item"><a href="profile" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
+                                <li class="navbar-item"><a href="userprofile" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
                                 <li class="navbar-item"><a href="profileSetting" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
                                 <!-- <li class="navbar-item"><a href="patient-list.html" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
                                 <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li> -->

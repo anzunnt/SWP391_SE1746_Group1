@@ -17,8 +17,10 @@ import model.Category;
  */
 public class CategoryDAO extends DBContext{
     public static void main(String[] args) {
-        //List<ProductMenu> p = dao.getTop4RelateProductByCategory(1);
-        //System.out.println(p);
+        List<Category> c = new ArrayList<>();
+        CategoryDAO cd = new CategoryDAO();
+        c = cd.getAllCategory();
+        System.out.println(c.toString());
     }
     public Category getCategoryById(int id) {
         String sql = "SELECT c.id,c.name,c.[Image] FROM Product p\n"
