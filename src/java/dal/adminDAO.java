@@ -99,7 +99,7 @@ public class adminDAO extends DBContext{
         catch(SQLException e){}
     }
     
-    public int getNumberUser() {
+    public int getNumberAdmin() {
         String sql = "select count(*) from  [dbo].[user]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
