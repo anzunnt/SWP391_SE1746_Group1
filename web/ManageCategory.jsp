@@ -29,7 +29,6 @@
 
             input[type="text"],
             input[type="number"],
-            textarea,
             select {
                 width: 100%;
                 padding: 5px;
@@ -97,8 +96,11 @@
                 <input type="text" id="name" name="name" value="${o.name}"required>
 
                 <label for="description">Image</label>
-                <textarea rows="707px" cols="100px" id="description" name="description" required>${o.image}</textarea>
-
+                <img style="width: 100px;height: 120px" src="${o.image}" class="img-fluid" alt="">
+                
+                <label for="description">Edit Image</label>
+                <input type="file" name="file">
+                
                 </br><button type="submit">${doing} Category</button>
             </form>
         </div>

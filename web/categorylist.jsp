@@ -132,7 +132,7 @@
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Image</th>
             
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageCategory">Add Product</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageCategory">Add Category</a></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody" >

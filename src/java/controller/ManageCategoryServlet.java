@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Category;
 
 /**
  *
@@ -57,17 +60,17 @@ public class ManageCategoryServlet extends HttpServlet {
     throws ServletException, IOException {
         String id_raw = request.getParameter("id");
         int id;
-        ProductDAO cdb = new ProductDAO();
+        CategoryDAO cdb = new CategoryDAO();
 
         if (id_raw != null) {
             id = Integer.parseInt(id_raw);
-            Product p = cdb.getProductById(id);
+            Category p = cdb.getCategoryById(id);
             request.setAttribute("product", p);
             request.setAttribute("doing", "Update");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
         } else {
             request.setAttribute("doing", "Add");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
         }
     } 
 
@@ -81,62 +84,8 @@ public class ManageCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // Lấy đối tượng HttpSession từ request
-        HttpSession session = request.getSession();
-        // Lấy ID của người dùng từ session hoặc tạo mới nếu không tồn tại
-        int userId = 1;//(int)session.getAttribute("userId");
-
-        String name_raw = request.getParameter("name");
-        String description_raw = request.getParameter("description");
-        String basePrice_raw = request.getParameter("basePrice");
-        String price_raw = request.getParameter("price");
-        String discount_raw = request.getParameter("discount");
-        String quantity_raw = request.getParameter("quantity");
-        String style_raw = request.getParameter("style");
-        String publishedAt_raw = request.getParameter("publishedAt").replaceAll("T", " ");
-        String state_raw = request.getParameter("state");
-        String startsAt_raw = request.getParameter("startsAt").replaceAll("T", " ");
-        String endsAt_raw = request.getParameter("endsAt").replaceAll("T", " ");
-        System.out.println(publishedAt_raw);
-        float basePrice, price, discount;
-        int quantity;
-        byte state;
-        ProductDAO dao = new ProductDAO();
-
-        // Lấy ngày giờ hiện tại
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        // Định dạng ngày giờ
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         
-        String id_raw = request.getParameter("id");
-        int id;
         try {
-            String modifiedAt = currentDateTime.format(formatter);
-            basePrice = Float.parseFloat(basePrice_raw);
-            price = Float.parseFloat(price_raw);
-            discount = Float.parseFloat(discount_raw);
-            quantity = Integer.parseInt(quantity_raw);
-            state = Byte.parseByte(state_raw);
-            //Update a Product
-            if (!"".equals(id_raw)) {
-                id = Integer.parseInt(id_raw);
-                dao.update(id, name_raw, description_raw, basePrice, price, discount, quantity, modifiedAt, publishedAt_raw,
-                        state, startsAt_raw, endsAt_raw, style_raw, userId);
-                response.sendRedirect("productlist");
-            } 
-            //Add a Product
-            else {
-                String createdAt = currentDateTime.format(formatter);
-                Product p = dao.getProductByName(name_raw);
-                if (p == null) {
-                    dao.insert(name_raw, description_raw, basePrice, price, discount, quantity, createdAt, modifiedAt, publishedAt_raw,
-                            state, startsAt_raw, endsAt_raw, style_raw, userId, userId);
-                    response.sendRedirect("productlist");
-                } else {
-                    request.setAttribute("error", "Product is existed");
-                    request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
-                }
-            }
 
         } catch (Exception e) {
             request.setAttribute("error", e);
