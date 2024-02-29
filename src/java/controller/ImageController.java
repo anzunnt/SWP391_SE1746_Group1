@@ -109,7 +109,7 @@ public class ImageController extends HttpServlet {
             inputStream = filePart.getInputStream();
 
             // Thiết lập thư mục lưu trữ file ảnh trên máy chủ.
-            String uploadPath = getServletContext().getRealPath("") + File.separator + "web/assets/images/product";
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "assets/images/product";
             // Tạo thư mục nếu nó không tồn tại.
             File directory = new File(uploadPath);
             if (!directory.exists()) {
