@@ -16,6 +16,7 @@
         <ul class="sidebar-menu pt-3">
             <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Product List</a></li>
             <!-- add another here --> 
+            <li><a href="categorylist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Category List</a></li>
             <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Customer List</a></li>
             <li><a href="adminlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>Admin List</a></li>
             <li><a href="fashionshop"><i class="uil uil-dashboard me-2 d-inline-block"></i>Home</a></li>
