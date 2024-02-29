@@ -53,4 +53,45 @@ public class CategoryDAO extends DBContext{
         }
         return list;
     }
+    public int getTotalCategory() {
+        String sql = "select count(*) from Category";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    public List<Category> pagingCategory(int index, int num) {
+        List<Category> list = new ArrayList<>();
+        String sql = "select * from Category order by id offset ? rows fetch next " + num + " rows only";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, (index - 1) * num);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Category p = new Category(rs.getInt(1), rs.getString(2), rs.getString(3));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public void deleteCategory(int id) {
+        String sql = "DELETE FROM [dbo].[Category]\n"
+                + " WHERE id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }
