@@ -90,7 +90,7 @@
         <h1 style="color: red">${error}</h1>
         <c:set var="o" value="${requestScope.product}"/>
         <div style="text-align: center">
-            <form action="manageProduct" method="post"><!-- Replace "#" with your form submission URL -->
+            <form action="manageCategory" method="post" enctype="multipart/form-data"><!-- Replace "#" with your form submission URL -->
                 <input type="text" hidden="true" name="id" value="${o.id}">
                 <label for="name">Category Name:</label>
                 <c:if test="${o.name != null}">

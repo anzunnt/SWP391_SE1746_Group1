@@ -153,7 +153,7 @@ public class ManageProductServlet extends HttpServlet {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
