@@ -8,20 +8,30 @@ import dal.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import model.Admin;
 import model.Category;
-import model.user;
 
 /**
  *
  * @author admin
  */
 @WebServlet(name = "ManageCategoryServlet", urlPatterns = {"/manageCategory"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 3, // 3MB
+        maxFileSize = 1024 * 1024 * 40, // 40MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class ManageCategoryServlet extends HttpServlet {
 
     /**
@@ -96,12 +106,64 @@ public class ManageCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Lấy ID của người dùng từ session
+        CategoryDAO cd = new CategoryDAO();
         HttpSession session = request.getSession();
-        user u = (user) session.getAttribute("account");
+        Admin u = (Admin) session.getAttribute("admin");
         int userId = u.getId();
+        String id_raw = request.getParameter("id");
+        int id;
+        // Lấy ngày giờ hiện tại
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String name_raw = request.getParameter("name");
+        Part filePart = request.getPart("file");
+        InputStream inputStream = null;
         try {
+            if (filePart != null) {
+                // Lấy tên file.
+                String fileName = filePart.getSubmittedFileName();
+                // Lấy InputStream của file.
+                inputStream = filePart.getInputStream();
 
-        } catch (Exception e) {
+                // Thiết lập thư mục lưu trữ file ảnh trên máy chủ.
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "assets/images/product";
+                // Tạo thư mục nếu nó không tồn tại.
+                File directory = new File(uploadPath);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                try ( // Ghi file vào thư mục đã thiết lập.
+                         OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                    int bytesRead = -1;
+                    byte[] buffer = new byte[4096];
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                }
+                inputStream.close();
+
+                // Lưu đường dẫn của file vào cơ sở dữ liệu.
+                String filePath = "assets/images/product" + File.separator + fileName;
+                String modifiedAt = currentDateTime.format(formatter);
+                //Update a category
+                if (!"".equals(id_raw)) {
+                    id = Integer.parseInt(id_raw);
+                    cd.update(name_raw, filePath, modifiedAt, userId, id);
+                    response.sendRedirect("categorylist");
+                } //Add a category
+                else {
+                    Category c = cd.getCategoryByName(name_raw);
+                    if (c == null) {
+                        cd.insert(name_raw, filePath, modifiedAt, userId, modifiedAt, userId);
+                        response.sendRedirect("categorylist");
+                    } else {
+                        request.setAttribute("error", "Category is existed");
+                        request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
+                    }
+                }
+            }
+        } catch (ServletException | IOException | NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

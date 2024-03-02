@@ -24,7 +24,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import model.Admin;
 import model.Image;
-import model.user;
 
 /**
  *
@@ -124,7 +123,7 @@ public class ManageImageServlet extends HttpServlet {
             }
 
             try ( // Ghi file vào thư mục đã thiết lập.
-                     OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                    OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
                 int bytesRead = -1;
                 byte[] buffer = new byte[4096];
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -141,7 +140,7 @@ public class ManageImageServlet extends HttpServlet {
             int id;
             // Lấy ID của người dùng từ session
             HttpSession session = request.getSession();
-            user u = (user) session.getAttribute("account");
+            Admin u = (Admin) session.getAttribute("admin");
             int userId = u.getId();
             // Lấy ngày giờ hiện tại
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -151,14 +150,12 @@ public class ManageImageServlet extends HttpServlet {
                 id = Integer.parseInt(id_raw);
                 imd.insert(filePath, id, createdAt, userId, createdAt, userId, description);
                 // Thông báo thành công sau khi tải lên
-                response.getWriter().println("Hình ảnh đã được tải lên thành công!");
                 response.sendRedirect("productlist");
             } catch (IOException | NumberFormatException e) {
                 // Xử lý lỗi nếu không tìm thấy file
-                response.getWriter().println("Lỗi: " + e.getMessage());
+                request.setAttribute("error", "Lỗi: " + e.getMessage());
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-        } else {
-            System.out.println("null");
         }
     }
 

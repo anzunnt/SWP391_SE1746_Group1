@@ -46,7 +46,7 @@ public class ProductDetailServlet extends HttpServlet {
             CategoryDAO cd = new CategoryDAO();
             id = Integer.parseInt(id_raw);
             Product p = cdb.getProductById(id);
-            Category c = cd.getCategoryById(id);
+            Category c = cd.getCategoryByIdProduct(id);
             List<ProductMenu> lS = dao.getTop4RelateProductByCategory(c.getId());
             request.setAttribute("product", p);
             List<ProductMenu> list = dao.getAllProductDetailByID(id);
