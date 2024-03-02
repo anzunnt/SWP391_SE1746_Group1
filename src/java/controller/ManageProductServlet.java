@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import model.Admin;
 import model.Product;
 
 /**
@@ -62,19 +63,25 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        int id;
-        ProductDAO cdb = new ProductDAO();
-
-        if (id_raw != null) {
-            id = Integer.parseInt(id_raw);
-            Product p = cdb.getProductById(id);
-            request.setAttribute("product", p);
-            request.setAttribute("doing", "Update");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Admin u = (Admin) session.getAttribute("account");
+        if (u == null) {
+            response.sendRedirect("error.jsp");
         } else {
-            request.setAttribute("doing", "Add");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            String id_raw = request.getParameter("id");
+            int id;
+            ProductDAO cdb = new ProductDAO();
+
+            if (id_raw != null) {
+                id = Integer.parseInt(id_raw);
+                Product p = cdb.getProductById(id);
+                request.setAttribute("product", p);
+                request.setAttribute("doing", "Update");
+                request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            } else {
+                request.setAttribute("doing", "Add");
+                request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            }
         }
     }
 
@@ -89,10 +96,11 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy đối tượng HttpSession từ request
+        // Lấy ID của người dùng từ session
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        // Lấy ID của người dùng từ session hoặc tạo mới nếu không tồn tại
-        int userId = 1;//(int)session.getAttribute("userId");
+        Admin u = (Admin) session.getAttribute("account");
+        int userId = u.getId();
 
         String name_raw = request.getParameter("name");
         String description_raw = request.getParameter("description");
@@ -115,7 +123,7 @@ public class ManageProductServlet extends HttpServlet {
         LocalDateTime currentDateTime = LocalDateTime.now();
         // Định dạng ngày giờ
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        
+
         String id_raw = request.getParameter("id");
         int id;
         try {
@@ -131,8 +139,7 @@ public class ManageProductServlet extends HttpServlet {
                 dao.update(id, name_raw, description_raw, basePrice, price, discount, quantity, modifiedAt, publishedAt_raw,
                         state, startsAt_raw, endsAt_raw, style_raw, userId);
                 response.sendRedirect("productlist");
-            } 
-            //Add a Product
+            } //Add a Product
             else {
                 String createdAt = currentDateTime.format(formatter);
                 Product p = dao.getProductByName(name_raw);

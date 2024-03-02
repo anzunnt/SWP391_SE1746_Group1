@@ -93,7 +93,7 @@ public class profileSettingServlet extends HttpServlet {
             if (un != null) {
                 ud.UpdateUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, u.getCreated_on(), 1, 1, currentDate, un.getId());
                 session.setAttribute("account", un);
-                response.sendRedirect("profile");
+                response.sendRedirect("userprofile");
             } else {
                 request.setAttribute("messregis", "Username is not existed!");
                 request.getRequestDispatcher("customerProfile.jsp").forward(request, response);

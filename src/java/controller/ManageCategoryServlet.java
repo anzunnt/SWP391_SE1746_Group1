@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.CategoryDAO;
@@ -14,42 +13,47 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Admin;
 import model.Category;
+import model.user;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name="ManageCategoryServlet", urlPatterns={"/manageCategory"})
+@WebServlet(name = "ManageCategoryServlet", urlPatterns = {"/manageCategory"})
 public class ManageCategoryServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageCategoryServlet</title>");  
+            out.println("<title>Servlet ManageCategoryServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageCategoryServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ManageCategoryServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -57,25 +61,32 @@ public class ManageCategoryServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        int id;
-        CategoryDAO cdb = new CategoryDAO();
-
-        if (id_raw != null) {
-            id = Integer.parseInt(id_raw);
-            Category p = cdb.getCategoryById(id);
-            request.setAttribute("product", p);
-            request.setAttribute("doing", "Update");
-            request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Admin u = (Admin) session.getAttribute("account");
+        if (u == null) {
+            response.sendRedirect("error.jsp");
         } else {
-            request.setAttribute("doing", "Add");
-            request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
-        }
-    } 
+            String id_raw = request.getParameter("id");
+            int id;
+            CategoryDAO cdb = new CategoryDAO();
 
-    /** 
+            if (id_raw != null) {
+                id = Integer.parseInt(id_raw);
+                Category p = cdb.getCategoryById(id);
+                request.setAttribute("product", p);
+                request.setAttribute("doing", "Update");
+                request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
+            } else {
+                request.setAttribute("doing", "Add");
+                request.getRequestDispatcher("ManageCategory.jsp").forward(request, response);
+            }
+        }
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,8 +94,11 @@ public class ManageCategoryServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
+        // Lấy ID của người dùng từ session
+        HttpSession session = request.getSession();
+        user u = (user) session.getAttribute("account");
+        int userId = u.getId();
         try {
 
         } catch (Exception e) {
@@ -93,8 +107,9 @@ public class ManageCategoryServlet extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

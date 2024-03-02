@@ -132,7 +132,8 @@
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Image</th>
             
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageCategory">Add Category</a></th>
+                                                    <th class="border-bottom p-3"><a href="manageCategory">Add Category</a></th>
+                                                    <th class="border-bottom p-3">Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody" >
@@ -143,6 +144,8 @@
                                                         <td class="p-3"><img style="width: 75px;height: 75px"src="${o.image}" class="img-fluid" alt=""></td>
                                                         <td class="p-3">
                                                             <a href="manageCategory?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                        </td>
+                                                        <td>
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                                         </td>
                                                     </tr>

@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,8 +22,9 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import model.Admin;
 import model.Image;
-
+import model.user;
 
 /**
  *
@@ -30,9 +32,9 @@ import model.Image;
  */
 @WebServlet(name = "ImageController", urlPatterns = {"/manageImage"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 3, // 3MB
-                 maxFileSize = 1024 * 1024 * 40,      // 40MB
-                 maxRequestSize = 1024 * 1024 * 50)   // 50MB
-public class ImageController extends HttpServlet {
+        maxFileSize = 1024 * 1024 * 40, // 40MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
+public class ManageImageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,20 +74,25 @@ public class ImageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        int id;
-        ImageDAO cdb = new ImageDAO();
-        try {
-            id = Integer.parseInt(id_raw);
-            List<Image> list = cdb.getAllImageByID(id);
-            request.setAttribute("listP", list);
-            request.setAttribute("id", id);
-            request.getRequestDispatcher("ManageImage.jsp").forward(request, response);
-        } catch (ServletException | IOException | NumberFormatException e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Admin u = (Admin) session.getAttribute("account");
+        if (u == null) {
+            response.sendRedirect("error.jsp");
+        } else {
+            String id_raw = request.getParameter("id");
+            int id;
+            ImageDAO cdb = new ImageDAO();
+            try {
+                id = Integer.parseInt(id_raw);
+                List<Image> list = cdb.getAllImageByID(id);
+                request.setAttribute("listP", list);
+                request.setAttribute("id", id);
+                request.getRequestDispatcher("ManageImage.jsp").forward(request, response);
+            } catch (ServletException | IOException | NumberFormatException e) {
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
         }
-
     }
 
     /**
@@ -100,7 +107,7 @@ public class ImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         InputStream inputStream = null; // Để lưu trữ dữ liệu đầu vào hình ảnh.
-        
+
         Part filePart = request.getPart("file");
         if (filePart != null) {
             // Lấy tên file.
@@ -117,7 +124,7 @@ public class ImageController extends HttpServlet {
             }
 
             try ( // Ghi file vào thư mục đã thiết lập.
-                    OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                     OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
                 int bytesRead = -1;
                 byte[] buffer = new byte[4096];
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -132,7 +139,10 @@ public class ImageController extends HttpServlet {
             String id_raw = request.getParameter("id");
             String description = request.getParameter("description");
             int id;
-            int userId = 1;//(int)session.getAttribute("userId");
+            // Lấy ID của người dùng từ session
+            HttpSession session = request.getSession();
+            user u = (user) session.getAttribute("account");
+            int userId = u.getId();
             // Lấy ngày giờ hiện tại
             LocalDateTime currentDateTime = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -147,7 +157,7 @@ public class ImageController extends HttpServlet {
                 // Xử lý lỗi nếu không tìm thấy file
                 response.getWriter().println("Lỗi: " + e.getMessage());
             }
-        }else{
+        } else {
             System.out.println("null");
         }
     }

@@ -64,7 +64,7 @@
             input, select, textarea {
                 width: 50%;
                 padding: 8px;
-                
+
                 box-sizing: border-box;
             }
 
@@ -82,7 +82,7 @@
                 color: blue;
             }
         </style>
-        <title>Management Product</title>
+        <title>Management Category</title>
     </head>
     <body>
         <button onclick="history.back()">Go Back</button>
@@ -93,14 +93,22 @@
             <form action="manageProduct" method="post"><!-- Replace "#" with your form submission URL -->
                 <input type="text" hidden="true" name="id" value="${o.id}">
                 <label for="name">Category Name:</label>
-                <input type="text" id="name" name="name" value="${o.name}"required>
+                <c:if test="${o.name != null}">
+                    <input type="text" readonly="" id="name" name="name" value="${o.name}"required>
+                </c:if>
+                <c:if test="${o.name == null}">
+                    <input type="text" id="name" name="name" value="${o.name}"required>
+                </c:if>   
+                    
+                <c:if test="${o.image != null}">
+                    <label for="description">Old Image:</label>
+                    <img style="width: 100px;height: 120px" src="${o.image}" class="img-fluid" alt="">
+                </c:if>
 
-                <label for="description">Image</label>
-                <img style="width: 100px;height: 120px" src="${o.image}" class="img-fluid" alt="">
-                
-                <label for="description">Edit Image</label>
+
+                <label for="description">${doing} Image:</label>
                 <input type="file" name="file">
-                
+
                 </br><button type="submit">${doing} Category</button>
             </form>
         </div>
