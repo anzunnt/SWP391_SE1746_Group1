@@ -14,10 +14,7 @@
     <textarea rows="50px"cols="100px" id="description" name="description"></textarea>
 
 <script>
-    var editor = '';
-    $(document).ready(function(){
-        editor = CKEDITOR.replace('description');
-    });
+    
 </script>
 
 </body>
