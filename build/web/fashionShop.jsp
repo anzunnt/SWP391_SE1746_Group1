@@ -39,7 +39,7 @@
             </div>
         </div>
         <!-- Loader -->
-        
+
         <jsp:include page="header.jsp"/>
 
         <div class="container mt-100 mt-60">    
@@ -48,112 +48,176 @@
                     <h5 class="mb-0">Categories</h5>
                 </div><!--end col-->
             </div><!--end row-->
-            
+
             <div class="row">
                 <div class="col-lg-12 mt-4 pt-2">
                     <div class="slider-range-four">
                         <c:forEach items="${listC}" var="o">
-                        <div class="tiny-slide">
-                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                <img style="width: 261px; height: 261px;border: solid 2px" src="${o.image}" class="img-fluid" alt="">
-                                <div class="category-title">
-                                    <span class="text-dark title-white"><span class="h5">${o.name}
-                                </div>
-                            </a>
-                        </div>
+                            <div class="tiny-slide">
+                                <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                    <img style="width: 261px; height: 261px;border: solid 2px" src="${o.image}" class="img-fluid" alt="">
+                                    <div class="category-title">
+                                        <span class="text-dark title-white"></span><span class="h5">${o.name}</span>
+                                    </div>
+                                </a>
+                            </div>
                         </c:forEach>
                     </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <!-- Start -->
+    <section class="section">
+        <div class="container mt-100 mt-60">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="mb-0">All Products</h5>
                 </div><!--end col-->
             </div><!--end row-->
-        </div><!--end container-->
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for="categoryFilter">Filter by Category:</label>
+                    <select class="form-control" id="categoryFilter" onchange="filterByCategory()">
+                        <option value="all">All</option>
+                        <c:forEach items="${listC}" var="category">
+                            <option value="${category.id}">${category.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label for="priceFilter">Filter by Price:</label>
+                    <input type="number" class="form-control" id="priceFilterMin" placeholder=".000đ Min Price">
+                    <input type="number" class="form-control" id="priceFilterMax" placeholder=".000đ Max Price">
+                    <button onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
+                </div>
+            </div>
 
-        <!-- Start -->
-        <section class="section">
-            <div class="container mt-100 mt-60">
+            <div class="row">  
+                <c:forEach items="${listP}" var="o">
+                    <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2 product-column" data-price="${o.price}">
+                        <div class="card shop-list border-0">
+                            <div class="shop-image position-relative overflow-hidden rounded shadow">
+                                <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
+                                <ul class="list-unstyled shop-icons">
+                                    <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
+                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
+                                </ul>                                
+
+                                <div class="qty-icons">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
+                                    <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
+                                </div>
+                            </div>
+                            <div class="card-body content pt-4 p-2">
+                                <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
+
+                                <div class="d-flex justify-content-between mt-1">
+                                    <h6 class="text-muted small font-italic mb-0 mt-1">
+                                        <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                    </h6>
+                                    <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                    <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </c:forEach>
+
+
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+
+    <!-- End -->
+    <!-- Offcanvas Start -->
+    <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+        <div class="offcanvas-body d-flex align-items-center align-items-center">
+            <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <h5 class="mb-0">All Products</h5>
+                    <div class="col">
+                        <div class="text-center">
+                            <h4>Search now.....</h4>
+                            <!-- Search input -->
+                            <div class="search-container mt-4">
+                                <input type="text" id="searchInput" name="searchInput" class="border bg-white rounded-pill" placeholder="Search products...">
+                                <button onclick="searchProducts()" class="btn btn-pills btn-primary">Search</button>
+                            </div>
+                        </div>
                     </div><!--end col-->
                 </div><!--end row-->
-
-                <div class="row">    
-                    <c:forEach items="${listP}" var="o">
-                        <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
-                            <div class="card shop-list border-0">
-                                <div class="shop-image position-relative overflow-hidden rounded shadow">
-                                    <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
-                                    <ul class="list-unstyled shop-icons">
-                                        <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
-                                        <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
-                                    </ul>                                
-
-                                    <div class="qty-icons">
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
-                                        <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
-                                    </div>
-                                </div>
-                                <div class="card-body content pt-4 p-2">
-                                    <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
-
-                                    <div class="d-flex justify-content-between mt-1">
-                                        <h6 class="text-muted small font-italic mb-0 mt-1">
-                                            <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
-                                        </h6>
-                                            <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
-                                        <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!--end col-->
-                    </c:forEach>
-
-
-                </div><!--end row-->
             </div><!--end container-->
-        </section><!--end section-->
-
-        <jsp:include page="footer.jsp"/>
-        
-        <!-- End -->
-        <!-- Offcanvas Start -->
-        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
-            <div class="offcanvas-body d-flex align-items-center align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                <h4>Search now.....</h4>
-                                <div class="subcribe-form mt-4">
-                                    <form>
-                                        <div class="mb-0">
-                                            <form action="search" method="post" id="searchform" class="searchform">
-                                                <input type="text" id="s" name="s" class="border bg-white rounded-pill" required="" placeholder="Search">
-                                                <button type="submit" class="btn btn-pills btn-primary">Search</button>
-                                            </form>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </div>
         </div>
-        <!-- Offcanvas End -->
+    </div>
+    <!-- Offcanvas End -->
 
-        <!-- Back to top -->
-        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-        <!-- Back to top -->
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+    <!-- Back to top -->
+    <jsp:include page="footer.jsp"/>
+    <!-- javascript -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- SLIDER -->
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/tiny-slider-init.js"></script>
+    <!-- Icons -->
+    <script src="assets/js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="assets/js/app.js"></script>
 
-        <!-- javascript -->
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <!-- SLIDER -->
-        <script src="assets/js/tiny-slider.js"></script>
-        <script src="assets/js/tiny-slider-init.js"></script>
-        <!-- Icons -->
-        <script src="assets/js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="assets/js/app.js"></script>
-    </body>
+    <script>
+        // JavaScript functions for search, filter, and sort
+        function searchProducts() {
+            var searchText = document.getElementById('searchInput').value.trim().toLowerCase();
+            var products = document.querySelectorAll('.product-column');
+
+            products.forEach(function (product) {
+                var productName = product.querySelector('.product-name').textContent.trim().toLowerCase();
+                if (!productName.includes(searchText)) {
+                    product.classList.add('d-none'); // Thêm lớp d-none để ẩn sản phẩm không trùng khớp
+                } else {
+                    product.classList.remove('d-none'); // Loại bỏ lớp d-none để hiển thị sản phẩm trùng khớp
+                }
+            });
+        }
+
+        function filterByCategory() {
+            var categoryFilter = document.getElementById('categoryFilter').value;
+            var products = document.querySelectorAll('.product-column');
+
+            products.forEach(function (product) {
+                var productCategory = product.dataset.category;
+
+                if (categoryFilter === 'all' || productCategory === categoryFilter) {
+                    product.classList.remove('d-none');
+                } else {
+                    product.classList.add('d-none');
+                }
+            });
+        }
+
+        function filterByPrice() {
+            var minPrice = parseInt(document.getElementById('priceFilterMin').value);
+            var maxPrice = parseInt(document.getElementById('priceFilterMax').value);
+            var products = document.querySelectorAll('.product-column');
+
+            products.forEach(function (product) {
+                var productPrice = parseInt(product.dataset.price);
+
+                if ((isNaN(minPrice) || productPrice >= minPrice) && (isNaN(maxPrice) || productPrice <= maxPrice)) {
+                    product.classList.remove('d-none');
+                } else {
+                    product.classList.add('d-none');
+                }
+            });
+        }
+
+        function sortProducts() {
+            var sortSelect = document.getElementById('sortSelect').value;
+            // Perform sorting logic based on selected option
+        }
+    </script>
+</body>
 </html>
