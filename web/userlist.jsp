@@ -87,7 +87,7 @@
                         </div>
 
                         <ul class="list-unstyled mb-0">
-
+                            <!-- list -->
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
                                     <c:if test="${sessionScope['admin'] == null}">
