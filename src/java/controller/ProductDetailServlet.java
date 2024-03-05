@@ -53,7 +53,7 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("listS", lS);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("productdetail.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

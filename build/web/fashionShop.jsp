@@ -76,21 +76,29 @@
                     <h5 class="mb-0">All Products</h5>
                 </div><!--end col-->
             </div><!--end row-->
+
             <div class="row">
-                <div class="form-group col-4">
-                    <label for="categoryFilter">Filter by Category:</label>
-                    <select class="form-control" id="categoryFilter" onchange="filterByCategory()">
-                        <option value="all">All</option>
-                        <c:forEach items="${listC}" var="category">
-                            <option value="${category.id}">${category.name}</option>
-                        </c:forEach>
-                    </select>
+
+                <div style="border-right:1px black dashed"class="form-group col-2 row" style="margin-right: 10px">
+                    <form action="fashionshop" method="post">
+                        <label class="col-12" for="categoryFilter">Filter by Category:</label>
+                        <select style="padding-top: 5px"class="col-12" class="form-control" name="categoryFilter">
+                            <option value="0">All</option>
+                            <c:forEach items="${listC}" var="category">
+                                <option ${(cid == category.id)?'selected':''} value="${category.id}">${category.name}</option>
+                            </c:forEach>
+                        </select>
+                        <button type="submit" class="btn btn-primary mt-2">Apply</button>
+                    </form>
                 </div>
-                <div class="form-group col-4">
-                    <label for="priceFilter">Filter by Price:</label>
-                    <input type="number" class="form-control" id="priceFilterMin" placeholder=".000đ Min Price">
-                    <input type="number" class="form-control" id="priceFilterMax" placeholder=".000đ Max Price">
-                    <button onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
+
+                <div style="margin-left: 10px;border-right:1px black dashed"class="form-group col-4 row">
+                    <label class="col-12" for="priceFilter">Filter by Price:</label>
+                    <label class="col-2"for="from">From:</label>
+                    <input class="col-2" type="number" class="form-control" id="priceFilterMin" placeholder="">.000đ
+                    <label class="col-2"for="to">To:</label>
+                    <input class="col-2" type="number" class="form-control" id="priceFilterMax" placeholder="">.000đ
+                    <button style="width:150px;margin-left: 50%"onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
                 </div>
             </div>
 
@@ -179,21 +187,6 @@
                     product.classList.add('d-none'); // Thêm lớp d-none để ẩn sản phẩm không trùng khớp
                 } else {
                     product.classList.remove('d-none'); // Loại bỏ lớp d-none để hiển thị sản phẩm trùng khớp
-                }
-            });
-        }
-
-        function filterByCategory() {
-            var categoryFilter = document.getElementById('categoryFilter').value;
-            var products = document.querySelectorAll('.product-column');
-
-            products.forEach(function (product) {
-                var productCategory = product.dataset.category;
-
-                if (categoryFilter === 'all' || productCategory === categoryFilter) {
-                    product.classList.remove('d-none');
-                } else {
-                    product.classList.add('d-none');
                 }
             });
         }

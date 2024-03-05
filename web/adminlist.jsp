@@ -132,7 +132,7 @@
                                                     <th class="border-bottom p-3">Id</th>
                                                     <th class="border-bottom p-3">UserName</th>
                                                     <th class="border-bottom p-3">Created On</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageUser">Add Admin</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;"><a href="admindetail">Add Admin</a></th>
                                                     <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DISABLE"></a></th>
                                                 </tr>
                                             </thead>
@@ -143,7 +143,7 @@
                                                         <td class="p-3">${as.username}</td>
                                                         <td class="p-3">${as.created_on}</td>
                                                         <td class="text-end p-3">
-                                                            <a href="manageUser?id=${as.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                            <a href="admindetail?id=${as.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${as.id}"></td>
                                                     </tr>
