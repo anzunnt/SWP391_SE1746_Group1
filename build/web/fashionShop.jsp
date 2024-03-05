@@ -100,9 +100,17 @@
                     <input class="col-2" type="number" class="form-control" id="priceFilterMax" placeholder="">.000đ
                     <button style="width:150px;margin-left: 50%"onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
                 </div>
+                <div style="margin-left: 20px"class="col-4">
+                    <select class="form-control" id="sortSelect" onchange="sortProducts()">
+                        <option value="discount_asc">Discount - Descending</option>
+                        <option value="discount_desc">Discount - Ascending</option>
+                        <option value="price_asc">Price - Descending</option>
+                        <option value="price_desc">Price - Ascending</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="row">  
+            <div class="row proD">  
                 <c:forEach items="${listP}" var="o">
                     <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2 product-column" data-price="${o.price}">
                         <div class="card shop-list border-0">
@@ -127,7 +135,7 @@
                                         <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
                                     </h6>
                                     <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
-                                    <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
+                                    <h6 class="text-muted small font-italic mb-0 mt-1 actualprice"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                                 </div>
                             </div>
                         </div>
@@ -209,8 +217,39 @@
 
         function sortProducts() {
             var sortSelect = document.getElementById('sortSelect').value;
-            // Perform sorting logic based on selected option
+            var productsContainer = document.querySelector('.proD');
+            var products = document.querySelectorAll('.product-column');
+
+            // Chuyển danh sách sản phẩm thành mảng để dễ dàng sắp xếp
+            var productsArray = Array.from(products);
+
+            // Sắp xếp mảng sản phẩm dựa trên lựa chọn của người dùng
+            productsArray.sort(function (a, b) {
+                var priceA = parseFloat(a.querySelector('.actualprice').textContent);
+                var priceB = parseFloat(b.querySelector('.actualprice').textContent);
+                var discountA = parseFloat(a.querySelector('.text-muted:nth-child(2)').textContent);
+                var discountB = parseFloat(b.querySelector('.text-muted:nth-child(2)').textContent);
+
+                if (sortSelect === 'discount_asc') {
+                    return discountA - discountB;
+                } else if (sortSelect === 'discount_desc') {
+                    return discountB - discountA;
+                } else if (sortSelect === 'price_asc') {
+                    return priceA - priceB;
+                } else if (sortSelect === 'price_desc') {
+                    return priceB - priceA;
+                }
+            });
+
+            // Xóa tất cả sản phẩm hiện có từ DOM
+            productsContainer.innerHTML = '';
+
+            // Thêm các sản phẩm đã sắp xếp vào container
+            productsArray.forEach(function (product) {
+                productsContainer.appendChild(product);
+            });
         }
+
     </script>
 </body>
 </html>
