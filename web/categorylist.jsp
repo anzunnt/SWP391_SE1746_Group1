@@ -159,19 +159,19 @@
 
                         <!-- PAGINATION START -->
                         <div class="row text-center">                                  
-                            <div class="col-12 mt-4">
-                                <ul style="justify-content: center" class="pagination" id="pagination">
-                                    <form action="categorylist" method="get">
-                                        <label for="pageNumber">Number Category/Page:</label>
-                                        <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
+                            <div class="col-12 mt-4 row">
+                                <ul class="pagination" id="pagination">
+                                    <form class="col-4 row" action="categorylist" method="get">
+                                        <label style="margin-top: 10px"class="col-6" for="pageNumber">Number Category/Page:</label>
+                                        <select class="col-3" style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
+                                            <option value="5" ${(num == "5")?'selected':''}>5</option>
+                                            <option value="10" ${(num == "10")?'selected':''}>10</option>
+                                            <option value="50" ${(num == "50")?'selected':''}>50</option>
+                                            <option value="100" ${(num == "100")?'selected':''}>100</option>
                                         </select>
-                                        </br><button type="submit">OK</button>
+                                        <button class="col-2" type="submit">OK</button>
                                     </form>
-                                    <li  class="page-item next"><a href="categorylist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
+                                    <li  class="col-5 page-item next"><a href="categorylist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
                                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                         <li class="${param['index']==i?'page-item active':'page-item'}"><a href="categorylist?index=${i}&pageNumber=${num}"   class="page-link">${i}</a></li>
                                         </c:forEach>

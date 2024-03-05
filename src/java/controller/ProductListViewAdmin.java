@@ -65,7 +65,7 @@ public class ProductListViewAdmin extends HttpServlet {
                 request.setAttribute("numberPage", numberPage);
                 request.setAttribute("listP", list);
                 request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            } catch (Exception e) {
+            } catch (ServletException | IOException | NumberFormatException e) {
                 request.setAttribute("error", e);
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
