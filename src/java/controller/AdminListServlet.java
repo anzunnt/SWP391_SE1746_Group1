@@ -47,35 +47,42 @@ public class AdminListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String num_raw = request.getParameter("pageNumber");
-        int num;
-        try {
-            if (num_raw == null) {
-                num = 5;
-            } else {
-                num = Integer.parseInt(num_raw);
+        HttpSession session = request.getSession();
+        Admin isAdmin = (Admin) session.getAttribute("admin");
+        if (isAdmin == null) {
+            response.sendRedirect("error.jsp");
+        } else {
+            String num_raw = request.getParameter("pageNumber");
+            int num;
+            try {
+                if (num_raw == null) {
+                    num = 5;
+                } else {
+                    num = Integer.parseInt(num_raw);
+                }
+                request.setCharacterEncoding("UTF-8");
+                adminDAO ad = new adminDAO();
+                
+                int totalAdmin = ad.getNumberAdmin();
+                int numberPage = (int) Math.ceil((double) totalAdmin / num);
+                int index;
+                String currentPage = request.getParameter("index");
+                if (currentPage == null) {
+                    index = 1;
+                } else {
+                    index = Integer.parseInt(currentPage);
+                }
+                List<Admin> list = ad.pagingAdmin(index, num);
+                request.setAttribute("num", num);
+                request.setAttribute("numberPage", numberPage);
+                request.setAttribute("admins", list);
+                request.getRequestDispatcher("adminlist.jsp").forward(request, response);
+            } catch (Exception e) {
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-            request.setCharacterEncoding("UTF-8");
-            adminDAO ad = new adminDAO();
-            
-            int totalAdmin = ad.getNumberAdmin();
-            int numberPage = (int) Math.ceil((double) totalAdmin / num);
-            int index;
-            String currentPage = request.getParameter("index");
-            if (currentPage == null) {
-                index = 1;
-            } else {
-                index = Integer.parseInt(currentPage);
-            }
-            List<Admin> list = ad.pagingAdmin(index, num);
-            request.setAttribute("num", num);
-            request.setAttribute("numberPage", numberPage);
-            request.setAttribute("admins", list);
-            request.getRequestDispatcher("adminlist.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+        
     } 
 
     /** 
