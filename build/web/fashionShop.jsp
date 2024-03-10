@@ -26,6 +26,25 @@
         <link rel="stylesheet" href="assets/css/tiny-slider.css"/>
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <style>
+            #showMoreButton {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            #showMoreButton button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            #showMoreButton button:hover {
+                background-color: #0056b3;
+            }
+        </style>
     </head>
 
     <body>
@@ -141,9 +160,13 @@
                         </div>
                     </div><!--end col-->
                 </c:forEach>
-
-
+                <div id="pagination" class="text-center mt-4">
+                    <button class="btn btn-primary" id="prevPage" onclick="prevPage()">Previous</button>
+                    <span id="pageInfo"></span>
+                    <button class="btn btn-primary" id="nextPage" onclick="nextPage()">Next</button>
+                </div>
             </div><!--end row-->
+
         </div><!--end container-->
     </section><!--end section-->
 

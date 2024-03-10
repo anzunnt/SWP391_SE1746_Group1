@@ -136,7 +136,7 @@ public class ManageImageServlet extends HttpServlet {
             String filePath = "assets/images/product" + File.separator + fileName;
             ImageDAO imd = new ImageDAO();
             String id_raw = request.getParameter("id");
-            String description = request.getParameter("description");
+            String description = "Image";
             int id;
             // Lấy ID của người dùng từ session
             HttpSession session = request.getSession();

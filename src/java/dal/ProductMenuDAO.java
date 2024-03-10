@@ -30,7 +30,8 @@ public class ProductMenuDAO extends DBContext {
                 + "SELECT p.Id,p.Name,p.Price,p.Discount,p.Quantity,p.State,pi.Image,pi.ImageDescription,\n"
                 + "ROW_NUMBER() OVER (PARTITION BY p.id ORDER BY pi.id) AS ImageRank\n"
                 + "FROM Product p LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
-                + ")SELECT Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages WHERE ImageRank = 1;";
+                + ")SELECT Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages"
+                + " WHERE ImageRank = 1 AND [State] = 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -76,7 +77,8 @@ public class ProductMenuDAO extends DBContext {
                 + "SELECT p.Id,p.Name,p.Price,p.Discount,p.Quantity,p.State,pi.Image,pi.ImageDescription,\n"
                 + "ROW_NUMBER() OVER (PARTITION BY p.id ORDER BY pi.id) AS ImageRank\n"
                 + "FROM Product p LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
-                + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages WHERE ImageRank = 1 ORDER BY discount desc;";
+                + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages"
+                + " WHERE ImageRank = 1 AND [State] = 1; ORDER BY discount desc;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -99,7 +101,8 @@ public class ProductMenuDAO extends DBContext {
                 + "SELECT p.Id,p.Name,p.Price,p.Discount,p.Quantity,p.State,pi.Image,pi.ImageDescription,\n"
                 + "ROW_NUMBER() OVER (PARTITION BY p.id ORDER BY pi.id) AS ImageRank\n"
                 + "FROM Product p LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
-                + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages WHERE ImageRank = 1 ORDER BY Quantity desc;";
+                + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages"
+                + " WHERE ImageRank = 1 AND [State] = 1; ORDER BY Quantity desc;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -125,7 +128,7 @@ public class ProductMenuDAO extends DBContext {
                 + ")\n"
                 + "SELECT Top 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages \n"
                 + "WHERE \n"
-                + "    ImageRank = 1;";
+                + "    ImageRank = 1 AND [State] = 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cid);
@@ -152,7 +155,7 @@ public class ProductMenuDAO extends DBContext {
                 + ")\n"
                 + "SELECT Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages \n"
                 + "WHERE \n"
-                + "    ImageRank = 1;";
+                + "    ImageRank = 1 AND [State] = 1;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cid);
@@ -170,32 +173,4 @@ public class ProductMenuDAO extends DBContext {
         return list;
     }
 
-    public List<ProductMenu> getProductOrderByDiscount(String order) {
-        List<ProductMenu> list = new ArrayList<>();
-        String sql = "WITH RankedImages AS (\n"
-                + "    SELECT p.Id, p.Name, p.Price, p.Discount, p.Quantity, p.State, pi.Image, pi.ImageDescription,\n"
-                + "        ROW_NUMBER() OVER (PARTITION BY p.Id ORDER BY pi.Id) AS ImageRank \n"
-                + "    FROM Product p \n"
-                + "    LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
-                + "    INNER JOIN CategoryProduct cp ON p.ID = cp.ProductId\n"
-                + ")\n"
-                + "SELECT Id, Name, Price, Discount, Quantity, State, Image, ImageDescription \n"
-                + "FROM RankedImages \n"
-                + "WHERE ImageRank = 1 ORDER BY Discount ?;";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, order);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                ProductMenu p = new ProductMenu(rs.getInt(1), rs.getString(2),
-                        rs.getFloat(3), rs.getFloat(4),
-                        rs.getInt(5), rs.getByte(6), rs.getString(7),
-                        rs.getString(8));
-                list.add(p);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
 }

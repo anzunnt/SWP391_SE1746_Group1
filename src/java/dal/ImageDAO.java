@@ -75,10 +75,22 @@ public class ImageDAO extends DBContext {
         }
     }
 
-    //delete a product
+    //delete Image by Id of Image
     public void deleteImage(int id) {
         String sql = "DELETE FROM [dbo].[ProductImage]\n"
                 + "      WHERE Id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    //delete Image by Id of Product
+    public void deleteImageByProductId(int id) {
+        String sql = "DELETE FROM [dbo].[ProductImage]\n"
+                + "      WHERE [ProductId] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
