@@ -129,9 +129,23 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
+    //delete Category by Id of Category
     public void deleteCategory(int id) {
         String sql = "DELETE FROM [dbo].[Category]\n"
                 + " WHERE id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    //delete Category by Id of product
+    public void deleteCategoryByProductId(int id) {
+        String sql = "DELETE FROM [dbo].[CategoryProduct]\n"
+                + "      WHERE [ProductId] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -167,7 +181,7 @@ public class CategoryDAO extends DBContext {
     }
 
     public void update(String name, String image,
-            String modifiedAt, int modifiedBy,int id) {
+            String modifiedAt, int modifiedBy, int id) {
         String sql = "UPDATE [dbo].[Category]\n"
                 + "   SET [name] = ?\n"
                 + "      ,[Image] = ?\n"

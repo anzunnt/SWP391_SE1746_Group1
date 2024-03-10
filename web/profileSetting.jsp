@@ -82,7 +82,7 @@
                     </div><!--end col-->
 
                     <div class="col-xl-8 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                        <form action="profileSetting" method="post">
+                        <form action="profileSetting" method="post" enctype="multipart/form-data">
                             <div class="rounded shadow mt-4">
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Personal Information Update :</h5>
@@ -128,6 +128,7 @@
                                             <div class="mb-3">
                                                 <label for="image">Choose Image: </label>
                                                 <input type="file" id="image" name="image" value="" accept="image/*">
+                                                <img src="" alt="Avatar" />
                                             </div>
                                         </div>
                                         <div class="col-md-12">

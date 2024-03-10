@@ -135,7 +135,6 @@
                                                     <th class="border-bottom p-3">Discount</th>
                                                     <th class="border-bottom p-3">Quantity</th>
                                                     <th class="border-bottom p-3" style="min-width: 30px;">State</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;">Style</th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageProduct">Add Product</a></th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;">Edit Image</th>
                                                     <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
@@ -151,8 +150,7 @@
                                                         <td class="p-3">${Math.round(o.discount*100)}%</td>
                                                         <td class="p-3">${o.quantity}</td>
                                                         <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
-                                                        <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  
-                                                        <td class="p-3">${o.style}</td>
+                                                        <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>
                                                         <td class="text-end p-3">
                                                             <a href="manageProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
