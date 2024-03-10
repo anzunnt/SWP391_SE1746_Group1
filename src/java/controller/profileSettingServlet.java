@@ -15,10 +15,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import model.user;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 /**
  *
@@ -72,26 +77,52 @@ public class profileSettingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        InputStream inputStream = null;
+        String filePath = "";
+        
+        Part filePart = request.getPart("image");
+        if (filePart != null) {
+            
+            String fileName = filePart.getSubmittedFileName();
+            
+            inputStream = filePart.getInputStream();
+            
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "assets/images/customer";
+            
+            File directory = new File(uploadPath);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            
+            try (
+                OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                int bytesRead = -1;
+                byte[] buffer = new byte[4096];
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            }
+            inputStream.close();
+            
+            filePath = "assets/images/customer" + File.separator + fileName;
+        }
         try {
             HttpSession session = request.getSession();
             userDAO ud = new userDAO();
             user u = (user)session.getAttribute("account");
             user un = ud.GetUserById(u.getId());
             
-            String fullname = request.getParameter("fullname");
-            String username = un.getUsername();
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String image = request.getParameter("image");
-            String dob = request.getParameter("dob");
-            String address = request.getParameter("address");
+            un.setFullname(request.getParameter("fullname"));
+            un.setUsername(un.getUsername());
+            un.setEmail(request.getParameter("email"));
+            un.setPhone(request.getParameter("phone"));
+            un.setDob(Date.valueOf(request.getParameter("dob")));
+            un.setAddress(request.getParameter("address"));
 
-            String vc = un.getCode_verify();
-            String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            un.setModified_on(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
 
             if (un != null) {
-                ud.UpdateUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, u.getCreated_on(), 1, 1, currentDate, un.getId());
+                ud.UpdateUser(un);
                 session.setAttribute("account", un);
                 response.sendRedirect("userprofile");
             } else {
