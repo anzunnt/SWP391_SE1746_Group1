@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import org.apache.catalina.User;
 
 /**
  *
@@ -107,7 +108,8 @@ public class ManageUserServlet extends HttpServlet {
 
             userDAO ud = new userDAO();
             if (!"".equals(id)) {
-                ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate, Integer.parseInt(id));
+                user u = new user(Integer.parseInt(id),fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate);
+                ud.UpdateUser(u);
                 response.sendRedirect("userlist");
             } 
             //Add a Product

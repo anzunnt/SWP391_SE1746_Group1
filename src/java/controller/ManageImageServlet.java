@@ -150,7 +150,7 @@ public class ManageImageServlet extends HttpServlet {
                 id = Integer.parseInt(id_raw);
                 imd.insert(filePath, id, createdAt, userId, createdAt, userId, description);
                 // Thông báo thành công sau khi tải lên
-                response.sendRedirect("productlist");
+                response.sendRedirect("manageImage?id="+id);
             } catch (IOException | NumberFormatException e) {
                 // Xử lý lỗi nếu không tìm thấy file
                 request.setAttribute("error", "Lỗi: " + e.getMessage());
