@@ -124,8 +124,8 @@ public class ProductDAO extends DBContext {
 //        return null;
 //    }
 //
+    
     //doc tu bang product theo id
-
     public Product getProductById(int id) {
         String sql = "select * from Product where id=?";
         try {

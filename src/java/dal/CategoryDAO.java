@@ -201,4 +201,47 @@ public class CategoryDAO extends DBContext {
         }
     }
 
+    public void updateCateProduct(int cid, String ModifiedAt,
+            int modifiedBy, int pid) {
+        String sql = "UPDATE [dbo].[CategoryProduct]\n"
+                + "   SET [CategoryId] = ?\n"
+                + "      ,[ModifiedAt] = ?\n"
+                + "      ,[ModifiedBy] = ?\n"
+                + " WHERE [ProductId] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            st.setString(2, ModifiedAt);
+            st.setInt(3, modifiedBy);
+            st.setInt(4, pid);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void insertCateProduct(int pid, int cid, String createdAt, int createdBy,
+            String modifiedAt, int modifiedBy) {
+        String sql = "INSERT INTO [dbo].[CategoryProduct]\n"
+                + "           ([ProductId]\n"
+                + "           ,[CategoryId]\n"
+                + "           ,[CreatedAt]\n"
+                + "           ,[CreatedBy]\n"
+                + "           ,[ModifiedAt]\n"
+                + "           ,[ModifiedBy])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, pid);
+            st.setInt(2, cid);
+            st.setString(3, createdAt);
+            st.setInt(4, createdBy);
+            st.setString(5, modifiedAt);
+            st.setInt(6, modifiedBy);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

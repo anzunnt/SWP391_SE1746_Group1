@@ -6,6 +6,7 @@
 package controller;
 
 import dal.ImageDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,8 +36,9 @@ public class DeleteImage extends HttpServlet {
         try{
             id=Integer.parseInt(id_raw);
             ImageDAO c = new ImageDAO();
+            int idP = c.getProductByIdImage(id).getProductId();
             c.deleteImage(id);
-            response.sendRedirect("productlist");
+            response.sendRedirect("manageImage?id="+idP);
         }catch(NumberFormatException e){
             System.out.println(e);
         }

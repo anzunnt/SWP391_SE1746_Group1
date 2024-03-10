@@ -65,7 +65,7 @@
             input, select, textarea {
                 width: 50%;
                 padding: 8px;
-                
+
                 box-sizing: border-box;
             }
 
@@ -106,7 +106,7 @@
                 <input type="number" id="price" name="price" value="${o.price}" step="0.01" required>
 
                 <label for="discount">Discount:</label>
-                <input type="number" id="discount" name="discount" value="${o.discount}" step="0.01">
+                <input min="0" max="1" type="number" id="discount" name="discount" value="${o.discount}" step="0.01">
 
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" value="${o.quantity}" required>
@@ -135,6 +135,12 @@
                 <label for="endsAt">Ends At:</label>
                 <input type="datetime-local" id="endsAt" name="endsAt" value="${o.endsAt}">
 
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <c:forEach items="${listC}" var="category">
+                        <option ${(cid == category.id)?'selected':''} value="${category.id}">${category.name}</option>
+                    </c:forEach>
+                </select>
                 </br><button type="submit">${doing} Product</button>
             </form>
             <script>//CKEDITOR.replace('description');

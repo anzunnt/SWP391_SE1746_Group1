@@ -99,4 +99,21 @@ public class ImageDAO extends DBContext {
             System.out.println(e);
         }
     }
+     //doc tu bang product theo id image
+    public Image getProductByIdImage(int id) {
+        String sql = "SELECT * FROM [FS_Thien].[dbo].[ProductImage] WHERE Id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Image(rs.getInt(1), rs.getString(2),
+                        rs.getInt(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), rs.getString(8));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
