@@ -101,14 +101,9 @@ public class ManageUserServlet extends HttpServlet {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.00").format(Calendar.getInstance().getTime());
 
             userDAO ud = new userDAO();
-<<<<<<< Updated upstream
-            if (!"".equals(id)) {
-                ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate, Integer.parseInt(id));
-=======
             if (id != null) {
                 user u = new user(Integer.parseInt(id), fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active") ? 1 : 0), created_on, 1, 1, currentDate);
                 ud.UpdateUser(u);
->>>>>>> Stashed changes
                 response.sendRedirect("userlist");
             } else {
                 request.setAttribute("error", "User is not existed: " + username);
