@@ -124,7 +124,7 @@
                                         ${messregis}
                                     </p>
                                 </div>
-                                <form action="register" class="login-form mt-4" method="post">
+                                <form action="register" class="login-form mt-4" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
@@ -159,7 +159,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="image">Choose Image: </label>
-                                                <input type="file" id="image" name="image" value="" accept="image/*" required>
+                                                <input type="file" id="image" name="image" accept="image/*" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
