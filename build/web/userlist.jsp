@@ -175,8 +175,10 @@
                                     <form action="userlist" method="get">
                                         <label for="pageNumber">Number User/Page:</label>
                                         <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
+                                            <option value="5" ${(num == "5")?'selected':''}>5</option>
+                                            <option value="10" ${(num == "10")?'selected':''}>10</option>
+                                            <option value="50" ${(num == "50")?'selected':''}>50</option>
+                                            <option value="100" ${(num == "100")?'selected':''}>100</option>
                                         </select>
                                         </br><button type="submit">OK</button>
                                     </form>
