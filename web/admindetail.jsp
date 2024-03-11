@@ -63,24 +63,24 @@
         <h1 style="color: red">${error}</h1>
         <c:set var="o" value="${requestScope.admin}"/>
         <div style="text-align: center">
-            <form action="manageUser" method="post"><!-- Replace "#" with your form submission URL -->
+            <form action="manageUser" method="post" autocomplete="off"><!-- Replace "#" with your form submission URL -->
                 <input type="text" hidden="true" name="id" value="${o.id}" disabled="">
 
                 <label for="description">User Name:</label>
-                <input type="text" id="username" name="username" value="${o.username}" disabled="">
+                <input type="text" id="username" name="username" value="${o.username}" >
 
                 <label for="basePrice">Password:</label>
-                <input type="password" id="password" name="password" value="${o.password}" disabled="">
-                
+                <input type="password" id="password" name="password" value="${o.password}">
+
                 <label class="form-label">Created On <span class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="created_on" name="created_on" value="${o.created_on}" disabled="">
-                
+
                 <label for="description">Created By:</label>
                 <input type="text" id="created_by" name="created_by" value="${o.created_by}" disabled="">
-                
+
                 <label class="form-label">Modified On <span class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="modified_on" name="modified_on" value="${o.modified_on}" disabled="">
-                
+
                 <label for="description">Modified By:</label>
                 <input type="text" id="modified_by" name="modified_by" value="${o.modified_by}" disabled="">
 

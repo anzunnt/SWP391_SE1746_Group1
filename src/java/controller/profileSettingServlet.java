@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.VerifyCode;
@@ -24,24 +23,27 @@ import model.user;
  *
  * @author admin
  */
-@WebServlet(name="profileSettingServlet", urlPatterns={"/profileSetting"})
+@WebServlet(name = "profileSettingServlet", urlPatterns = {"/profileSetting"})
 public class profileSettingServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -49,21 +51,21 @@ public class profileSettingServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
             user u = (user) session.getAttribute("account");
             request.setAttribute("user", u);
             request.getRequestDispatcher("profileSetting.jsp").forward(request, response);
-        }
-        catch (Exception e) {
-            
-        }
-    } 
+        } catch (Exception e) {
 
-    /** 
+        }
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -71,6 +73,7 @@ public class profileSettingServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+<<<<<<< Updated upstream
     throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
@@ -92,21 +95,69 @@ public class profileSettingServlet extends HttpServlet {
 
             if (un != null) {
                 ud.UpdateUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, u.getCreated_on(), 1, 1, currentDate, un.getId());
+=======
+            throws ServletException, IOException {
+        InputStream inputStream = null;
+        String filePath = "";
+
+        Part filePart = request.getPart("image");
+        if (filePart != null) {
+            // Lấy tên file.
+            String fileName = filePart.getSubmittedFileName();
+            // Lấy InputStream của file.
+            inputStream = filePart.getInputStream();
+
+            // Thiết lập thư mục lưu trữ file ảnh trên máy chủ.
+            String uploadPath = getServletContext().getRealPath("") + File.separator + "assets/images/customer";
+            // Tạo thư mục nếu nó không tồn tại.
+            File directory = new File(uploadPath);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            try ( // Ghi file vào thư mục đã thiết lập.
+                     OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                int bytesRead = 0;
+                byte[] buffer = new byte[4096];
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            }
+            inputStream.close();
+
+            // Lưu đường dẫn của file vào cơ sở dữ liệu.
+            filePath = "assets/images/customer" + File.separator + fileName;
+            try {
+                HttpSession session = request.getSession();
+                userDAO ud = new userDAO();
+                user u = (user) session.getAttribute("account");
+                user un = ud.GetUserById(u.getId());
+
+                un.setFullname(request.getParameter("fullname"));
+                un.setUsername(un.getUsername());
+                un.setEmail(request.getParameter("email"));
+                un.setPhone(request.getParameter("phone"));
+                un.setImage(filePath);
+                un.setDob(Date.valueOf(request.getParameter("dob")));
+                un.setAddress(request.getParameter("address"));
+
+                un.setModified_on(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+
+                ud.UpdateUser(un);
+>>>>>>> Stashed changes
                 session.setAttribute("account", un);
                 response.sendRedirect("userprofile");
-            } else {
-                request.setAttribute("messregis", "Username is not existed!");
-                request.getRequestDispatcher("customerProfile.jsp").forward(request, response);
+            } catch (IOException e) {
+                request.setAttribute("messregis", e.getMessage());
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
-        catch (Exception e) {
-            request.setAttribute("messregis", e.getMessage());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

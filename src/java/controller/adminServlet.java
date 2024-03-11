@@ -85,16 +85,14 @@ public class adminServlet extends HttpServlet {
             String password = request.getParameter("password");
             adminDAO ad = new adminDAO();
             EnCryptPassword ep = new EnCryptPassword();
-            List<Admin> admins = ad.GetAllAdmins();
+            Admin adm = ad.GetAdminByUsernameAndPassword(username, password);
             String mess = "Email or password wrong!";
-            for (Admin admin : admins) {
-                if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
-                    session.setAttribute("account", admin);
-                    session.setAttribute("admin", admin);
-                    // Thiết lập thời gian hết hạn của session là 30 phút (1800 giây)
-                    session.setMaxInactiveInterval(1800);
-                    mess = "ok";
-                }
+            if (adm != null) {
+                session.setAttribute("account", adm);
+                session.setAttribute("admin", adm);
+                // Thiết lập thời gian hết hạn của session là 30 phút (1800 giây)
+                session.setMaxInactiveInterval(1800);
+                mess = "ok";
             }
             if (mess.equals("ok")) {
                 response.sendRedirect("index");

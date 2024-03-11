@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.VerifyCode;
@@ -24,36 +23,31 @@ import java.util.Calendar;
  *
  * @author admin
  */
-@WebServlet(name="ManageUserServlet", urlPatterns={"/manageUser"})
+@WebServlet(name = "ManageUserServlet", urlPatterns = {"/manageUser"})
 public class ManageUserServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ManageUserServlet</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ManageUserServlet at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,7 +55,7 @@ public class ManageUserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String id_raw = request.getParameter("id");
         int id;
         userDAO ud = new userDAO();
@@ -76,10 +70,11 @@ public class ManageUserServlet extends HttpServlet {
             request.setAttribute("doing", "Add");
             request.getRequestDispatcher("manageUser.jsp").forward(request, response);
         }
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -87,7 +82,7 @@ public class ManageUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
             String id = request.getParameter("id");
@@ -106,30 +101,28 @@ public class ManageUserServlet extends HttpServlet {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.00").format(Calendar.getInstance().getTime());
 
             userDAO ud = new userDAO();
+<<<<<<< Updated upstream
             if (!"".equals(id)) {
                 ud.UpdateUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate, Integer.parseInt(id));
+=======
+            if (id != null) {
+                user u = new user(Integer.parseInt(id), fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active") ? 1 : 0), created_on, 1, 1, currentDate);
+                ud.UpdateUser(u);
+>>>>>>> Stashed changes
                 response.sendRedirect("userlist");
-            } 
-            //Add a Product
-            else {
-                user p = ud.GetUserByUsername(username);
-                if (p == null) {
-                    ud.InsertUser(fullname, username, password, code, email, phone, image, Date.valueOf(dob), address, (status.equals("active")?1:0), created_on, 1, 1, currentDate);
-                    response.sendRedirect("userlist");
-                } else {
-                    request.setAttribute("error", "User is existed");
-                    request.getRequestDispatcher("manageUser.jsp").forward(request, response);
-                }
+            } else {
+                request.setAttribute("error", "User is not existed: " + username);
+                request.getRequestDispatcher("manageUser.jsp").forward(request, response);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.EnCryptPassword;
 import dal.VerifyCode;
 import dal.userDAO;
 import java.io.IOException;
@@ -65,24 +66,29 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
-            String fullname = request.getParameter("fullname");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            String image = request.getParameter("image");
-            String dob = request.getParameter("dob");
-            String address = request.getParameter("address");
+            
+            EnCryptPassword ecp = new EnCryptPassword();
+            user u = new user();
+            u.setId(-1);
+            u.setFullname(request.getParameter("fullname"));
+            u.setUsername(request.getParameter("username"));
+            u.setPassword(ecp.hashPassword(request.getParameter("password")));
+            u.setEmail(request.getParameter("email"));
+            u.setPhone(request.getParameter("phone"));
+            u.setImage(request.getParameter("image"));
+            u.setDob(Date.valueOf(request.getParameter("dob")));
+            u.setAddress(request.getParameter("address"));
 
             VerifyCode vcdal = new VerifyCode();
-            String vc = vcdal.generateVerificationCode(6);
+            u.setCode_verify(vcdal.generateVerificationCode(6));
             String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            u.setCreated_on(currentDate);
+            u.setModified_on(currentDate);
 
             userDAO ud = new userDAO();
-            user checkExist = ud.GetUserByUsername(username);
+            user checkExist = ud.GetUserByUsername(request.getParameter("username"));
             if (checkExist == null) {
-                ud.InsertUser(fullname, username, password, vc, email, phone, image, Date.valueOf(dob), address, 1, currentDate, 1, 1, currentDate);
+                ud.InsertUser(u);
                 response.sendRedirect("login");
             } else {
                 request.setAttribute("messregis", "Username is already existed!");
