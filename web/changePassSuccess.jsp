@@ -46,7 +46,7 @@
         <!-- Loader -->
 
         <div class="back-to-home rounded d-none d-sm-block">
-            <a href="index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+            <a href="userprofile" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
 
         <!-- Hero Start -->

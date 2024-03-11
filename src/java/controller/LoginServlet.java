@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
             userDAO ud = new userDAO();
             EnCryptPassword ep = new EnCryptPassword();
             List<user> users = ud.GetAllUsers();
-            String mess = "Email or password wrong!";
+            String mess = "Username or password wrong!";
             for (user user : users) {
                 if (user.getUsername().equals(username) && user.getPassword().equals(ep.hashPassword(password))) {
                     session.setAttribute("account", user);

@@ -52,7 +52,13 @@ public class resetPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        user u = (user) session.getAttribute("account");
+        if (u != null) {
+            request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     /**
