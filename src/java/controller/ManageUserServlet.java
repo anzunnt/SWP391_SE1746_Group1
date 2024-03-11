@@ -99,7 +99,7 @@ public class ManageUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Admin ad = (Admin) session.getAttribute("account");
+        Admin ad = (Admin) session.getAttribute("admin");
 
         try {
             String id = request.getParameter("id");

@@ -97,7 +97,7 @@ public class adminServlet extends HttpServlet {
                 }
             }
             if (mess.equals("ok")) {
-                response.sendRedirect("index");
+                response.sendRedirect("productlist");
             } else {
                 request.setAttribute("mess", mess);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);

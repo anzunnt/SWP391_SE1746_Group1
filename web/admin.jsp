@@ -105,9 +105,9 @@
                                                                                     </div>
                                                                                 </div>end col-->
 
-                                        <div class="col-12 text-center">
+<!--                                        <div class="col-12 text-center">
                                             <p class="mb-0 mt-3"><small class="text-dark me-2">Don't have an account ?</small> <a href="#registerform" onclick="switchLoginRegister()" class="fw-bold link-danger">Register</a></p>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </form>
                             </div>
