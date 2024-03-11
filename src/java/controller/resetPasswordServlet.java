@@ -99,7 +99,7 @@ public class resetPasswordServlet extends HttpServlet {
                 request.setAttribute("mess", mess);
                 request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
         }
     }
 

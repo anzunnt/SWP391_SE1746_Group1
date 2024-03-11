@@ -23,8 +23,19 @@
                 }
             }
         </script>
+        <style>
+            button {
+                background-color: blue;
+                color: #fff;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
+        <button onclick="history.back()">Go Back</button>
         <h1 style="font-size:25px">Danh sách hình ảnh của product có id = ${id}</h1>
         <div style="border-bottom: solid gray"id="image-container">
             <div class="row">
@@ -36,7 +47,6 @@
                                     <tr>
                                         <th class="border-bottom p-4">Id</th>
                                         <th class="border-bottom p-4" style="min-width: 120px;">Image</th>
-                                        <th class="border-bottom p-4">Image Description</th>
                                         <th class="border-bottom p-4">Delete</th>
                                     </tr>
                                 </thead>
@@ -45,7 +55,6 @@
                                         <tr>
                                             <td class="p-4">${o.id}</td>
                                             <td class="p-4"><img style="width: 100px;height: 120px" src="${o.image}" class="img-fluid" alt=""></td>
-                                            <td class="p-4">${o.imageDescription}</td>
                                             <td class="p-4"><a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a></td>
                                         </tr>
                                     </c:forEach>
@@ -60,8 +69,6 @@
             <form style="margin-left: 50%"action="manageImage" method="post" enctype="multipart/form-data">
                 <input type="text" hidden="true" name="id" value="${id}">
                 <input type="file" name="file">
-                <label for="name">Description:</label>
-                <input type="text" id="description" name="description" required>
                 <input type="submit" value="Tải lên">
             </form>
         </div>     

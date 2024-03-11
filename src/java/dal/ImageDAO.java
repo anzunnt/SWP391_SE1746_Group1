@@ -75,7 +75,7 @@ public class ImageDAO extends DBContext {
         }
     }
 
-    //delete a product
+    //delete Image by Id of Image
     public void deleteImage(int id) {
         String sql = "DELETE FROM [dbo].[ProductImage]\n"
                 + "      WHERE Id = ?";
@@ -86,5 +86,34 @@ public class ImageDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    //delete Image by Id of Product
+    public void deleteImageByProductId(int id) {
+        String sql = "DELETE FROM [dbo].[ProductImage]\n"
+                + "      WHERE [ProductId] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+     //doc tu bang product theo id image
+    public Image getProductByIdImage(int id) {
+        String sql = "SELECT * FROM [FS_Thien].[dbo].[ProductImage] WHERE Id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Image(rs.getInt(1), rs.getString(2),
+                        rs.getInt(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), rs.getString(8));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 }

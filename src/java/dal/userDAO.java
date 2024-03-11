@@ -94,26 +94,26 @@ public class userDAO extends DBContext{
         catch(SQLException e){}
     }
     
-    public void UpdateUser(String fullname, String username, String password, String code_verify, String email, String phone, String image, Date dob, String address, int status, String created_on, int created_by, int modified_by, String modified_on, int id) {
+    public void UpdateUser(user u) {
         String sql = "update [dbo].[user] set [full_name]=?, [username]=?, [password]=?, [code_verify]=?, [email]=?, [phone]=?, [image]=?, [dob]=?, [address]=?, [status]=?, [created_on]=?, [created_by]=?, [modified_by]=?, [modified_on]=?\n" +
                         "where [id] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, fullname);
-            st.setString(2, username);
-            st.setString(3, ep.hashPassword(password));
-            st.setString(4, code_verify);
-            st.setString(5, email);
-            st.setString(6, phone);
-            st.setString(7, image);
-            st.setDate(8, dob);
-            st.setString(9, address);
-            st.setInt(10, status);
-            st.setString(11, created_on);
-            st.setInt(12, created_by);
-            st.setInt(13, modified_by);
-            st.setString(14, modified_on);
-            st.setInt(15, id);
+            st.setString(1, u.getFullname());
+            st.setString(2, u.getUsername());
+            st.setString(3, ep.hashPassword(u.getPassword()));
+            st.setString(4, u.getCode_verify());
+            st.setString(5, u.getEmail());
+            st.setString(6, u.getPhone());
+            st.setString(7, u.getImage());
+            st.setDate(8, u.getDob());
+            st.setString(9, u.getAddress());
+            st.setInt(10, u.getStatus());
+            st.setString(11, u.getCreated_on());
+            st.setInt(12, u.getCreated_by());
+            st.setInt(13, u.getModified_by());
+            st.setString(14, u.getModified_on());
+            st.setInt(15, u.getId());
             st.executeUpdate();
         }
         catch(SQLException e){}

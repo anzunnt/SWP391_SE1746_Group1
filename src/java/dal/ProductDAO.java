@@ -47,6 +47,13 @@ public class ProductDAO extends DBContext {
 
     //delete a product
     public void deleteProduct(int id) {
+        //xoa lien ket cua product voi image
+        ImageDAO imd = new ImageDAO();
+        imd.deleteImageByProductId(id);
+        //xoa lien ket cua product voi category
+        CategoryDAO cd = new CategoryDAO();
+        cd.deleteCategoryByProductId(id);
+        //xoa product
         String sql = "DELETE FROM [dbo].[Product]\n"
                 + " WHERE id=?";
         try {
@@ -117,8 +124,8 @@ public class ProductDAO extends DBContext {
 //        return null;
 //    }
 //
+    
     //doc tu bang product theo id
-
     public Product getProductById(int id) {
         String sql = "select * from Product where id=?";
         try {
