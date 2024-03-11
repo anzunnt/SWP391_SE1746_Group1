@@ -64,7 +64,7 @@
         <c:set var="o" value="${requestScope.user}"/>
         <div style="text-align: center">
             <form action="manageUser" method="post"><!-- Replace "#" with your form submission URL -->
-                <input type="text" hidden="true" name="id" value="${o.id}" disabled="">
+                <input type="text" hidden="true" id="id" name="id" value="${o.id}" disabled="">
                 <label for="name">Full Name:</label>
                 <input type="text" id="fullname" name="fullname" value="${o.fullname}" disabled="">
 

@@ -2,6 +2,35 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+<<<<<<< Updated upstream
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ProductListViewClient.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/dal/CategoryDAO.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ProductListViewAdmin.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/fashionShop.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/sidebar.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ProductDetailServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/ManageCategory.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/adminServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/adminlist.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/LoginServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/AdminListServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/test.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/AdminDetailServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/META-INF/context.xml</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/UserListServlet.java</file>
+=======
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ManageImageServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/header.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/resetPasswordServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/manageUser.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/RegisterServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/dal/userDAO.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/profileSetting.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/profileSettingServlet.java</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/web/ManageImage.jsp</file>
+            <file>file:/D:/DataHoc/SWP391/SWP391_SE1748/Project/SWP391_SE1746_Group1/SWP391_SE1746_Group1/SWP391_SE1746_Group1/src/java/controller/ManageUserServlet.java</file>
+>>>>>>> Stashed changes
+        </group>
     </open-files>
 </project-private>

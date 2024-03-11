@@ -67,7 +67,7 @@ public class AdminDetailServlet extends HttpServlet {
         
         if (id_raw != null) {
             id = Integer.parseInt(id_raw);
-            Admin a = ad.GetUserById(id);
+            Admin a = ad.GetAdminById(id);
             request.setAttribute("admin", a);
             request.setAttribute("doing", "Update");
             request.getRequestDispatcher("admindetail.jsp").forward(request, response);
@@ -89,26 +89,27 @@ public class AdminDetailServlet extends HttpServlet {
     throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
+            
+            Admin adm = (Admin)session.getAttribute("admin");
             String id = request.getParameter("id");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String created_on = request.getParameter("dob");
             String created_by = request.getParameter("address");
-            String modified_by = request.getParameter("status");
-            String modified_on = request.getParameter("created_on");
 
             String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.00").format(Calendar.getInstance().getTime());
 
             adminDAO ad = new adminDAO();
-            if (!"".equals(id)) {
-                ad.UpdateUser(username, password, created_on, created_by, modified_by, currentDate, Integer.parseInt(id));
+            if (id!=null) {
+                System.out.println(id);
+                ad.UpdateAdmin(username, password, created_on, created_by, String.valueOf(adm.getId()), currentDate, Integer.parseInt(id));
                 response.sendRedirect("adminlist");
             } 
             //Add a Product
             else {
                 Admin p = ad.GetAdminByUsername(username);
                 if (p == null) {
-                    ad.InsertUser(username, password, created_on, created_by, modified_by, currentDate);
+                    ad.InsertAdmin(username, password, currentDate, String.valueOf(adm.getId()), String.valueOf(adm.getId()), currentDate);
                     response.sendRedirect("adminlist");
                 } else {
                     request.setAttribute("error", "Admin is existed");
