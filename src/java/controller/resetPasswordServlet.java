@@ -89,7 +89,10 @@ public class resetPasswordServlet extends HttpServlet {
                         request.setAttribute("mess", mess);
                         request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
                     } else {
-                        ud.UpdateUser(u.getFullname(), u.getUsername(), newpassword, u.getCode_verify(), u.getEmail(), u.getPhone(), u.getImage(), u.getDob(), u.getAddress(), u.getStatus(), u.getCreated_on(), u.getCreated_by(), u.getModified_by(), currentDate, u.getId());
+                        u.setPassword(newpassword);
+                        u.setModified_on(currentDate);
+                        u.setModified_by(u.getId());
+                        ud.UpdateUser(u);
                         request.getRequestDispatcher("changePassSuccess.jsp").forward(request, response);
                     }
                 }
