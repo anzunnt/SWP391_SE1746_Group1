@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                <img src="assets/images/doctors/01.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                <img src="${user.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                 <h5 class="mt-3 mb-1">${user.fullname}</h5>
                                 <p class="text-muted mb-0">${user.username}</p>
                             </div>
@@ -138,7 +138,7 @@
                                         <a href="profileSetting"><button id="profileSetting" name="send" class="btn btn-primary" >Profile Setting</button></a>
                                     </div><!--end col-->
                                     <div class="col-sm">
-                                        <a href="resetPassword"><button id="resetPassword" name="send" class="btn btn-primary" >Reset Password</button></a>
+                                        <a href="changepassword"><button id="resetPassword" name="send" class="btn btn-primary" >Reset Password</button></a>
                                     </div><!--end col-->
                                 </div><!--end row-->
                             </div>

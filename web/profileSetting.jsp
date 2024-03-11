@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                <img src="assets/images/doctors/01.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                <img src="${user.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                 <h5 class="mt-3 mb-1">${user.fullname}</h5>
                                 <p class="text-muted mb-0">${user.username}</p>
                             </div>
@@ -127,8 +127,8 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="image">Choose Image: </label>
-                                                <input type="file" id="image" name="image" value="" accept="image/*">
-                                                <img src="" alt="Avatar" />
+                                                <input type="file" id="image" name="image" onchange="handleImage(this)" accept="image/*">
+                                                <img id="avatar" src="${user.image}" style="width: 150px; height: 200px" alt="Avatar" />
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -209,5 +209,20 @@
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+            function handleImage(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#avatar')
+                                .attr('src', e.target.result)
+                                .width(150)
+                                .height(200);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
     </body>
 </html>
