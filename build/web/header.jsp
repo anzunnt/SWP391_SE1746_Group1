@@ -50,24 +50,25 @@
                     <div class="dropdown dropdown-primary">
                         <c:if test="${sessionScope['admin'] == null}">
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="${sessionScope['account'].image}" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                            </c:if>
-                            <c:if test="${sessionScope['admin'] != null}">
-                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                            </c:if>
-                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center text-dark" href="userprofile">
-                                <img src="assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                <div class="flex-1 ms-2">
-                                    <span class="d-block mb-1">${sessionScope['account'].username}</span>
-                                    <c:if test="${sessionScope['admin'] == null}">
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                                <a class="dropdown-item d-flex align-items-center text-dark" href="userprofile">
+                                    <img src="${sessionScope['account'].image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="Avatar">
+                                    <div class="flex-1 ms-2">
+                                        <span class="d-block mb-1">${sessionScope['account'].username}</span>
                                         <small class="text-muted">${sessionScope['account'].fullname}</small>
-                                    </c:if>
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-dark" href="changepassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Change Password</a>
-                            <div class="dropdown-divider border-top"></div>
-                            <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
-                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-dark" href="changepassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Change Password</a>
+                                <div class="dropdown-divider border-top"></div>
+                                <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                            </div>
+                        </c:if>
+                        <c:if test="${sessionScope['admin'] != null}">
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                                <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                            </div>
+                        </c:if>
                     </div>
                 </li>
             </c:if>
