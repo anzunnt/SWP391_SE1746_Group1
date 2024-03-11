@@ -63,7 +63,6 @@ public class AdminListServlet extends HttpServlet {
                 }
                 request.setCharacterEncoding("UTF-8");
                 adminDAO ad = new adminDAO();
-
                 int totalAdmin = ad.getNumberAdmin();
                 int numberPage = (int) Math.ceil((double) totalAdmin / num);
                 int index;
