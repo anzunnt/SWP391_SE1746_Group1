@@ -61,16 +61,16 @@
         <button onclick="history.back()">Go Back</button>
         <h1>${doing} a Admin!</h1>
         <h1 style="color: red">${error}</h1>
-        <c:set var="o" value="${requestScope.admin}"/>
+        <c:set var="o" value="${requestScope.adminlist}"/>
         <div style="text-align: center">
-            <form action="manageUser" method="post"><!-- Replace "#" with your form submission URL -->
-                <input type="text" hidden="true" name="id" value="${o.id}" disabled="">
+            <form action="admindetail" method="post"><!-- Replace "#" with your form submission URL -->
+                <input type="text" hidden="true" name="id" value="${o.id}">
 
                 <label for="description">User Name:</label>
-                <input type="text" id="username" name="username" value="${o.username}" disabled="">
+                <input type="text" id="username" name="username" value="${o.username}">
 
                 <label for="basePrice">Password:</label>
-                <input type="password" id="password" name="password" value="${o.password}" disabled="">
+                <input type="password" id="password" name="password" value="${o.password}">
                 
                 <label class="form-label">Created On <span class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="created_on" name="created_on" value="${o.created_on}" disabled="">
