@@ -138,7 +138,7 @@
                                         <a href="profileSetting"><button id="profileSetting" name="send" class="btn btn-primary" >Profile Setting</button></a>
                                     </div><!--end col-->
                                     <div class="col-sm">
-                                        <a href="resetPassword"><button id="resetPassword" name="send" class="btn btn-primary" >Reset Password</button></a>
+                                        <a href="changepassword"><button id="resetPassword" name="send" class="btn btn-primary" >Reset Password</button></a>
                                     </div><!--end col-->
                                 </div><!--end row-->
                             </div>

@@ -96,14 +96,14 @@
                                                 <input name="fullname" id="fullname" type="text" class="form-control" value="${user.fullname}" >
                                             </div>
                                         </div><!--end col-->
-
+                                        
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">User Name</label>
                                                 <input name="username" id="username" type="text" class="form-control" value="${user.username}" >
                                             </div>
                                         </div><!--end col-->
-
+                                        
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password</label>
@@ -127,16 +127,8 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="image">Choose Image: </label>
-<<<<<<< Updated upstream
-                                                <input type="file" id="image" name="image" value="" accept="image/*">
-<<<<<<< HEAD
-=======
                                                 <input type="file" id="image" name="image" onchange="handleImage(this)" accept="image/*">
                                                 <img id="avatar" src="${user.image}" style="width: 150px; height: 200px" alt="Avatar" />
->>>>>>> Stashed changes
-=======
-                                                <img src="" alt="Avatar" />
->>>>>>> c4224826c49faa06ec5aa47b3567a5718923f764
                                             </div>
                                         </div>
                                         <div class="col-md-12">
