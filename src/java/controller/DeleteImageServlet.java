@@ -6,8 +6,8 @@
 package controller;
 
 import dal.ImageDAO;
-import dal.ProductDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-@WebServlet(name="DeleteImage", urlPatterns={"/deleteImage"})
-public class DeleteImage extends HttpServlet {
+@WebServlet(name="DeleteImageServlet", urlPatterns={"/DeleteImage"})
+public class DeleteImageServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,7 +38,7 @@ public class DeleteImage extends HttpServlet {
             ImageDAO c = new ImageDAO();
             int idP = c.getProductByIdImage(id).getProductId();
             c.deleteImage(id);
-            response.sendRedirect("manageImage?id="+idP);
+            response.sendRedirect("ManageImage?id="+idP);
         }catch(NumberFormatException e){
             System.out.println(e);
         }

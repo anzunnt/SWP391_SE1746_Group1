@@ -116,7 +116,7 @@ public class ManageProductServlet extends HttpServlet {
         String price_raw = request.getParameter("price");
         String discount_raw = request.getParameter("discount");
         String quantity_raw = request.getParameter("quantity");
-        String style_raw = request.getParameter("style");
+        String style_raw = "category";
         String publishedAt_raw = request.getParameter("publishedAt").replaceAll("T", " ");
         String state_raw = request.getParameter("state");
         String startsAt_raw = request.getParameter("startsAt").replaceAll("T", " ");
@@ -139,7 +139,7 @@ public class ManageProductServlet extends HttpServlet {
             String modifiedAt = currentDateTime.format(formatter);
             basePrice = Float.parseFloat(basePrice_raw);
             price = Float.parseFloat(price_raw);
-            discount = Float.parseFloat(discount_raw);
+            discount = Float.parseFloat(discount_raw)/100;
             quantity = Integer.parseInt(quantity_raw);
             state = Byte.parseByte(state_raw);
             cateId = Integer.parseInt(category);

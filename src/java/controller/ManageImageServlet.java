@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dal.ImageDAO;
@@ -29,42 +30,39 @@ import model.Image;
  *
  * @author admin
  */
-@WebServlet(name = "ImageController", urlPatterns = {"/manageImage"})
+@WebServlet(name="ManageImageServlet", urlPatterns={"/ManageImage"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 3, // 3MB
         maxFileSize = 1024 * 1024 * 40, // 40MB
         maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class ManageImageServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ImageController</title>");
+            out.println("<title>Servlet ManageImageServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ImageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageImageServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -72,7 +70,7 @@ public class ManageImageServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         HttpSession session = request.getSession();
         Admin u = (Admin) session.getAttribute("account");
         if (u == null) {
@@ -92,11 +90,10 @@ public class ManageImageServlet extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -104,7 +101,7 @@ public class ManageImageServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         InputStream inputStream = null; // Để lưu trữ dữ liệu đầu vào hình ảnh.
 
         Part filePart = request.getPart("file");
@@ -123,7 +120,7 @@ public class ManageImageServlet extends HttpServlet {
             }
 
             try ( // Ghi file vào thư mục đã thiết lập.
-                    OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
+                     OutputStream outputStream = new FileOutputStream(new File(uploadPath + File.separator + fileName))) {
                 int bytesRead = -1;
                 byte[] buffer = new byte[4096];
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -150,7 +147,7 @@ public class ManageImageServlet extends HttpServlet {
                 id = Integer.parseInt(id_raw);
                 imd.insert(filePath, id, createdAt, userId, createdAt, userId, description);
                 // Thông báo thành công sau khi tải lên
-                response.sendRedirect("manageImage?id="+id);
+                response.sendRedirect("ManageImage?id=" + id);
             } catch (IOException | NumberFormatException e) {
                 // Xử lý lỗi nếu không tìm thấy file
                 request.setAttribute("error", "Lỗi: " + e.getMessage());
@@ -159,9 +156,8 @@ public class ManageImageServlet extends HttpServlet {
         }
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

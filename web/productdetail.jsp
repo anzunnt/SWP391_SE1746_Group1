@@ -100,9 +100,9 @@
                             <h4 style="margin-bottom: 30px" class="title">${o.name}</h4>
                             <div style="margin-bottom: 30px" class="d-flex justify-content-between mt-1"> 
                                 <h6 class="text-muted small font-italic mb-0 mt-1">
-                                    GIÁ GỐC: <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                    GIÁ GỐC: <span style="text-decoration: line-through; color: black">${Math.round(o.price)}.000đ</span>
                                 </h6>
-                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
+                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: red">${Math.round(o.discount*100)}%</span></h6>
                                 <h6 class="text-muted small font-italic mb-0 mt-1">CHỈ CÒN:<span style="color: blue"> ${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                             </div>
 
@@ -157,9 +157,9 @@
 
                                             <div class="d-flex justify-content-between mt-1">
                                                 <h6 class="text-muted small font-italic mb-0 mt-1">
-                                                    <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                                    <span style="text-decoration: line-through;">${Math.round(o.price)}.000đ</span>
                                                 </h6>
-                                                <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                                <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: red">${Math.round(o.discount*100)}%</span></h6>
                                                 <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                                             </div>
                                         </div>
