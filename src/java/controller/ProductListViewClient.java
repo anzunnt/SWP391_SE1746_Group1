@@ -7,7 +7,6 @@ package controller;
 import dal.CategoryDAO;
 import dal.ProductMenuDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +43,7 @@ public class ProductListViewClient extends HttpServlet {
             List<ProductMenu> list = dao.getAllProductMenu();
             request.setAttribute("listC", clist);
             request.setAttribute("listP", list);
-            request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
+            request.getRequestDispatcher("productShop.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -91,7 +90,7 @@ public class ProductListViewClient extends HttpServlet {
             request.setAttribute("cid", cateId);
             request.setAttribute("listC", clist);
             request.setAttribute("listP", list);
-            request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
+            request.getRequestDispatcher("productShop.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);

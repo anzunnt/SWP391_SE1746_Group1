@@ -128,7 +128,7 @@
                                         <table class="table table-center bg-white mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th class="border-bottom p-3">Id</th>
+                                                    <th class="border-bottom p-3" hidden="">Id</th>
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Base Price</th>
                                                     <th class="border-bottom p-3">Price</th>
@@ -143,7 +143,7 @@
                                             <tbody id="tableBody" >
                                                 <c:forEach items="${listP}" var="o">
                                                     <tr>
-                                                        <td class="p-3">${o.id}</td>
+                                                        <td class="p-3" hidden="">${o.id}</td>
                                                         <td class="p-3">${o.name}</td>
                                                         <td class="p-3">${o.basePrice}VNĐ</td>
                                                         <td class="p-3">${o.price}VNĐ</td>
@@ -156,7 +156,8 @@
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
                                                         </td>
                                                         <td class="p-3">
-                                                            <a href="manageImage?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                            <a href="ManageImage?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                            <!--<a href="ManageImage.jsp" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>-->
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${o.id}"></td>
                                                     </tr>

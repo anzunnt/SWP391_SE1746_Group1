@@ -21,30 +21,11 @@
         <!-- Icons -->
         <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <!-- SLIDER -->
-        <link rel="stylesheet" href="assets/css/tiny-slider.css"/>
+        <link rel="stylesheet" href="assets/css/tiny-slider.css" />
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <style>
-            #showMoreButton {
-                text-align: center;
-                margin-top: 20px;
-            }
-
-            #showMoreButton button {
-                background-color: #007bff;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                cursor: pointer;
-                border-radius: 5px;
-            }
-
-            #showMoreButton button:hover {
-                background-color: #0056b3;
-            }
-        </style>
     </head>
 
     <body>
@@ -59,9 +40,9 @@
         </div>
         <!-- Loader -->
 
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="header.jsp" />
 
-        <div class="container mt-100 mt-60">    
+        <div class="container mt-100 mt-60">
             <div class="row">
                 <div class="col-12">
                     <h5 class="mb-0">Categories</h5>
@@ -98,10 +79,10 @@
 
             <div class="row">
 
-                <div style="border-right:1px black dashed"class="form-group col-2 row" style="margin-right: 10px">
+                <div style="border-right:1px black dashed" class="form-group col-2 row" style="margin-right: 10px">
                     <form action="fashionshop" method="post">
                         <label class="col-12" for="categoryFilter">Filter by Category:</label>
-                        <select style="padding-top: 5px"class="col-12" class="form-control" name="categoryFilter">
+                        <select style="padding-top: 5px" class="col-12" class="form-control" name="categoryFilter">
                             <option value="0">All</option>
                             <c:forEach items="${listC}" var="category">
                                 <option ${(cid == category.id)?'selected':''} value="${category.id}">${category.name}</option>
@@ -111,15 +92,15 @@
                     </form>
                 </div>
 
-                <div style="margin-left: 10px;border-right:1px black dashed"class="form-group col-4 row">
+                <div style="margin-left: 10px;border-right:1px black dashed" class="form-group col-4 row">
                     <label class="col-12" for="priceFilter">Filter by Price:</label>
-                    <label class="col-2"for="from">From:</label>
+                    <label class="col-2" for="from">From:</label>
                     <input class="col-2" type="number" class="form-control" id="priceFilterMin" placeholder="">.000đ
-                    <label class="col-2"for="to">To:</label>
+                    <label class="col-2" for="to">To:</label>
                     <input class="col-2" type="number" class="form-control" id="priceFilterMax" placeholder="">.000đ
-                    <button style="width:150px;margin-left: 50%"onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
+                    <button style="width:150px;margin-left: 50%" onclick="filterByPrice()" class="btn btn-primary mt-2">Apply</button>
                 </div>
-                <div style="margin-left: 20px"class="col-4">
+                <div style="margin-left: 20px" class="col-4">
                     <select class="form-control" id="sortSelect" onchange="sortProducts()">
                         <option value="discount_asc">Discount - Descending</option>
                         <option value="discount_desc">Discount - Ascending</option>
@@ -129,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="row proD">  
+            <div class="row proD">
                 <c:forEach items="${listP}" var="o">
                     <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2 product-column" data-price="${o.price}">
                         <div class="card shop-list border-0">
@@ -138,7 +119,7 @@
                                 <ul class="list-unstyled shop-icons">
                                     <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
-                                </ul>                                
+                                </ul>
 
                                 <div class="qty-icons">
                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
@@ -151,22 +132,16 @@
 
                                 <div class="d-flex justify-content-between mt-1">
                                     <h6 class="text-muted small font-italic mb-0 mt-1">
-                                        <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                        <span style="text-decoration: line-through;">${Math.round(o.price)}.000đ</span>
                                     </h6>
-                                    <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                        <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: red">${Math.round(o.discount*100)}%</span></h6>
                                     <h6 class="text-muted small font-italic mb-0 mt-1 actualprice"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                                 </div>
                             </div>
                         </div>
                     </div><!--end col-->
                 </c:forEach>
-                <div id="pagination" class="text-center mt-4">
-                    <button class="btn btn-primary" id="prevPage" onclick="prevPage()">Previous</button>
-                    <span id="pageInfo"></span>
-                    <button class="btn btn-primary" id="nextPage" onclick="nextPage()">Next</button>
-                </div>
             </div><!--end row-->
-
         </div><!--end container-->
     </section><!--end section-->
 
@@ -195,7 +170,7 @@
     <!-- Back to top -->
     <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
     <!-- Back to top -->
-    <jsp:include page="footer.jsp"/>
+    <jsp:include page="footer.jsp" />
     <!-- javascript -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <!-- SLIDER -->
@@ -272,7 +247,7 @@
                 productsContainer.appendChild(product);
             });
         }
-
     </script>
 </body>
+
 </html>

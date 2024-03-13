@@ -16,8 +16,7 @@ import model.Image;
  *
  * @author admin
  */
-public class ImageDAO extends DBContext {
-
+public class ImageDAO extends DBContext{
     public List<Image> getAllImageByID(int id) {
         List<Image> list = new ArrayList<>();
         String sql = "SELECT * FROM ProductImage WHERE ProductId = ?";

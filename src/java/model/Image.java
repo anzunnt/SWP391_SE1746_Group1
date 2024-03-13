@@ -95,5 +95,4 @@ public class Image {
     public void setImageDescription(String imageDescription) {
         this.imageDescription = imageDescription;
     }
-    
 }

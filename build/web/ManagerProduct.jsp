@@ -100,19 +100,16 @@
                 <textarea rows="707px" cols="100px" id="description" name="description" required>${o.description}</textarea>
 
                 <label for="basePrice">Base Price:</label>
-                <input type="number" id="basePrice" name="basePrice" value="${o.basePrice}" step="0.01" required>
+                <input type="number" id="basePrice" name="basePrice" value="${o.basePrice}" step="1" required placeholder=".........(.000đ)">
 
                 <label for="price">Actual Price:</label>
-                <input type="number" id="price" name="price" value="${o.price}" step="0.01" required>
+                <input type="number" id="price" name="price" value="${o.price}" step="1" required placeholder=".........(.000đ)">
 
                 <label for="discount">Discount:</label>
-                <input min="0" max="1" type="number" id="discount" name="discount" value="${o.discount}" step="0.01">
+                <input min="0" max="100" type="number" id="discount" name="discount" value="${o.discount}" step="1">
 
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" value="${o.quantity}" required>
-
-                <label for="style">Style:</label>
-                <input type="text" id="style" name="style" value="${o.style}" required>
 
                 <label for="startsAt">Publish At:</label>
                 <input type="datetime-local" id="publishedAt" name="publishedAt" value="${o.publishedAt}">

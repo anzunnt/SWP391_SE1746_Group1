@@ -19,23 +19,25 @@
         <script type="text/javascript">
             function doDelete(id) {
                 if (confirm("Are you sure to delete image with id " + id)) {
-                    window.location = "deleteImage?id=" + id;
+                    window.location = "DeleteImage?id=" + id;
                 }
             }
         </script>
         <style>
             button {
                 background-color: blue;
-                color: #fff;
                 padding: 10px 15px;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
             }
+            a{
+                color: #fff;
+            }
         </style>
     </head>
     <body>
-        <button onclick="history.back()">Go Back</button>
+        <button><a href="productlist">Go Back</a></button>
         <h1 style="font-size:25px">Danh sách hình ảnh của product có id = ${id}</h1>
         <div style="border-bottom: solid gray"id="image-container">
             <div class="row">
@@ -66,7 +68,7 @@
             </div><!--end row-->
         </div>
         <div style="margin-top: 25px;">
-            <form style="margin-left: 50%"action="manageImage" method="post" enctype="multipart/form-data">
+            <form style="margin-left: 50%"action="ManageImage" method="post" enctype="multipart/form-data">
                 <input type="text" hidden="true" name="id" value="${id}">
                 <input type="file" name="file">
                 <input type="submit" value="Tải lên">
