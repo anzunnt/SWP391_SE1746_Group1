@@ -42,6 +42,16 @@ public class BlogList extends HttpServlet {
 
         BlogDAO bdao = new BlogDAO();
         ArrayList<Blog> blist = bdao.getBlogs(cateId, name, Integer.valueOf(currentPage));
+        for (Blog blog : blist) {
+                String relativeBannerPath = blog.getBanner(); // Đường dẫn tương đối từ database
+                String absoluteBannerPath = request.getContextPath() + "/file/"+ relativeBannerPath;
+                String relativeImgPath = blog.getImg1();
+                String absoluteImgPath = request.getContextPath() + "/file/"+ relativeImgPath;
+                System.out.println("duogn dan 1 " + absoluteBannerPath);
+                System.out.println("duong dan 2" + absoluteImgPath);
+                blog.setBanner(absoluteBannerPath);
+                blog.setImg1(absoluteImgPath);
+            }
         request.setAttribute("blist", blist);
 
         int totalBlogs = bdao.countBlogs(cateId, name);

@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -19,7 +20,6 @@ public class Blog {
     String blog_category;
     String blog_body1;
     String img1;
-  
     java.util.Date create_date;
     int viewCount;
     boolean status;
@@ -37,8 +37,6 @@ public class Blog {
         this.status = status;
         this.blogCategory = blogCategory;
     }
-
-
 
     public Blog() {
     }
@@ -91,7 +89,6 @@ public class Blog {
         this.img1 = img1;
     }
 
-
     public java.util.Date getCreate_date() {
         return create_date;
     }
@@ -122,6 +119,11 @@ public class Blog {
 
     public void setBlogCategory(BlogCategory blogCategory) {
         this.blogCategory = blogCategory;
+    }
+
+    public String getFormatDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(create_date);
     }
 
 }

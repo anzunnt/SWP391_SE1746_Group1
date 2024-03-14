@@ -66,6 +66,7 @@
                         <li><a href="productlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Products</a></li>
                         <!-- add another here --> 
                         <li><a href="userlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List Users</a></li>
+                        <li><a href="newlist"><i class="uil uil-dashboard me-2 d-inline-block"></i>List News</a></li>
                         <li><a href="fashionshop"><i class="uil uil-dashboard me-2 d-inline-block"></i>Home</a></li>
                     </ul>
 
