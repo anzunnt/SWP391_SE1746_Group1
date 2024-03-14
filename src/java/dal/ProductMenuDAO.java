@@ -78,7 +78,7 @@ public class ProductMenuDAO extends DBContext {
                 + "ROW_NUMBER() OVER (PARTITION BY p.id ORDER BY pi.id) AS ImageRank\n"
                 + "FROM Product p LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
                 + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages"
-                + " WHERE ImageRank = 1 AND [State] = 1; ORDER BY discount desc;";
+                + " WHERE ImageRank = 1 AND [State] = 1 ORDER BY discount desc;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -102,7 +102,7 @@ public class ProductMenuDAO extends DBContext {
                 + "ROW_NUMBER() OVER (PARTITION BY p.id ORDER BY pi.id) AS ImageRank\n"
                 + "FROM Product p LEFT JOIN ProductImage pi ON p.Id = pi.ProductId\n"
                 + ")SELECT TOP 4 Id,Name,Price,Discount,Quantity,State,Image,ImageDescription FROM RankedImages"
-                + " WHERE ImageRank = 1 AND [State] = 1; ORDER BY Quantity desc;";
+                + " WHERE ImageRank = 1 AND [State] = 1 ORDER BY Quantity desc;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

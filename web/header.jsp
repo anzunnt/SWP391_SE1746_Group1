@@ -134,7 +134,7 @@
                     </ul>
                 </li>
                 <c:if test="${sessionScope['admin']!=null}">
-                    <li><a href="productlist" class="sub-menu-item" target="_blank">Admin</a></li>
+                    <li><a href="productlist" class="sub-menu-item" style="color: black!important">Admin</a></li>
                     </c:if>
             </ul><!--end navigation menu-->
         </div><!--end navigation-->

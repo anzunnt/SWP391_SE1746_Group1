@@ -40,8 +40,24 @@ public class userDAO extends DBContext{
         return users;
     }
     
+    public user GetUserByUsernameAndPassword(String username, String password) {
+        String sql =  "select * from [user] where [username] = ? and [password] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, ep.hashPassword(password));
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                return new user(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(9), rs.getString(10), rs.getInt(11), rs.getString(12), rs.getInt(13), rs.getInt(14), rs.getString(15));
+                
+            }
+        }
+        catch (SQLException e){}
+        return null;
+    }
+    
     public user GetUserByUsername(String username) {
-        String sql =  "select * from [user] where username = ?";
+        String sql =  "select * from [user] where [username] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -95,25 +111,33 @@ public class userDAO extends DBContext{
     }
     
     public void UpdateUser(user u) {
-        String sql = "update [dbo].[user] set [full_name]=?, [username]=?, [password]=?, [code_verify]=?, [email]=?, [phone]=?, [image]=?, [dob]=?, [address]=?, [status]=?, [created_on]=?, [created_by]=?, [modified_by]=?, [modified_on]=?\n" +
+        String sql = "update [dbo].[user] set [full_name]=?, [username]=?, [email]=?, [phone]=?, [image]=?, [dob]=?, [address]=?, [status]=?, [modified_by]=?, [modified_on]=?\n" +
                         "where [id] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, u.getFullname());
             st.setString(2, u.getUsername());
-            st.setString(3, ep.hashPassword(u.getPassword()));
-            st.setString(4, u.getCode_verify());
-            st.setString(5, u.getEmail());
-            st.setString(6, u.getPhone());
-            st.setString(7, u.getImage());
-            st.setDate(8, u.getDob());
-            st.setString(9, u.getAddress());
-            st.setInt(10, u.getStatus());
-            st.setString(11, u.getCreated_on());
-            st.setInt(12, u.getCreated_by());
-            st.setInt(13, u.getModified_by());
-            st.setString(14, u.getModified_on());
-            st.setInt(15, u.getId());
+            st.setString(3, u.getEmail());
+            st.setString(4, u.getPhone());
+            st.setString(5, u.getImage());
+            st.setDate(6, u.getDob());
+            st.setString(7, u.getAddress());
+            st.setInt(8, u.getStatus());
+            st.setInt(9, u.getModified_by());
+            st.setString(10, u.getModified_on());
+            st.setInt(11, u.getId());
+            st.executeUpdate();
+        }
+        catch(SQLException e){}
+    }
+    
+    public void UpdateUserPassword(user u) {
+        String sql = "update [dbo].[user] set [password] =? \n" +
+                        "where [id] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, ep.hashPassword(u.getPassword()));
+            st.setInt(2, u.getId());
             st.executeUpdate();
         }
         catch(SQLException e){}
@@ -149,12 +173,15 @@ public class userDAO extends DBContext{
         return list;
     }
     
-    public static void main(String[] args) {
-        userDAO ud = new userDAO();
-        List<user> list = ud.pagingUser(1, 5);
-        for (user u : list) {
-            System.out.println(u.getFullname());
-        }
-    }
+//    public static void main(String[] args) {
+//        userDAO ud = new userDAO();
+////        List<user> list = ud.pagingUser(1, 5);
+////        for (user u : list) {
+////            System.out.println(u.getFullname());
+////        }
+//        user u = ud.GetUserById(12);
+//        u.setPassword("123456");
+//        ud.UpdateUserPassword(u);
+//    }
     
 }

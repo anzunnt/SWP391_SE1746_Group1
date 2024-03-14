@@ -98,7 +98,7 @@ public class resetPasswordServlet extends HttpServlet {
                         u.setPassword(newpassword);
                         u.setModified_on(currentDate);
                         u.setModified_by(u.getId());
-                        ud.UpdateUser(u);
+                        ud.UpdateUserPassword(u);
                         request.getRequestDispatcher("changePassSuccess.jsp").forward(request, response);
                     }
                 }

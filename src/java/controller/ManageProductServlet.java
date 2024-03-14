@@ -139,7 +139,7 @@ public class ManageProductServlet extends HttpServlet {
             String modifiedAt = currentDateTime.format(formatter);
             basePrice = Float.parseFloat(basePrice_raw);
             price = Float.parseFloat(price_raw);
-            discount = Float.parseFloat(discount_raw)/100;
+            discount = Float.parseFloat(discount_raw);
             quantity = Integer.parseInt(quantity_raw);
             state = Byte.parseByte(state_raw);
             cateId = Integer.parseInt(category);

@@ -95,12 +95,12 @@
         </section><!--end section-->
         <!-- End Hero -->
         
-        <div class="container mt-100 mt-60">    
+<!--        <div class="container mt-100 mt-60">    
             <div class="row">
                 <div class="col-12">
                     <h5 class="mb-0">News</h5>
-                </div><!--end col-->
-            </div><!--end row-->
+                </div>end col
+            </div>end row
 
             <div class="row">
                 <div class="col-lg-12 mt-4 pt-2">
@@ -168,9 +168,9 @@
                             </a>
                         </div>
                     </div>
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
+                </div>end col
+            </div>end row
+        </div>end container-->
 
 	<!-- Start -->
         <section class="section">

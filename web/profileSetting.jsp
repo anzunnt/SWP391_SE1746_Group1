@@ -76,7 +76,7 @@
                                 <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li> -->
                                 <!--<li class="navbar-item"><a href="doctor-chat.html" class="navbar-link"><i class="ri-chat-voice-line align-middle navbar-icon"></i> Chat</a></li>-->
                                 <li class="navbar-item"><a href="logout" class="navbar-link"><i class="ri-login-circle-line align-middle navbar-icon"></i> Logout</a></li>
-                                <li class="navbar-item"><a href="forgotPassword" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
+                                <!--<li class="navbar-item"><a href="forgotPassword" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>-->
                             </ul>
                         </div>
                     </div><!--end col-->
@@ -104,12 +104,12 @@
                                             </div>
                                         </div><!--end col-->
                                         
-                                        <div class="col-md-12">
+<!--                                        <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password</label>
                                                 <input name="password" id="password" type="password" class="form-control" value="${user.password}" >
                                             </div>
-                                        </div><!--end col-->
+                                        </div>end col-->
 
                                         <div class="col-md-12">
                                             <div class="mb-3">

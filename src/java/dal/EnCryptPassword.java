@@ -43,7 +43,7 @@ public class EnCryptPassword {
     
 //    public static void main(String[] args) {
 //        EnCryptPassword ep = new EnCryptPassword();
-//        String plainPassword = "123456";
+//        String plainPassword = "68686868";
 //        String hashedPassword = ep.hashPassword(plainPassword);
 //
 //        System.out.println("Original Password: " + plainPassword);

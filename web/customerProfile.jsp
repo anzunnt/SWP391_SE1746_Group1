@@ -76,7 +76,7 @@
                                 <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li> -->
                                 <!--<li class="navbar-item"><a href="doctor-chat.html" class="navbar-link"><i class="ri-chat-voice-line align-middle navbar-icon"></i> Chat</a></li>-->
                                 <li class="navbar-item"><a href="logout" class="navbar-link"><i class="ri-login-circle-line align-middle navbar-icon"></i> Logout</a></li>
-                                <li class="navbar-item"><a href="forgotPassword" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
+                                <!--<li class="navbar-item"><a href="forgotPassword" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>-->
                             </ul>
                         </div>
                     </div><!--end col-->
