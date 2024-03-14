@@ -73,13 +73,13 @@
                 <input type="password" id="password" name="password" value="${o.password}">
                 
                 <label class="form-label">Created On <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="created_on" name="created_on" value="${o.created_on}" disabled="">
+                <input type="text" class="form-control" id="created_on" name="created_on" value="${o.created_on}" disabled="">
                 
                 <label for="description">Created By:</label>
                 <input type="text" id="created_by" name="created_by" value="${o.created_by}" disabled="">
                 
                 <label class="form-label">Modified On <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="modified_on" name="modified_on" value="${o.modified_on}" disabled="">
+                <input type="text" class="form-control" id="modified_on" name="modified_on" value="${o.modified_on}" disabled="">
                 
                 <label for="description">Modified By:</label>
                 <input type="text" id="modified_by" name="modified_by" value="${o.modified_by}" disabled="">

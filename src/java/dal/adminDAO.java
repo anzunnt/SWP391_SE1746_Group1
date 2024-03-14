@@ -88,9 +88,11 @@ public class adminDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
-            st.setInt(3, modified_by);
-            st.setString(4, modified_on);
-            st.setInt(5, id);
+            st.setString(3, created_on);
+            st.setInt(4, created_by);
+            st.setInt(5, modified_by);
+            st.setString(6, modified_on);
+            st.setInt(7, id);
             st.executeUpdate();
         } catch (SQLException e) {
         }
