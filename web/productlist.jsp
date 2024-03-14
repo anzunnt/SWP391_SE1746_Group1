@@ -5,6 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,6 +53,7 @@
         <!-- Loader -->
 
         <div class="page-wrapper doctris-theme toggled">
+<<<<<<< HEAD
             <nav id="sidebar" class="sidebar-wrapper">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand">
@@ -80,6 +82,9 @@
                     </li>
                 </ul>
             </nav>
+=======
+            <jsp:include page="sidebar.jsp"/>
+>>>>>>> main
             <!-- sidebar-wrapper  -->
 
             <!-- Start Page Content -->
@@ -114,26 +119,11 @@
 
                         <ul class="list-unstyled mb-0">
 
+                            Xin chào, ${sessionScope['account'].username}
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
-                                    <c:if test="${sessionScope['admin'] == null}">
-                                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="${sessionScope['account'].image}" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                                        </c:if>
-                                        <c:if test="${sessionScope['admin'] != null}">
-                                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                                        </c:if>
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                                        <a class="dropdown-item d-flex align-items-center text-dark" href="userprofile">
-                                            <img src="assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                            <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">${sessionScope['account'].username}</span>
-                                                <c:if test="${sessionScope['admin'] == null}">
-                                                    <small class="text-muted">${sessionScope['account'].fullname}</small>
-                                                </c:if>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item text-dark" href="changepassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Change Password</a>
-                                        <div class="dropdown-divider border-top"></div>
                                         <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
                                 </div>
@@ -155,33 +145,36 @@
                                         <table class="table table-center bg-white mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th class="border-bottom p-3">Id</th>
+                                                    <th class="border-bottom p-3" hidden="">Id</th>
                                                     <th class="border-bottom p-3" style="min-width: 120px;">Name</th>
                                                     <th class="border-bottom p-3">Base Price</th>
                                                     <th class="border-bottom p-3">Price</th>
                                                     <th class="border-bottom p-3">Discount</th>
                                                     <th class="border-bottom p-3">Quantity</th>
                                                     <th class="border-bottom p-3" style="min-width: 30px;">State</th>
-                                                    <th class="border-bottom p-3" style="min-width: 100px;">Style</th>
                                                     <th class="border-bottom p-3" style="min-width: 100px;"><a href="manageProduct">Add Product</a></th>
+                                                    <th class="border-bottom p-3" style="min-width: 100px;">Edit Image</th>
                                                     <th class="border-bottom p-3" style="min-width: 50px;"><input type="submit" value="DELETE"></a></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tableBody" >
                                                 <c:forEach items="${listP}" var="o">
                                                     <tr>
-                                                        <td class="p-3">${o.id}</td>
+                                                        <td class="p-3" hidden="">${o.id}</td>
                                                         <td class="p-3">${o.name}</td>
-                                                        <td class="p-3">${o.basePrice}VNĐ</td>
-                                                        <td class="p-3">${o.price}VNĐ</td>
-                                                        <td class="p-3">${Math.round(o.discount*100)}%</td>
+                                                        <td class="p-3"><fmt:formatNumber value="${o.basePrice}"/>&nbsp;VNĐ</td>
+                                                        <td class="p-3"><fmt:formatNumber value="${o.price}"/>&nbsp;VNĐ</td>
+                                                        <td class="p-3"><fmt:formatNumber value="${o.discount}"/>%</td>
                                                         <td class="p-3">${o.quantity}</td>
                                                         <c:if test="${o.state == 1}"><td class="p-3">Active</td></c:if>   
-                                                        <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>  
-                                                        <td class="p-3">${o.style}</td>
+                                                        <c:if test="${o.state == 0}"><td class="p-3">InActive</td></c:if>
                                                         <td class="text-end p-3">
                                                             <a href="manageProduct?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
                                                             <a href="#" onclick="doDelete('${o.id}')" class ="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-trash"></i></a>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <a href="ManageImage?id=${o.id}" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>
+                                                            <!--<a href="ManageImage.jsp" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-pen"></i></a>-->
                                                         </td>
                                                         <td><input type="checkbox" name="deleteRow" value="${o.id}"></td>
                                                     </tr>
@@ -195,17 +188,19 @@
 
                         <!-- PAGINATION START -->
                         <div class="row text-center">                                  
-                            <div class="col-12 mt-4">
-                                <ul style="justify-content: center" class="pagination" id="pagination">
-                                    <form action="productlist" method="get">
-                                        <label for="pageNumber">Number Product/Page:</label>
-                                        <select style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
+                            <div class="col-12 mt-4 row">
+                                <ul class="pagination" id="pagination">
+                                    <form class="col-4 row" action="productlist" method="get">
+                                        <label style="margin-top: 10px"class="col-6"for="pageNumber">Number Product/Page:</label>
+                                        <select class="col-3" style="margin-right: 20px" id="pageNumber" name="pageNumber" required>
+                                            <option value="5" ${(num == "5")?'selected':''}>5</option>
+                                            <option value="10" ${(num == "10")?'selected':''}>10</option>
+                                            <option value="50" ${(num == "50")?'selected':''}>50</option>
+                                            <option value="100" ${(num == "100")?'selected':''}>100</option>
                                         </select>
-                                        </br><button type="submit">OK</button>
+                                        <button class="col-2" type="submit">OK</button>
                                     </form>
-                                    <li  class="page-item next"><a href="productlist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
+                                    <li class="col-5 page-item next"><a href="productlist?index=1&pageNumber=${num}"><i class="fa fa-angle-left" class="page-link" aria-hidden="true"></i></a></li>
                                             <c:forEach var = "i" begin = "1" end = "${numberPage}">
                                         <li class="${param['index']==i?'page-item active':'page-item'}"><a href="productlist?index=${i}&pageNumber=${num}"   class="page-link">${i}</a></li>
                                         </c:forEach>

@@ -33,7 +33,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+        <script src="ckeditor/ckeditor.js"></script>
     </head>
 
     <body>
@@ -97,33 +97,81 @@
                     <c:set var="o" value="${requestScope.product}"/>
                     <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
                         <div class="section-title ms-md-4">
-                            <h4 class="title">${o.name}</h4>
-                            <div class="d-flex justify-content-between mt-1"> 
+                            <h4 style="margin-bottom: 30px" class="title">${o.name}</h4>
+                            <div style="margin-bottom: 30px" class="d-flex justify-content-between mt-1"> 
                                 <h6 class="text-muted small font-italic mb-0 mt-1">
-                                    GIÁ GỐC: <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
+                                    GIÁ GỐC: <span style="text-decoration: line-through; color: black">${Math.round(o.price)}.000đ</span>
                                 </h6>
-                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: black">${Math.round(o.discount*100)}%</span></h6>
+                                <h6 class="text-muted small font-italic mb-0 mt-1">SALE: <span style="color: red">${Math.round(o.discount*100)}%</span></h6>
                                 <h6 class="text-muted small font-italic mb-0 mt-1">CHỈ CÒN:<span style="color: blue"> ${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                             </div>
-                            <h5 class="mt-4 py-2">Overview :</h5>
-                            <p class="text-muted">${o.description}</p>
 
-                            <div class="d-flex shop-list align-items-center">
+
+                            <div style="margin-bottom: 30px" class="d-flex shop-list align-items-center">
                                 <h6 class="mb-0">Quantity:</h6>
                                 <div class="qty-icons ms-3">
-                                    <button onclick="changeQuantity(this, -1)" class="btn btn-icon btn-primary minus">-</button>
-                                    <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-icon btn-primary qty-btn quantity">
-                                    <button onclick="changeQuantity(this, 1)" class="btn btn-icon btn-primary plus">+</button>
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-icon btn-primary minus">-</button>
+                                    <input min="1" max="${o.quantity}" name="quantity" value="1" type="number" class="btn btn-icon btn-primary qty-btn quantity">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-icon btn-primary plus">+</button>
                                 </div>
                             </div>
 
-                            <div class="mt-4 pt-2">
+                            <div style="margin-bottom: 30px" class="mt-4 pt-2">
                                 <a href="#" class="btn btn-primary">Shop Now</a>
-                                <a href="fashionshop?action=cart&productId=${o.id}&quantity=" class="btn btn-soft-primary ms-2" id="addToCartBtn">Add to Cart</a>
+                                <a href="#" class="btn btn-soft-primary ms-2">Add to Cart</a>
                             </div>
                         </div>
                     </div><!--end col-->
+                    <h5 class="mt-4 py-2">Overview :</h5>
+                    <p class="text-muted">${o.description}</p>
                 </div><!--end row-->
+
+                <!-- Start -->
+                <section class="section">
+                    <div class="container mt-100 mt-60">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="mb-0">Related Products</h5>
+                            </div><!--end col-->
+                        </div><!--end row-->
+
+                        <div class="row">    
+                            <c:forEach items="${listS}" var="o">
+                                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                                    <div class="card shop-list border-0">
+                                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                                            <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
+                                            <ul class="list-unstyled shop-icons">
+                                                <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
+                                                <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
+                                            </ul>                                
+
+                                            <div class="qty-icons">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
+                                                <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
+                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body content pt-4 p-2">
+                                            <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
+
+                                            <div class="d-flex justify-content-between mt-1">
+                                                <h6 class="text-muted small font-italic mb-0 mt-1">
+                                                    <span style="text-decoration: line-through;">${Math.round(o.price)}.000đ</span>
+                                                </h6>
+                                                <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: red">${Math.round(o.discount*100)}%</span></h6>
+                                                <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+                            </c:forEach>
+
+
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </section><!--end section-->
+
             </div><!--end container-->
 
             <jsp:include page="footer.jsp"/>
@@ -169,21 +217,6 @@
             <script src="assets/js/feather.min.js"></script>
             <!-- Main Js -->
             <script src="assets/js/app.js"></script>
-            <script>
-                function changeQuantity(element, value) {
-                    var inputElement = element.parentNode.querySelector('input[type=number]');
-                    var currentValue = parseInt(inputElement.value);
-                    var newValue = currentValue + value;
-
-                    if (newValue >= 0 && newValue <= parseInt(inputElement.max)) {
-                        inputElement.value = newValue;
-
-                        // Update the Add to Cart button URL
-                        var addToCartBtn = document.getElementById('addToCartBtn');
-                        addToCartBtn.href = "fashionshop?action=cart&productId=${o.id}&quantity=" + newValue;
-                    }
-                }
-            </script>
     </body>
 
 </html>

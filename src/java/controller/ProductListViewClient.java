@@ -4,20 +4,16 @@
  */
 package controller;
 
-import dal.ProductDAO;
+import dal.CategoryDAO;
 import dal.ProductMenuDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import model.LineItem;
-import model.Product;
+import model.Category;
 import model.ProductMenu;
 
 /**
@@ -40,12 +36,14 @@ public class ProductListViewClient extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            HttpSession session = request.getSession();
-            List<LineItem> lsCart = (List<LineItem>) session.getAttribute("cart");
             request.setCharacterEncoding("UTF-8");
             ProductMenuDAO dao = new ProductMenuDAO();
+            CategoryDAO cd = new CategoryDAO();
+            List<Category> clist = cd.getAllCategory();
             List<ProductMenu> list = dao.getAllProductMenu();
+            request.setAttribute("listC", clist);
             request.setAttribute("listP", list);
+<<<<<<< HEAD
 
             String action = request.getParameter("action");
             String productParam = request.getParameter("productId");
@@ -144,31 +142,12 @@ public class ProductListViewClient extends HttpServlet {
             request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
 
         } catch (Exception e) {
+=======
+            request.getRequestDispatcher("productShop.jsp").forward(request, response);
+        } catch (ServletException | IOException e) {
+>>>>>>> main
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
-    }
-
-    private void decrementQuantity(List<LineItem> lsCart, int productId) {
-        for (int i = 0; i < lsCart.size(); i++) {
-            LineItem item = lsCart.get(i);
-            if (i == productId) {
-                int newQuantity = item.getQuantity() - 1;
-                if (newQuantity >= 0) {
-                    item.setQuantity(newQuantity);
-                }
-                break;
-            }
-        }
-    }
-
-    private void incrementQuantity(List<LineItem> lsCart, int productId) {
-        for (int i = 0; i < lsCart.size(); i++) {
-            LineItem item = lsCart.get(i);
-            if (i == productId) {
-                item.setQuantity(item.getQuantity() + 1);
-                break;
-            }
         }
     }
 
@@ -198,33 +177,25 @@ public class ProductListViewClient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ProductMenuDAO dao = new ProductMenuDAO();
+        String category = request.getParameter("categoryFilter");
+        int cateId;
         try {
-            HttpSession session = request.getSession();
-            List<LineItem> lsCart = (List<LineItem>) session.getAttribute("cart");
-            String action = request.getParameter("action");
-            String productParam = request.getParameter("productId");
-            int productId = 0;
-            if (productParam != null && !productParam.isEmpty()) {
-                try {
-                    productId = Integer.parseInt(productParam);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
+            CategoryDAO cd = new CategoryDAO();
+            List<Category> clist = cd.getAllCategory();
+            cateId = Integer.parseInt(category);
+            List<ProductMenu> list = dao.getAllProductMenu();
+            if (cateId != 0) {
+                list = dao.getProductByCategory(cateId);
             }
-            if (action != null) {
-                if (action.equalsIgnoreCase("decrement")) {
-                    decrementQuantity(lsCart, productId);
-
-                } else if (action.equalsIgnoreCase("increment")) {
-                    incrementQuantity(lsCart, productId);
-                }
-            }
-        } catch (Exception e) {
+            request.setAttribute("cid", cateId);
+            request.setAttribute("listC", clist);
+            request.setAttribute("listP", list);
+            request.getRequestDispatcher("productShop.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
-            return;
         }
-        response.sendRedirect("cart.jsp");
 
     }
 

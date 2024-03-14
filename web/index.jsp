@@ -42,7 +42,7 @@
 
         <jsp:include page="header.jsp"/>
 
-        <!-- Start Hero -->
+	<!-- Start Hero -->
         <section class="home-slider position-relative">
             <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -55,7 +55,7 @@
                                         <div class="heading-title">
                                             <h1 class="fw-bold mb-4">Hot <br> Fashion Products</h1>
                                             <p class="para-desc mb-0">Great you need some good dress.</p>
-
+                                            
                                             <div class="mt-4 pt-2">
                                                 <a href="fashionshop" class="btn btn-primary">Shop now</a>
                                             </div>
@@ -75,7 +75,7 @@
                                         <div class="heading-title">
                                             <h1 class="fw-bold mb-4">SALE OFF <br>Maximum 50%</h1>
                                             <p class="para-desc mb-0">The best place you can find discount fashion.</p>
-
+                                            
                                             <div class="mt-4 pt-2">
                                                 <a href="fashionshop" class="btn btn-primary">Shop now</a>
                                             </div>
@@ -94,13 +94,13 @@
             </div>
         </section><!--end section-->
         <!-- End Hero -->
-
-        <div class="container mt-100 mt-60">    
+        
+<!--        <div class="container mt-100 mt-60">    
             <div class="row">
                 <div class="col-12">
                     <h5 class="mb-0">News</h5>
-                </div><!--end col-->
-            </div><!--end row-->
+                </div>end col
+            </div>end row
 
             <div class="row">
                 <div class="col-lg-12 mt-4 pt-2">
@@ -168,11 +168,11 @@
                             </a>
                         </div>
                     </div>
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
+                </div>end col
+            </div>end row
+        </div>end container-->
 
-        <!-- Start -->
+	<!-- Start -->
         <section class="section">
             <div class="container mt-100 mt-60">
                 <div class="row">
@@ -187,15 +187,16 @@
                             <div class="card shop-list border-0">
                                 <div class="shop-image position-relative overflow-hidden rounded shadow">
                                     <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
-                                    <div class="qty-icons">
-                                        <button onclick="changeQuantity(this, -1)" class="btn btn-icon btn-primary minus">-</button>
-                                        <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-icon btn-primary qty-btn quantity" data-product-id="${o.id}">
-                                        <button onclick="changeQuantity(this, 1)" class="btn btn-icon btn-primary plus">+</button>
-                                    </div>
                                     <ul class="list-unstyled shop-icons">
                                         <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
-                                        <li class="mt-2"><a href="fashionshop?action=cart1&productId=${o.id}&quantity=" class="btn btn-icon btn-pills btn-soft-warning" id="addToCartBtn"><i data-feather="shopping-cart" class="icons"></i></a></li>
-                                    </ul>
+                                        <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
+                                    </ul>                                
+
+                                    <div class="qty-icons">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
+                                        <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
+                                    </div>
                                 </div>
                                 <div class="card-body content pt-4 p-2">
                                     <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
@@ -204,7 +205,7 @@
                                         <h6 class="text-muted small font-italic mb-0 mt-1">
                                             <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
                                         </h6>
-                                        <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                            <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
                                         <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                                     </div>
                                 </div>
@@ -217,7 +218,7 @@
             </div><!--end container-->
         </section><!--end section-->
 
-        <!-- Start -->
+	<!-- Start -->
         <section class="section">
             <div class="container mt-100 mt-60">
                 <div class="row">
@@ -232,15 +233,16 @@
                             <div class="card shop-list border-0">
                                 <div class="shop-image position-relative overflow-hidden rounded shadow">
                                     <a href="productdetail?id=${o.id}"><img src="${o.image}" class="img-fluid" alt=""></a>
-                                    <div class="qty-icons">
-                                        <button onclick="changeQuantity(this, -1)" class="btn btn-icon btn-primary minus">-</button>
-                                        <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-icon btn-primary qty-btn quantity" data-product-id="${o.id}">
-                                        <button onclick="changeQuantity(this, 1)" class="btn btn-icon btn-primary plus">+</button>
-                                    </div>
                                     <ul class="list-unstyled shop-icons">
                                         <li class="mt-2"><a href="productdetail?id=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="eye" class="icons"></i></a></li>
-                                        <li class="mt-2"><a href="fashionshop?action=cart1&productId=${o.id}&quantity=" class="btn btn-icon btn-pills btn-soft-warning" id="addToCartBtn"><i data-feather="shopping-cart" class="icons"></i></a></li>
-                                    </ul>
+                                        <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-warning"><i data-feather="shopping-cart" class="icons"></i></a></li>
+                                    </ul>                                
+
+                                    <div class="qty-icons">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="btn btn-pills btn-icon btn-primary minus">-</button>
+                                        <input min="0" max="${o.quantity}" name="quantity" value="0" type="number" class="btn btn-pills btn-icon btn-primary qty-btn quantity">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="btn btn-pills btn-icon btn-primary plus">+</button>
+                                    </div>
                                 </div>
                                 <div class="card-body content pt-4 p-2">
                                     <a href="productdetail?id=${o.id}" class="text-dark product-name h6">${o.name}</a>
@@ -249,103 +251,108 @@
                                         <h6 class="text-muted small font-italic mb-0 mt-1">
                                             <span style="text-decoration: line-through; color: red">${Math.round(o.price)}.000đ</span>
                                         </h6>
-                                        <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
+                                            <h6 class="text-muted small font-italic mb-0 mt-1">${Math.round(o.discount*100)}%</h6>
                                         <h6 class="text-muted small font-italic mb-0 mt-1"><span style="color: blue">${Math.round(o.price - (o.discount*o.price))}.000đ</span></h6>
                                     </div>
                                 </div>
                             </div>
                         </div><!--end col-->
                     </c:forEach>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> main
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
 
-        <!--        <div class="container mt-100 mt-60">    
-                    <div class="row">
-                        <div class="col-12">
-                            <h5 class="mb-0">Categories</h5>
-                        </div>end col
-                    </div>end row
-        
-                    <div class="row">
-                        <div class="col-lg-12 mt-4 pt-2">
-                            <div class="slider-range-four">
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/skin.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Skin</span><br>Care</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/sexual.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Sexual</span><br>Wallness</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/weight.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Weight</span><br>Management</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/pain.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Pain</span><br>Relief</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/heart.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Heart</span><br>Health</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/cough.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Cough</span><br> & Cold</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/diabetes.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Diabetes</span><br>Care</span>
-                                        </div>
-                                    </a>
-                                </div>
-        
-                                <div class="tiny-slide">
-                                    <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
-                                        <img src="assets/images/pharmacy/cancer.jpg" class="img-fluid" alt="">
-                                        <div class="category-title">
-                                            <span class="text-dark title-white"><span class="h5">Cancer</span><br>Care</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>end col
-                    </div>end row
-                </div>end container-->
+<!--        <div class="container mt-100 mt-60">    
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="mb-0">Categories</h5>
+                </div>end col
+            </div>end row
 
+            <div class="row">
+                <div class="col-lg-12 mt-4 pt-2">
+                    <div class="slider-range-four">
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/skin.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Skin</span><br>Care</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/sexual.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Sexual</span><br>Wallness</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/weight.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Weight</span><br>Management</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/pain.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Pain</span><br>Relief</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/heart.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Heart</span><br>Health</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/cough.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Cough</span><br> & Cold</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/diabetes.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Diabetes</span><br>Care</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="tiny-slide">
+                            <a href="#" class="card pharpachy-categories border-0 rounded overflow-hidden">
+                                <img src="assets/images/pharmacy/cancer.jpg" class="img-fluid" alt="">
+                                <div class="category-title">
+                                    <span class="text-dark title-white"><span class="h5">Cancer</span><br>Care</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>end col
+            </div>end row
+        </div>end container-->
+        
         <jsp:include page="footer.jsp"/>
 
         <!-- End -->
@@ -388,25 +395,5 @@
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-        <script>
-            function changeQuantity(element, value, event) {
-                var qtyIcons = element.closest('.qty-icons');
-                var inputElement = qtyIcons.querySelector('input[type=number]');
-                var currentValue = parseInt(inputElement.value);
-                var newValue = currentValue + value;
-
-                if (newValue >= 0 && newValue <= parseInt(inputElement.max)) {
-                    inputElement.value = newValue;
-
-                    // Update the Add to Cart button URL
-                    var productId = inputElement.dataset.productId;
-                    var addToCartBtn = qtyIcons.nextElementSibling.querySelector('#addToCartBtn');
-                    addToCartBtn.href = "fashionshop?action=cart1&productId=" + productId + "&quantity=" + newValue;
-                }
-
-                // Prevent the default behavior of the anchor element
-                event.preventDefault();
-            }
-        </script>
     </body>
 </html>

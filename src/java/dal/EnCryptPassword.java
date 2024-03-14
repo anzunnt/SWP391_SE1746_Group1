@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -44,7 +43,7 @@ public class EnCryptPassword {
     
 //    public static void main(String[] args) {
 //        EnCryptPassword ep = new EnCryptPassword();
-//        String plainPassword = "123456";
+//        String plainPassword = "68686868";
 //        String hashedPassword = ep.hashPassword(plainPassword);
 //
 //        System.out.println("Original Password: " + plainPassword);
@@ -55,4 +54,5 @@ public class EnCryptPassword {
     //e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446
     //8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
     //8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+    
 }

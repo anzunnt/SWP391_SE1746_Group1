@@ -11,7 +11,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Admin;
 import model.Product;
 
 /**
@@ -33,36 +35,41 @@ public class ProductListViewAdmin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String num_raw = request.getParameter("pageNumber");
-        int num;
-        try {
-            if (num_raw == null) {
-                num = 5;
-            } else {
-                num = Integer.parseInt(num_raw);
+        HttpSession session = request.getSession();
+        Admin isAdmin = (Admin) session.getAttribute("admin");
+        if (isAdmin == null) {
+            response.sendRedirect("error.jsp");
+        } else {
+            String num_raw = request.getParameter("pageNumber");
+            int num;
+            try {
+                if (num_raw == null) {
+                    num = 5;
+                } else {
+                    num = Integer.parseInt(num_raw);
+                }
+                request.setCharacterEncoding("UTF-8");
+                ProductDAO dao = new ProductDAO();
+                //Product p = dao.getProductById(id);
+                int totalProduct = dao.getTotalProduct();
+                int numberPage = (int) Math.ceil((double) totalProduct / num);
+                int index;
+                String currentPage = request.getParameter("index");
+                if (currentPage == null) {
+                    index = 1;
+                } else {
+                    index = Integer.parseInt(currentPage);
+                }
+                List<Product> list = dao.pagingProduct(index, num);
+                request.setAttribute("num", num);
+                request.setAttribute("numberPage", numberPage);
+                request.setAttribute("listP", list);
+                request.getRequestDispatcher("productlist.jsp").forward(request, response);
+            } catch (ServletException | IOException | NumberFormatException e) {
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
-            request.setCharacterEncoding("UTF-8");
-            ProductDAO dao = new ProductDAO();
-            //Product p = dao.getProductById(id);
-            int totalProduct = dao.getTotalProduct();
-            int numberPage = (int) Math.ceil((double) totalProduct / num);
-            int index;
-            String currentPage = request.getParameter("index");
-            if (currentPage == null) {
-                index = 1;
-            } else {
-                index = Integer.parseInt(currentPage);
-            }
-            List<Product> list = dao.pagingProduct(index, num);
-            request.setAttribute("num", num);
-            request.setAttribute("numberPage", numberPage);
-            request.setAttribute("listP", list);
-            request.getRequestDispatcher("productlist.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("error", e);
-            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

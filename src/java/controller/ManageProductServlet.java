@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.CategoryDAO;
 import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,8 @@ import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import model.Admin;
+import model.Category;
 import model.Product;
 
 /**
@@ -63,19 +66,30 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        int id;
-        ProductDAO cdb = new ProductDAO();
-
-        if (id_raw != null) {
-            id = Integer.parseInt(id_raw);
-            Product p = cdb.getProductById(id);
-            request.setAttribute("product", p);
-            request.setAttribute("doing", "Update");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        Admin u = (Admin) session.getAttribute("account");
+        if (u == null) {
+            response.sendRedirect("error.jsp");
         } else {
-            request.setAttribute("doing", "Add");
-            request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            String id_raw = request.getParameter("id");
+            int id;
+            ProductDAO cdb = new ProductDAO();
+            CategoryDAO cd = new CategoryDAO();
+            List<Category> clist = cd.getAllCategory();
+            if (id_raw != null) {
+                id = Integer.parseInt(id_raw);
+                int cid = cd.getCategoryByIdProduct(id).getId();
+                Product p = cdb.getProductById(id);
+                request.setAttribute("cid", cid);
+                request.setAttribute("listC", clist);
+                request.setAttribute("product", p);
+                request.setAttribute("doing", "Update");
+                request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            } else {
+                request.setAttribute("listC", clist);
+                request.setAttribute("doing", "Add");
+                request.getRequestDispatcher("ManagerProduct.jsp").forward(request, response);
+            }
         }
     }
 
@@ -90,10 +104,11 @@ public class ManageProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy đối tượng HttpSession từ request
+        // Lấy ID của người dùng từ session
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        // Lấy ID của người dùng từ session hoặc tạo mới nếu không tồn tại
-        int userId = 1;//(int)session.getAttribute("userId");
+        Admin u = (Admin) session.getAttribute("account");
+        int userId = u.getId();
 
         String name_raw = request.getParameter("name");
         String description_raw = request.getParameter("description");
@@ -101,24 +116,25 @@ public class ManageProductServlet extends HttpServlet {
         String price_raw = request.getParameter("price");
         String discount_raw = request.getParameter("discount");
         String quantity_raw = request.getParameter("quantity");
-        String style_raw = request.getParameter("style");
+        String style_raw = "category";
         String publishedAt_raw = request.getParameter("publishedAt").replaceAll("T", " ");
         String state_raw = request.getParameter("state");
         String startsAt_raw = request.getParameter("startsAt").replaceAll("T", " ");
         String endsAt_raw = request.getParameter("endsAt").replaceAll("T", " ");
+        String category = request.getParameter("category");
         System.out.println(publishedAt_raw);
         float basePrice, price, discount;
         int quantity;
         byte state;
         ProductDAO dao = new ProductDAO();
-
+        CategoryDAO cd = new CategoryDAO();
         // Lấy ngày giờ hiện tại
         LocalDateTime currentDateTime = LocalDateTime.now();
         // Định dạng ngày giờ
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        
+
         String id_raw = request.getParameter("id");
-        int id;
+        int id,cateId;
         try {
             String modifiedAt = currentDateTime.format(formatter);
             basePrice = Float.parseFloat(basePrice_raw);
@@ -126,20 +142,23 @@ public class ManageProductServlet extends HttpServlet {
             discount = Float.parseFloat(discount_raw);
             quantity = Integer.parseInt(quantity_raw);
             state = Byte.parseByte(state_raw);
+            cateId = Integer.parseInt(category);
             //Update a Product
             if (!"".equals(id_raw)) {
                 id = Integer.parseInt(id_raw);
+                cd.updateCateProduct(cateId, modifiedAt, userId, id);
                 dao.update(id, name_raw, description_raw, basePrice, price, discount, quantity, modifiedAt, publishedAt_raw,
                         state, startsAt_raw, endsAt_raw, style_raw, userId);
                 response.sendRedirect("productlist");
-            } 
-            //Add a Product
+            } //Add a Product
             else {
                 String createdAt = currentDateTime.format(formatter);
                 Product p = dao.getProductByName(name_raw);
                 if (p == null) {
                     dao.insert(name_raw, description_raw, basePrice, price, discount, quantity, createdAt, modifiedAt, publishedAt_raw,
                             state, startsAt_raw, endsAt_raw, style_raw, userId, userId);
+                    int idp = dao.getProductByName(name_raw).getId();
+                    cd.insertCateProduct(idp, cateId, createdAt, userId, modifiedAt, userId);
                     response.sendRedirect("productlist");
                 } else {
                     request.setAttribute("error", "Product is existed");
@@ -147,7 +166,7 @@ public class ManageProductServlet extends HttpServlet {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

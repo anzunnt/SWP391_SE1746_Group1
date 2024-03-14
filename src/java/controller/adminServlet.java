@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import dal.EnCryptPassword;
@@ -22,36 +21,39 @@ import java.util.List;
  *
  * @author admin
  */
-@WebServlet(name="adminServlet", urlPatterns={"/admin"})
+@WebServlet(name = "adminServlet", urlPatterns = {"/admin"})
 public class adminServlet extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet adminServlet</title>");  
+            out.println("<title>Servlet adminServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet adminServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet adminServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,13 +61,14 @@ public class adminServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("admin.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,9 +76,9 @@ public class adminServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try {
             HttpSession session = request.getSession();
             String username = request.getParameter("username");
@@ -88,22 +91,24 @@ public class adminServlet extends HttpServlet {
                 if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
                     session.setAttribute("account", admin);
                     session.setAttribute("admin", admin);
+                    // Thiết lập thời gian hết hạn của session là 30 phút (1800 giây)
+                    session.setMaxInactiveInterval(1800);
                     mess = "ok";
                 }
             }
             if (mess.equals("ok")) {
-                response.sendRedirect("index");
+                response.sendRedirect("productlist");
             } else {
                 request.setAttribute("mess", mess);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

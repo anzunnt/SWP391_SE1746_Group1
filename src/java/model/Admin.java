@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 
 /**
  *
@@ -15,14 +17,14 @@ public class Admin {
     private String username;
     private String password;
     private String created_on;
-    private String created_by;
-    private String modified_by;
+    private int created_by;
+    private int modified_by;
     private String modified_on;
 
     public Admin() {
     }
 
-    public Admin(int id, String username, String password, String created_on, String created_by, String modified_by, String modified_on) {
+    public Admin(int id, String username, String password, String created_on, int created_by, int modified_by, String modified_on) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -64,19 +66,19 @@ public class Admin {
         this.created_on = created_on;
     }
 
-    public String getCreated_by() {
+    public int getCreated_by() {
         return created_by;
     }
 
-    public void setCreated_by(String created_by) {
+    public void setCreated_by(int created_by) {
         this.created_by = created_by;
     }
 
-    public String getModified_by() {
+    public int getModified_by() {
         return modified_by;
     }
 
-    public void setModified_by(String modified_by) {
+    public void setModified_by(int modified_by) {
         this.modified_by = modified_by;
     }
 
