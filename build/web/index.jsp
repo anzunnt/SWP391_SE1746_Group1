@@ -256,7 +256,7 @@
                             </div>
                         </div><!--end col-->
                     </c:forEach>
-                        </div><!--end row-->
+                </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
 
