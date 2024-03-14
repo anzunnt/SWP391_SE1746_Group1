@@ -51,7 +51,7 @@ public class ProductListViewClient extends HttpServlet {
             String productParam = request.getParameter("productId");
             String quantityParam = request.getParameter("quantity");
             int productId = 0;
-            int quantity = 0;
+            int quantity = 1;
             if (productParam != null && !productParam.isEmpty()) {
                 try {
                     productId = Integer.parseInt(productParam);
