@@ -183,11 +183,14 @@
             <div class="grand-total-container">
                 <a href="fashionshop" class="shop-more-button">Shop More</a>
                 <div class="grand-totalpurchase-container">
-                    <p class="grand-total">Grand Total: <span>${grandTotal}.000</span></p>
+                    <p class="grand-total">Grand Total: <span>${grandTotal}.000VNÐ</span></p>
+                    <p class="grand-total">VAT (10%): <span>${(grandTotal * 0.1)}00VNĐ</span></p>
+                    <p class="grand-total">Pay: <span>${grandTotal + (grandTotal * 0.1)}00VNĐ</span></p>
                     <div>
-                    <form action="your_purchase_action" method="post">
-                        <button type="submit" class="purchase-button">Purchase</button>
-                    </form><!-- comment -->
+
+                        <form action="your_purchase_action" method="post">
+                            <button type="submit" class="purchase-button"><a href="payment"> Payment</a></button>
+                        </form><!-- comment -->
                     </div>
                 </div>
             </div>
@@ -198,5 +201,46 @@
         <!-- Your existing content goes here -->
 
         <jsp:include page="footer.jsp" />
+
+        <!-- End -->
+        <!-- Offcanvas Start -->
+        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-body d-flex align-items-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h4>Search now.....</h4>
+                                <div class="subcribe-form mt-4">
+                                    <form>
+                                        <div class="mb-0">
+                                            <form action="search" method="post" id="searchform" class="searchform">
+                                                <input type="text" id="s" name="s" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                                <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                            </form>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+
+        <!-- Back to top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <!-- Back to top -->
+
+        <!-- javascript -->
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <!-- SLIDER -->
+        <script src="assets/js/tiny-slider.js"></script>
+        <script src="assets/js/tiny-slider-init.js"></script>
+        <!-- Icons -->
+        <script src="assets/js/feather.min.js"></script>
+        <!-- Main Js -->
+        <script src="assets/js/app.js"></script>
     </body>
 </html>

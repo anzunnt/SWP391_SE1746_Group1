@@ -73,7 +73,10 @@
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
 
+<<<<<<< HEAD:build/web/error.jsp
+=======
 
+>>>>>>> main:web/changePassSuccess.jsp
     </body>
 
 </html>

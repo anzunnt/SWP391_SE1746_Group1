@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 
     <head>
         <meta charset="utf-8" />
@@ -37,7 +37,7 @@
             </div>
         </div>
         <!-- Loader -->
-        
+
         <div class="back-to-home rounded d-none d-sm-block">
             <a href="index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
@@ -56,14 +56,14 @@
             </div><!--end container-->
         </section><!--end section-->
         <!-- Hero End -->
-        
+
         <!-- javascript -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- Icons -->
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-        
+
     </body>
 
 </html>

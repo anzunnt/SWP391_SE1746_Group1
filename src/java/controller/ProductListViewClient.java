@@ -43,8 +43,109 @@ public class ProductListViewClient extends HttpServlet {
             List<ProductMenu> list = dao.getAllProductMenu();
             request.setAttribute("listC", clist);
             request.setAttribute("listP", list);
+<<<<<<< HEAD
+
+            String action = request.getParameter("action");
+            String productParam = request.getParameter("productId");
+            String quantityParam = request.getParameter("quantity");
+            int productId = 0;
+            int quantity = 0;
+            if (productParam != null && !productParam.isEmpty()) {
+                try {
+                    productId = Integer.parseInt(productParam);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (quantityParam != null && !quantityParam.isEmpty()) {
+                try {
+                    quantity = Integer.parseInt(quantityParam);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+            // return product page
+            if (action != null && action.equalsIgnoreCase("cart")) {
+                LineItem lineitem = new LineItem();
+                Product product = null;
+
+                if (lsCart == null) {
+                    lsCart = new ArrayList<>();
+                    session.setAttribute("cart", lsCart);
+                }
+
+                boolean productExists = false;
+                for (LineItem item : lsCart) {
+                    if (item.getProduct().getId() == productId) {
+                        item.setQuantity(item.getQuantity() + quantity);
+                        productExists = true;
+                        break;
+                    }
+                }
+                if (!productExists) {
+                    ProductDAO p = new ProductDAO();
+                    product = p.getProductById(productId);
+                    if (product != null) {
+                        lineitem.setProduct(product);
+                        lineitem.setQuantity(quantity);
+                        lsCart.add(lineitem);
+                    }
+                }
+
+                System.out.println("Size" + lsCart.size());
+                ProductMenuDAO menuDAO = new ProductMenuDAO();
+                List<ProductMenu> menuList = menuDAO.getAllProductMenu();
+                request.setAttribute("listP", menuList);
+                request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
+                return;
+
+            } // return home
+            else if (action != null && action.equalsIgnoreCase("cart1")) {
+                LineItem lineitem = new LineItem();
+                Product product = null;
+
+                if (lsCart == null) {
+                    lsCart = new ArrayList<>();
+                    session.setAttribute("cart", lsCart);
+                }
+
+                boolean productExists = false;
+                for (LineItem item : lsCart) {
+                    if (item.getProduct().getId() == productId) {
+                        item.setQuantity(item.getQuantity() + quantity);
+                        productExists = true;
+                        break;
+                    }
+                }
+                if (!productExists) {
+                    ProductDAO p = new ProductDAO();
+                    product = p.getProductById(productId);
+                    if (product != null) {
+                        lineitem.setProduct(product);
+                        lineitem.setQuantity(quantity);
+                        lsCart.add(lineitem);
+                    }
+                }
+
+                System.out.println("Size" + lsCart.size());
+                ProductMenuDAO menuDAO = new ProductMenuDAO();
+                List<ProductMenu> menuList = menuDAO.getAllProductMenu();
+                request.setAttribute("listP", menuList);
+                request.getRequestDispatcher("index").forward(request, response);
+                return;
+            } else if (action != null && action.equalsIgnoreCase("deleteCart")) {
+                int id = Integer.parseInt(request.getParameter("productId"));
+                lsCart.remove(productId);
+                request.getRequestDispatcher("cart.jsp").forward(request, response);
+            }
+            request.getRequestDispatcher("fashionShop.jsp").forward(request, response);
+
+        } catch (Exception e) {
+=======
             request.getRequestDispatcher("productShop.jsp").forward(request, response);
         } catch (ServletException | IOException e) {
+>>>>>>> main
             request.setAttribute("error", e);
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

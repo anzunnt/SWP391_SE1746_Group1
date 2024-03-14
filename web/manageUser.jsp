@@ -81,6 +81,14 @@
                 <input type="text" id="email" name="email" value="${o.email}" disabled>
 
                 <label for="quantity">Phone:</label>
+<<<<<<< HEAD
+                <input type="text" id="phone" name="phone" value="${o.phone}" required>
+                <!--
+                                <label for="style">Image:</label>
+                                <input type="file" id="image" name="image" value="" accept="image/*" required>
+                                </br>
+                                <img src="${o.image}" alt="Avatar" width="100px" height="100px">-->
+=======
                 <input type="text" id="phone" name="phone" value="${o.phone}" disabled>
                 <!--
                 -->                
@@ -88,6 +96,7 @@
                 <input type="file" id="image" name="image" value="" accept="image/*" disabled>
                 </br><!--
                 <img src="${o.image}" alt="Avatar" width="100px" height="100px">-->
+>>>>>>> main
 
                 <label class="form-label">Birthday <span class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="dob" name="dob" value="${o.dob}" disabled>

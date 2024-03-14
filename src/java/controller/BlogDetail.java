@@ -65,7 +65,12 @@ public class BlogDetail extends HttpServlet {
         BlogDAO bdao = new BlogDAO();
         request.setAttribute("bcl", bdao.getBlogCategory());
         Blog b = bdao.getBlogById(bid);
-        
+        String relativeBannerPath = b.getBanner(); // Đường dẫn tương đối từ database
+        String absoluteBannerPath = request.getContextPath() + "/file/" + relativeBannerPath;
+        String relativeImgPath = b.getImg1();
+        String absoluteImgPath = request.getContextPath() + "/file/" + relativeImgPath;
+        b.setBanner(absoluteBannerPath);
+        b.setImg1(absoluteImgPath);
         bdao.updateCountViewBlog(bid);
         request.setAttribute("b", b);
         request.getRequestDispatcher("blogdetail.jsp").forward(request, response);
