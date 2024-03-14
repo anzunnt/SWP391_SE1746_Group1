@@ -4,16 +4,20 @@
  */
 package controller;
 
-import dal.CategoryDAO;
+import dal.ProductDAO;
 import dal.ProductMenuDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
-import model.Category;
+import model.LineItem;
+import model.Product;
 import model.ProductMenu;
 
 /**
